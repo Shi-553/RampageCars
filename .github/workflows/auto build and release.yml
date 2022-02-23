@@ -45,7 +45,7 @@ jobs:
           buildName: RampageCars
 
       - name: Zip
-        run: 7z a "./RampageCars-x64.zip" "./build/RampageCars" -tzip
+        run: 7z a "./RampageCars-x64.zip" "./build" -tzip
 
       - name: Set releaser settings
         run: |
