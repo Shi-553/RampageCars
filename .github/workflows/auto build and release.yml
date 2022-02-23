@@ -45,7 +45,7 @@ jobs:
           buildName: RampageCars
           
       - name: rename
-        run: mv "./build/StandaloneWindows64" "./build/RampageCars"
+        run: sudo mv "./build/StandaloneWindows64" "./build/RampageCars"
         
       - name: Zip
         run: 7z a "./RampageCars-x64.zip" "./build/RampageCars" -tzip
