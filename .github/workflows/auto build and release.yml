@@ -48,7 +48,7 @@ jobs:
         run: sudo mv "./build/StandaloneWindows64" "./build/RampageCars"
         
       - name: Zip
-        run: 7z a "./RampageCars-x64.zip" "./build/RampageCars" -tzip
+        run: 7z a "./RampageCars.zip" "./build/RampageCars" -tzip
 
       - name: Set releaser settings
         run: |
