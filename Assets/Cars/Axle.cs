@@ -14,6 +14,9 @@ namespace RampageCars
         [SerializeField]
         bool isMotor;
         public bool IsMotor => isMotor;
+        [SerializeField]
+        bool isBrake;
+        public bool IsBrake => isBrake;
 
         [SerializeField]
         bool isSteering;
@@ -27,6 +30,15 @@ namespace RampageCars
                 rightWheel.motorTorque = motorTorque;
             }
             return IsMotor;
+        }
+        public bool SetBrakeTorque(float brakeTorque)
+        {
+            if (IsBrake)
+            {
+                leftWheel.brakeTorque = brakeTorque;
+                rightWheel.brakeTorque = brakeTorque;
+            }
+            return IsBrake;
         }
         public bool SetSteerAngle(float steerAngle)
         {
