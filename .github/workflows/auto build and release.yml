@@ -42,9 +42,29 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           targetPlatform: StandaloneWindows64
+          buildName: RampageCars
 
-      # Output
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Build
-          path: build
+      - name: Zip
+        run: 7z a "./RampageCars-x64.zip" "./build/RampageCars" -tzip
+
+      - name: Set releaser settings
+        run: |
+          git config --global user.name release-machine
+          git config --global user.email email@example.com
+      
+          
+      - name: Major release
+        id: major
+        if: contains(toJSON(github.event.commits.*.message), 'major update')
+        run:  npx release-it@${RELEASE_IT_VERSION} -- major --ci
+        
+      - name: Minor release
+        id: minor
+        # メジャーバージョンアップをしていないときマイナーバージョンアップを行なうか
+        if: steps.major.conclusion == 'skipped'  && contains(toJSON(github.event.commits.*.message), 'minor update')
+        run:  npx release-it@${RELEASE_IT_VERSION} -- minor --ci
+        
+      - name: Patch release
+        # コミットメッセージに特に指定がない場合はパッチバージョンを更新する
+        if: "!(steps.major.conclusion == 'success' || steps.minor.conclusion == 'success')"
+        run:  npx release-it@${RELEASE_IT_VERSION} -- patch --ci
