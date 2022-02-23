@@ -22,6 +22,19 @@ namespace RampageCars
         bool isSteering;
         public bool IsSteering => isSteering;
 
+        private void ApplyLocalPositionToVisuals(WheelCollider collider)
+        {
+            var visualWheel = collider.transform.GetChild(0);
+            collider.GetWorldPose(out var position, out var rotation);
+            visualWheel.position = position;
+            visualWheel.rotation = rotation;
+        }
+
+        private void FixedUpdate()
+        {
+            ApplyLocalPositionToVisuals(leftWheel);
+            ApplyLocalPositionToVisuals(rightWheel);
+        }
         public bool SetMotorTorque(float motorTorque)
         {
             if (IsMotor)
