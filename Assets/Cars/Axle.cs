@@ -6,10 +6,7 @@ namespace RampageCars
 {
     public class Axle : MonoBehaviour
     {
-        [SerializeField]
-        WheelCollider leftWheel;
-        [SerializeField]
-        WheelCollider rightWheel;
+        WheelCollider[] wheels=new WheelCollider[0];
 
         [SerializeField]
         bool isMotor;
@@ -22,6 +19,11 @@ namespace RampageCars
         bool isSteering;
         public bool IsSteering => isSteering;
 
+        private void Awake()
+        {
+            wheels = GetComponentsInChildren<WheelCollider>();
+        }
+
         private void ApplyLocalPositionToVisuals(WheelCollider collider)
         {
             var visualWheel = collider.transform.GetChild(0);
@@ -32,15 +34,19 @@ namespace RampageCars
 
         private void FixedUpdate()
         {
-            ApplyLocalPositionToVisuals(leftWheel);
-            ApplyLocalPositionToVisuals(rightWheel);
+            foreach (var wheel in wheels)
+            {
+                ApplyLocalPositionToVisuals(wheel);
+            }
         }
         public bool SetMotorTorque(float motorTorque)
         {
             if (IsMotor)
             {
-                leftWheel.motorTorque = motorTorque;
-                rightWheel.motorTorque = motorTorque;
+                foreach (var wheel in wheels)
+                {
+                    wheel.motorTorque = motorTorque;
+                }
             }
             return IsMotor;
         }
@@ -48,8 +54,10 @@ namespace RampageCars
         {
             if (IsBrake)
             {
-                leftWheel.brakeTorque = brakeTorque;
-                rightWheel.brakeTorque = brakeTorque;
+                foreach (var wheel in wheels)
+                {
+                    wheel.brakeTorque = brakeTorque;
+                }
             }
             return IsBrake;
         }
@@ -57,8 +65,10 @@ namespace RampageCars
         {
             if (IsSteering)
             {
-                leftWheel.steerAngle = steerAngle;
-                rightWheel.steerAngle = steerAngle;
+                foreach (var wheel in wheels)
+                {
+                    wheel.steerAngle = steerAngle;
+                }
             }
             return IsSteering;
         }

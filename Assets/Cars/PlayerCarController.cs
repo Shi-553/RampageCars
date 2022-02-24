@@ -26,9 +26,6 @@ namespace RampageCars
         void Start()
         {
             car = GetComponent<Car>();
-
-            action.Player.Brake.performed += BrakePerformed;
-            action.Player.Brake.canceled += BrakeCanceled; ;
             action.Player.Steer.performed += SteerPerformed;
             action.Player.Steer.canceled += SteerCanceled;
             action.Player.Boost.performed += BoostPerformed;
@@ -36,18 +33,6 @@ namespace RampageCars
             car.SetMotorTorque(1);
         }
 
-        private void BrakeCanceled(InputAction.CallbackContext obj)
-        {
-            car.SetBrakeTorque(0);
-            car.SetMotorTorque(1);
-        }
-
-        private void BrakePerformed(InputAction.CallbackContext obj)
-        {
-            var brake = obj.ReadValue<float>();
-            car.SetBrakeTorque(brake);
-            car.SetMotorTorque(0);
-        }
 
         private void SteerCanceled(InputAction.CallbackContext obj)
         {
@@ -64,10 +49,35 @@ namespace RampageCars
             car.SetSteerAngle(steer);
         }
 
-        // Update is called once per frame
         void Update()
         {
-
+            var brake = action.Player.Brake.ReadValue<float>();
+            if (brake > 0)
+            {
+                if (car.VelocityForward > 1)
+                {
+                    car.SetBrakeTorque(brake);
+                    car.SetMotorTorque(0);
+                }
+                else
+                {
+                    car.SetBrakeTorque(0);
+                    car.SetMotorTorque(-brake);
+                }
             }
+            else
+            {
+                if (car.VelocityForward < -1)
+                {
+                    car.SetBrakeTorque(1);
+                    car.SetMotorTorque(0);
+                }
+                else
+                {
+                    car.SetBrakeTorque(0);
+                    car.SetMotorTorque(1);
+                }
+            }
+        }
     }
 }
