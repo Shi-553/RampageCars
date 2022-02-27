@@ -5,12 +5,12 @@ using UnityEngine.InputSystem;
 
 namespace RampageCars
 {
-    [RequireComponent(typeof(Car))]
+    [RequireComponent(typeof(ICar))]
+    [RequireComponent(typeof(SpeedMeasure))]
     public class PlayerCarController : MonoBehaviour
     {
         PlayerAction action;
-
-        Car car;
+        ICar car;
 
         private void OnEnable()
         {
@@ -25,14 +25,25 @@ namespace RampageCars
 
         void Start()
         {
-            car = GetComponent<Car>();
+            car = GetComponent<ICar>();
             action.Player.Steer.performed += SteerPerformed;
             action.Player.Steer.canceled += SteerCanceled;
             action.Player.Boost.performed += BoostPerformed;
+            action.Player.Boost.canceled += BoostCanceled;
+            action.Player.Jump.started += JumpStarted; ;
 
             car.SetMotorTorque(1);
         }
 
+        private void JumpStarted(InputAction.CallbackContext obj)
+        {
+            car.Jamp();
+        }
+
+        private void BoostCanceled(InputAction.CallbackContext obj)
+        {
+            car.Boost(Vector3.zero);
+        }
 
         private void SteerCanceled(InputAction.CallbackContext obj)
         {
@@ -41,6 +52,7 @@ namespace RampageCars
 
         private void BoostPerformed(InputAction.CallbackContext obj)
         {
+            car.Boost(transform.forward);
         }
 
         private void SteerPerformed(InputAction.CallbackContext obj)
@@ -51,33 +63,8 @@ namespace RampageCars
 
         void Update()
         {
-            var brake = action.Player.Brake.ReadValue<float>();
-            if (brake > 0)
-            {
-                if (car.VelocityForward > 1)
-                {
-                    car.SetBrakeTorque(brake);
-                    car.SetMotorTorque(0);
-                }
-                else
-                {
-                    car.SetBrakeTorque(0);
-                    car.SetMotorTorque(-brake);
-                }
-            }
-            else
-            {
-                if (car.VelocityForward < -1)
-                {
-                    car.SetBrakeTorque(1);
-                    car.SetMotorTorque(0);
-                }
-                else
-                {
-                    car.SetBrakeTorque(0);
-                    car.SetMotorTorque(1);
-                }
-            }
+            var motor = action.Player.Motor.ReadValue<float>();
+            car.SetMotorTorque(motor);
         }
     }
 }

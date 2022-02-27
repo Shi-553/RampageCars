@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RampageCars
 {
-    public class Axle : MonoBehaviour
+    public class Axle : MonoBehaviour, IAxle
     {
         WheelCollider[] wheels=new WheelCollider[0];
 
@@ -31,7 +31,6 @@ namespace RampageCars
             visualWheel.position = position;
             visualWheel.rotation = rotation;
         }
-
         private void FixedUpdate()
         {
             foreach (var wheel in wheels)
@@ -39,38 +38,42 @@ namespace RampageCars
                 ApplyLocalPositionToVisuals(wheel);
             }
         }
-        public bool SetMotorTorque(float motorTorque)
+        public void SetMotorTorque(float motorTorque)
         {
-            if (IsMotor)
+            if (!IsMotor)
             {
-                foreach (var wheel in wheels)
-                {
-                    wheel.motorTorque = motorTorque;
-                }
+                return ;
             }
-            return IsMotor;
+
+            foreach (var wheel in wheels)
+            {
+                wheel.motorTorque = motorTorque;
+            }
         }
-        public bool SetBrakeTorque(float brakeTorque)
+        public void SetBrakeTorque(float brakeTorque)
         {
-            if (IsBrake)
+            if (!IsBrake)
             {
-                foreach (var wheel in wheels)
-                {
-                    wheel.brakeTorque = brakeTorque;
-                }
+                return ;
             }
-            return IsBrake;
+
+            foreach (var wheel in wheels)
+            {
+                wheel.brakeTorque = brakeTorque;
+            }
         }
-        public bool SetSteerAngle(float steerAngle)
+        public void SetSteerAngle(float steerAngle)
         {
-            if (IsSteering)
+            if (!IsSteering)
             {
-                foreach (var wheel in wheels)
-                {
-                    wheel.steerAngle = steerAngle;
-                }
+                return ;
             }
-            return IsSteering;
+
+            foreach (var wheel in wheels)
+            {
+                wheel.steerAngle = steerAngle;
+            }
+
         }
     }
 }

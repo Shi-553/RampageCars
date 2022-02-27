@@ -55,9 +55,18 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Brake"",
+                    ""name"": ""Motor"",
+                    ""type"": ""Value"",
+                    ""id"": ""09736dab-521e-4406-9423-16f547716e86"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Jump"",
                     ""type"": ""Button"",
-                    ""id"": ""5d91e1ae-bd15-4378-a1cb-54fe137fb3c8"",
+                    ""id"": ""e3b7526b-cea4-4b88-b696-75479091f66e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -101,7 +110,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""143bb1cd-cc10-4eca-a2f0-a3664166fe91"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
@@ -188,12 +197,100 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1c59bb53-19bb-4349-809b-571bd9c6b331"",
+                    ""id"": ""c368bdf4-db08-465c-b53d-fd7b95b5d6ff"",
+                    ""path"": ""<Gamepad>/leftStick/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Steer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WS"",
+                    ""id"": ""8fe54e2f-d96c-4866-a3d2-9264c1c02316"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Motor"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Negative"",
+                    ""id"": ""17d6ba85-865e-4fdf-91f9-c124913d573a"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Motor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Positive"",
+                    ""id"": ""074e150f-889f-46a4-99a8-53b7c46f8c57"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Brake"",
+                    ""action"": ""Motor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""e5df6d0d-3804-4d29-84df-d21f95c2fecd"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Motor"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""3ccd554f-4d86-46d0-9fc7-b678ce7f53ea"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Motor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""228f76d6-55a3-4a95-ac04-2f1042f64258"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Motor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9dc3a6fa-746d-4aa6-b96c-ce47968d5ed9"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""16794b61-046e-4b76-beb9-d7b0fdd872e8"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -784,7 +881,8 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Boost = m_Player.FindAction("Boost", throwIfNotFound: true);
         m_Player_Steer = m_Player.FindAction("Steer", throwIfNotFound: true);
-        m_Player_Brake = m_Player.FindAction("Brake", throwIfNotFound: true);
+        m_Player_Motor = m_Player.FindAction("Motor", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -859,7 +957,8 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Boost;
     private readonly InputAction m_Player_Steer;
-    private readonly InputAction m_Player_Brake;
+    private readonly InputAction m_Player_Motor;
+    private readonly InputAction m_Player_Jump;
     public struct PlayerActions
     {
         private @PlayerAction m_Wrapper;
@@ -867,7 +966,8 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Boost => m_Wrapper.m_Player_Boost;
         public InputAction @Steer => m_Wrapper.m_Player_Steer;
-        public InputAction @Brake => m_Wrapper.m_Player_Brake;
+        public InputAction @Motor => m_Wrapper.m_Player_Motor;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -886,9 +986,12 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                 @Steer.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSteer;
                 @Steer.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSteer;
                 @Steer.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSteer;
-                @Brake.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBrake;
-                @Brake.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBrake;
-                @Brake.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBrake;
+                @Motor.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMotor;
+                @Motor.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMotor;
+                @Motor.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMotor;
+                @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -902,9 +1005,12 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                 @Steer.started += instance.OnSteer;
                 @Steer.performed += instance.OnSteer;
                 @Steer.canceled += instance.OnSteer;
-                @Brake.started += instance.OnBrake;
-                @Brake.performed += instance.OnBrake;
-                @Brake.canceled += instance.OnBrake;
+                @Motor.started += instance.OnMotor;
+                @Motor.performed += instance.OnMotor;
+                @Motor.canceled += instance.OnMotor;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
@@ -1064,7 +1170,8 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
         void OnSteer(InputAction.CallbackContext context);
-        void OnBrake(InputAction.CallbackContext context);
+        void OnMotor(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
