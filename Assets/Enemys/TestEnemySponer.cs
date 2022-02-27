@@ -16,6 +16,8 @@ namespace RampageCars
         float time;
         [SerializeField]
         float sponeSpeed=1;
+        [SerializeField]
+        float sponeMax=100;
         async Task Start()
         {
             testEnemy=await testEnemyRef.LoadAssetAsync<GameObject>().Task;
@@ -33,6 +35,10 @@ namespace RampageCars
             if (time > 1)
             {
                 time = 0;
+                if (transform.childCount > sponeMax)
+                {
+                    return;
+                }
                 var obj=Instantiate(testEnemy);
                 var pos =new Vector3(Random.Range(-30, 30),5, Random.Range(-30, 30));
                 obj.transform.position= pos;
