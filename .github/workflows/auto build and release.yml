@@ -12,7 +12,7 @@ jobs:
   build:
     if: github.event_name == 'workflow_dispatch' || github.event.pull_request_target.merged == true
     name: Build my project ✨
-    runs-on: windows-latest
+    runs-on: windows-2021
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       RELEASE_IT_VERSION: 14
