@@ -1,0 +1,48 @@
+---
+# MegaLinter GitHub Action configuration file
+# More info at https://megalinter.github.io
+name: Linter
+
+on:
+  # Trigger mega-linter at every push. Action will also be visible from Pull Requests to main
+  push: # Comment this line to trigger action only on pull-requests (not recommended if you don't pay for GH Actions)
+  pull_request:
+    branches: [master, main]
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  check-eof-with-new-line:
+    runs-on: ubuntu-latest
+    steps:
+      # clone repository to be able to merge master
+      - name: checkout repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - name: setting for git
+        # 1.2. setting for git merge command (require user.email and user.name)
+        run: |
+          git config --global user.email "xxxxxx.ci@users.noreply.github.com" && \
+          git config --global user.name "xxxxxx.ci"
+      # install eclint only
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+      - run: |
+          rm package.json package-lock.json || :
+      - run: npm init -y
+      - run: npm install -g eclint
+      
+      
+          
+      - run: |
+          for j in  $( \
+                  git --no-pager diff --name-only ${{ github.event.pull_request.head.ref }}  origin/${{ github.event.pull_request.base.ref }} | xargs file | grep ".*: .* text" | sed "s;\(.*\): .* text.*;\1;" \
+              ); \
+          do
+              eclint check "$j" --insert_final_newline; \
+          done
