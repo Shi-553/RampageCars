@@ -44,5 +44,5 @@ jobs:
                   git --no-pager diff --name-only ${{ github.event.pull_request.head.ref }}  origin/${{ github.event.pull_request.base.ref }} | xargs file | grep ".*: .* text" | sed "s;\(.*\): .* text.*;\1;" \
               ); \
           do
-              eclint check "$j" --insert_final_newline; \
+              eclint check "$j"  \
           done
