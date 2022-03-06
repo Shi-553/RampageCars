@@ -4,12 +4,13 @@ on:
   workflow_dispatch:
   
   pull_request:
-    types: [closed]
+    types: [merged]
     branches:
       - master
 
 jobs:
   build:
+    if: github.event.pull_request_target.merged == true
     name: Build my project ✨
     runs-on: ubuntu-latest
     env:
