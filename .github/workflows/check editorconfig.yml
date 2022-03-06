@@ -16,7 +16,11 @@ jobs:
 
     steps:
     
-    - uses: actions/checkout@v2
-    
-    - name: check editorconfig
-      uses: editorconfig-checker/action-editorconfig-checker@v1.0.0
+    - name: Checkout repository
+      uses: actions/checkout@v2.3.4
+
+    - name: Install editorconfig-checker
+      uses: kasperhesthaven/setup-editorconfig-checker@v1.2.0
+
+    - name: Lint
+      run: editorconfig-checker
