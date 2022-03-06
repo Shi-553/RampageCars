@@ -24,13 +24,17 @@ jobs:
     name: MegaLinter
     runs-on: ubuntu-latest
     steps:
+    
       # Git Checkout
       - name: Checkout Code
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
           fetch-depth: 0
-
+      
+      - uses: satackey/action-docker-layer-caching@v0.0.11
+        continue-on-error: true
+          
       # MegaLinter
       - name: MegaLinter
         id: ml
