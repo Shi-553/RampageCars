@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    if: github.event.pull_request_target.merged == true
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request_target.merged == true
     name: Build my project ✨
     runs-on: ubuntu-latest
     env:
