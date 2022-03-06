@@ -50,6 +50,7 @@ jobs:
 
       - name: rename
         run: sudo mv "./build/StandaloneWindows64" "./build/RampageCars"
+        shell: bash
         
       - name: Zip
         run: 7z a "./RampageCars.zip" "./build/RampageCars" -tzip
