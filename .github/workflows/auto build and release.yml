@@ -4,15 +4,16 @@ on:
   workflow_dispatch:
   
   pull_request:
-    types: [merged]
+    types:
+      - closed
     branches:
       - master
 
 jobs:
   build:
-    if: github.event.pull_request_target.merged == true
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     name: Build my project ✨
-    runs-on: ubuntu-latest
+    runs-on: windows-2019
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       RELEASE_IT_VERSION: 14
@@ -41,12 +42,15 @@ jobs:
         uses: game-ci/unity-builder@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: StandaloneWindows64
           buildName: RampageCars
 
       - name: rename
-        run: sudo mv "./build/StandaloneWindows64" "./build/RampageCars"
+        run: mv "./build/StandaloneWindows64" "./build/RampageCars"
+        shell: bash
         
       - name: Zip
         run: 7z a "./RampageCars.zip" "./build/RampageCars" -tzip

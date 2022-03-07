@@ -10,7 +10,6 @@ namespace RampageCars
     public class TestEnemySponer : MonoBehaviour
     {
         [SerializeField]
-        AssetReferenceGameObject testEnemyRef;
         GameObject testEnemy;
 
         float time;
@@ -18,15 +17,7 @@ namespace RampageCars
         float sponeSpeed=1;
         [SerializeField]
         float sponeMax=100;
-        async Task Start()
-        {
-            testEnemy=await testEnemyRef.LoadAssetAsync<GameObject>().Task;
 
-        }
-        private void OnDestroy()
-        {
-            testEnemyRef.ReleaseAsset();
-        }
         // Update is called once per frame
         void Update()
         {
