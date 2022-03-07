@@ -4,19 +4,19 @@
 *.shader             text
 
 # Unity YAML
-*.mat                merge=unityyamlmerge eol=lf
-*.anim               merge=unityyamlmerge eol=lf
-*.unity              merge=unityyamlmerge eol=lf
-*.prefab             merge=unityyamlmerge eol=lf
-*.asset              merge=unityyamlmerge eol=lf
-*.meta               merge=unityyamlmerge eol=lf
-*.controller         merge=unityyamlmerge eol=lf
+*.mat                eol=lf
+*.anim               eol=lf
+*.unity              eol=lf
+*.prefab             eol=lf
+*.asset              eol=lf
+*.meta               eol=lf
+*.controller         eol=lf
 
 # "physic" for 3D but "physics" for 2D
-*.physicMaterial2D   merge=unityyamlmerge eol=lf
-*.physicMaterial     merge=unityyamlmerge eol=lf
-*.physicsMaterial2D  merge=unityyamlmerge eol=lf
-*.physicsMaterial    merge=unityyamlmerge eol=lf
+*.physicMaterial2D   eol=lf
+*.physicMaterial     eol=lf
+*.physicsMaterial2D  eol=lf
+*.physicsMaterial    eol=lf
 
 # Using Git LFS
 # Add diff=lfs merge=lfs to the binary files
