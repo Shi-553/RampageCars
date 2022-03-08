@@ -27,7 +27,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          lfs: true
+          fetch-depth: 0
 
       # Cache
       - uses: actions/cache@v2
@@ -58,7 +58,6 @@ jobs:
         run: |
           git config --global user.name release-machine
           git config --global user.email email@example.com
-      
           
       - name: Major release
         id: major
@@ -74,4 +73,4 @@ jobs:
       - name: Patch release
         # コミットメッセージに特に指定がない場合はパッチバージョンを更新する
         if: "!(steps.major.conclusion == 'success' || steps.minor.conclusion == 'success')"
-        run:  npx release-it@${RELEASE_IT_VERSION} -- patch --ci
+        run:  npm run release -- patch --ci
