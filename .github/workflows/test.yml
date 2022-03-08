@@ -1,0 +1,35 @@
+name:  release test
+
+on:
+  workflow_dispatch:
+  
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+  
+jobs:
+  build:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
+    name: Build my project ✨
+    runs-on: windows-2019
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      RELEASE_IT_VERSION: 14
+    steps:
+        
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+        
+
+      - name: Set releaser settings
+        run: |
+          git config --global user.name release-machine
+          git config --global user.email email@example.com
+          
+        
+      - name: Patch release
+        run: npx release-it@${RELEASE_IT_VERSION} -- patch --ci
