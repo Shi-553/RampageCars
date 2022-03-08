@@ -141,5 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ed625779993d34585a664826eb05c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleObject: {fileID: 5503518702973123558, guid: 6797ad6ac503b2243a6af0943a510360,
+  hit: {fileID: 5503518702973123558, guid: 6797ad6ac503b2243a6af0943a510360, type: 3}
+  explosion: {fileID: 4141262272073827685, guid: b5c2a1ef7f700fd47a374e09be7b8428,
     type: 3}
+  fuseTime: 0.9

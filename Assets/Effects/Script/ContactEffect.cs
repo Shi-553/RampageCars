@@ -6,13 +6,24 @@ namespace RampageCars
 {
     public class ContactEffect : MonoBehaviour
     {
-        public GameObject particleObject;
+        public GameObject hit, explosion;
+        public float fuseTime;
+
+        private void Explode()
+        {
+            //パーティクル用ゲームオブジェクト生成
+            Instantiate(explosion, this.transform.position, Quaternion.identity); 
+        }
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.tag == "Player") //Playerタグの付いたゲームオブジェクトと衝突したか判別
+            //Playerタグの付いたゲームオブジェクトと衝突したか判別
+            if (collision.gameObject.tag == "Player") 
             {
-                Instantiate(particleObject, this.transform.position, Quaternion.identity); //パーティクル用ゲームオブジェクト生成
+                Instantiate(hit, this.transform.position, Quaternion.identity);
+
+                // 時間経過で出現
+                Invoke("Explode", fuseTime);
             }
         }
     }
