@@ -46,6 +46,7 @@ jobs:
         with:
           targetPlatform: StandaloneWindows64
           buildName: RampageCars
+          versioning: None
 
       - name: rename
         run: mv "./build/StandaloneWindows64" "./build/RampageCars"
