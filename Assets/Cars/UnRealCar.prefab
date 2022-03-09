@@ -1122,6 +1122,7 @@ GameObject:
   - component: {fileID: 6250986090857139769}
   - component: {fileID: 4088751428438853234}
   - component: {fileID: 679347267058413624}
+  - component: {fileID: 5803539830043723447}
   m_Layer: 0
   m_Name: UnRealCar
   m_TagString: Player
@@ -1319,6 +1320,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5803539830043723447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6458540396161758453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 176ccb733a239a84395c81c9742be2e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limit: 50
+  limitedDrag: 5
+  limitedAngularDrag: 10
 --- !u!1 &6458540396641731329
 GameObject:
   m_ObjectHideFlags: 0
