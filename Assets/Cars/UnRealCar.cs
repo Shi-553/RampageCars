@@ -39,6 +39,10 @@ namespace RampageCars
         Vector3 boost;
 
         bool isGrounded;
+
+        [SerializeField]
+        CollisionDamageInfo collisionDamageInfo;
+
         void Awake()
         {
             rb = GetComponent<Rigidbody>();
@@ -112,6 +116,17 @@ namespace RampageCars
         public void Jamp()
         {
             rb.AddForce(transform.up* jumpPower, ForceMode.Impulse);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            collisionDamageInfo.Collision = collision;
+
+            var damageable = collision.gameObject.GetComponent<IAffectable<ICollisionDamageInfo>>();
+            if (damageable is not null and IEnemyTag)
+            {
+                damageable.Affect(collisionDamageInfo);
+            }
         }
     }
 }

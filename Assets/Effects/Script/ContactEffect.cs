@@ -4,27 +4,27 @@ using UnityEngine;
 
 namespace RampageCars
 {
-    public class ContactEffect : MonoBehaviour
+
+    public class ContactEffect : MonoEventReceiver
     {
-        public GameObject hit, explosion;
-        public float fuseTime;
+        [SerializeField]
+        GameObject hit;
+        [SerializeField]
+        GameObject explosion;
 
-        private void Explode()
+        private void Start()
         {
-            //パーティクル用ゲームオブジェクト生成
-            Instantiate(explosion, this.transform.position, Quaternion.identity); 
+            OnDestroyed += GetComponent<IAffectable<ICollisionDamageInfo>>().OnAffect.Subscribe(OnDamage);
+
+            OnDestroyed += GetComponent<IDeathable>().OnDeath.Subscribe(OnDeath);
         }
-
-        private void OnCollisionEnter(Collision collision)
+        private void OnDamage(ICollisionDamageInfo info)
         {
-            //Playerタグの付いたゲームオブジェクトと衝突したか判別
-            if (collision.gameObject.tag == "Player") 
-            {
-                Instantiate(hit, this.transform.position, Quaternion.identity);
-
-                // 時間経過で出現
-                Invoke("Explode", fuseTime);
-            }
+            Instantiate(hit, transform.position, Quaternion.identity);
+        }
+        private void OnDeath()
+        {
+            Instantiate(explosion, transform.position, Quaternion.identity);
         }
     }
 }
