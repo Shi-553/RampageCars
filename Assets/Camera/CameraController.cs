@@ -31,7 +31,6 @@ namespace RampageCars
         private void ResetStarted(InputAction.CallbackContext obj)
         {
             camera.ViewReset();
-            Debug.Log("bb");
         }
     }
 }

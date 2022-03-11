@@ -12,6 +12,10 @@ namespace RampageCars
         void Awake()
         {
             cinemaFreeLook = this.GetComponent<CinemachineFreeLook>();
+            cinemaFreeLook.m_RecenterToTargetHeading.m_WaitTime = 0;
+            cinemaFreeLook.m_RecenterToTargetHeading.m_RecenteringTime = 0.1f;
+            cinemaFreeLook.m_YAxisRecentering.m_WaitTime = 0;
+            cinemaFreeLook.m_YAxisRecentering.m_RecenteringTime = 0.1f;
         }
 
         void Update()
@@ -29,7 +33,6 @@ namespace RampageCars
             cinemaFreeLook.m_RecenterToTargetHeading.m_enabled=true;
             cinemaFreeLook.m_YAxisRecentering.m_enabled = true;
             resetCount = 30;
-            Debug.Log("aa");
         }
     }
 }
