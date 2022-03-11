@@ -13,9 +13,9 @@ namespace RampageCars
         {
             cinemaFreeLook = this.GetComponent<CinemachineFreeLook>();
             cinemaFreeLook.m_RecenterToTargetHeading.m_WaitTime = 0;
-            cinemaFreeLook.m_RecenterToTargetHeading.m_RecenteringTime = 0.1f;
+            cinemaFreeLook.m_RecenterToTargetHeading.m_RecenteringTime = 0.04f;
             cinemaFreeLook.m_YAxisRecentering.m_WaitTime = 0;
-            cinemaFreeLook.m_YAxisRecentering.m_RecenteringTime = 0.1f;
+            cinemaFreeLook.m_YAxisRecentering.m_RecenteringTime = 0.04f;
         }
 
         void Update()
