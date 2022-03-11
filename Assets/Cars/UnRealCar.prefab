@@ -916,7 +916,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 975
+  m_VersionIndex: 984
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1160,7 +1160,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 16
   m_Drag: 0
-  m_AngularDrag: 0.5
+  m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1178,14 +1178,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81440c12bcbb858448ffd24b22bf039a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 200
-  boostPower: 400
+  speed: 500
+  boostPower: 300
   jumpPower: 50
   steeringMax: 1.5
   steeringThreshold: 60
   steeringVisualMax: 20
-  drag: 10
-  dragFactor: {x: 1, y: 0, z: 0.1}
+  drag: 40
+  dragFactor: {x: 1, y: 0, z: 0.2}
 --- !u!114 &6458540396161758449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1333,8 +1333,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   limit: 50
-  limitedDrag: 5
-  limitedAngularDrag: 10
+  limitedDrag: 3
+  limitedAngularDrag: 5
 --- !u!1 &6458540396641731329
 GameObject:
   m_ObjectHideFlags: 0
