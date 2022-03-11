@@ -7,6 +7,6 @@ namespace RampageCars
 {
     public interface IDeathable
     {
-        public ActionWrapper OnDeath { get; }
+        public ISubscribeableAction OnDeath { get; }
     }
 }

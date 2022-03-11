@@ -11,7 +11,7 @@ namespace RampageCars
 
     public interface IAffectable<Info> where Info : IAffectInfo
     {
-        ActionWrapper<Info> OnAffect { get; }
+        ISubscribeableAction<Info> OnAffect { get; }
         void Affect(Info info);
     }
 }
