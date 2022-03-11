@@ -6,11 +6,7 @@ on:
 jobs:
   add-reviews:
     runs-on: ubuntu-latest
-    if: |
-      ((github.event.action == 'review request PG') && 
-        (github.event.label.name == 'Pronto')) ||
-      ((github.event.action == 'synchronize') &&
-        contains(github.event.pull_request.labels.*.name, 'review request PG') 
+    if: contains(toJson(github.event.pull_request.requested_reviewers), "[]" )
     steps:
       - uses: kentaro-m/auto-assign-action@v1.2.1
         with:
