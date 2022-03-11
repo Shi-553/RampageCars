@@ -31,8 +31,8 @@ namespace RampageCars
 
             GetComponent<Rigidbody>().AddForce(f, ForceMode.Impulse);
 
-            healthPoint -= info.Value;
             OnAffect?.Invoke(info);
+            healthPoint -= info.Value;
 
             if (IsDeath)
             {
@@ -44,8 +44,8 @@ namespace RampageCars
         {
             yield return new WaitForSeconds(destroyDelayTime);
 
-            Destroy(gameObject);
             OnDeath?.Invoke();
+            Destroy(gameObject);
         }
 
     }

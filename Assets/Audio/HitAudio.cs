@@ -11,12 +11,9 @@ namespace RampageCars
         [SerializeField]
         AudioClip explosion;
 
-        AudioSource audioSource;
 
         private void Start()
         {
-            audioSource = GetComponent<AudioSource>();
-
             OnDestroyed += GetComponent<IAffectable<ICollisionDamageInfo>>().OnAffect.Subscribe(OnDamage);
 
             OnDestroyed += GetComponent<IDeathable>().OnDeath.Subscribe(OnDeath);
@@ -24,11 +21,11 @@ namespace RampageCars
 
         private void OnDamage(ICollisionDamageInfo info)
         {
-            audioSource.PlayOneShot(hit);
+            AudioSource.PlayClipAtPoint(hit, transform.position, 1);
         }
         private void OnDeath()
         {
-            audioSource.PlayOneShot(explosion);
+            AudioSource.PlayClipAtPoint(explosion, transform.position, 1);
         }
 
     }
