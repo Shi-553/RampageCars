@@ -1,12 +1,12 @@
 name: 'Auto Assign Reviewr'
 on:
   pull_request:
-    types: [opened, synchronize, labeled]
+    types: [opened, ready_for_review]
 
 jobs:
   add-reviews:
     runs-on: ubuntu-latest
-    if: contains(toJson(github.event.pull_request.requested_reviewers), "[]" )
+    if: (! github.event.pull_request.draft) && contains(toJson(github.event.pull_request.requested_reviewers), "[]" )
     steps:
       - uses: kentaro-m/auto-assign-action@v1.2.1
         with:
