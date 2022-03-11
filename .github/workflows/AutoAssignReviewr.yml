@@ -1,0 +1,17 @@
+name: 'Auto Assign Reviewr'
+on:
+  pull_request:
+    types: [opened, synchronize, labeled]
+
+jobs:
+  add-reviews:
+    runs-on: ubuntu-latest
+    if: |
+      ((github.event.action == 'review request PG') && 
+        (github.event.label.name == 'Pronto')) ||
+      ((github.event.action == 'synchronize') &&
+        contains(github.event.pull_request.labels.*.name, 'review request PG') 
+    steps:
+      - uses: kentaro-m/auto-assign-action@v1.2.1
+        with:
+          configuration-path: '.github/auto_assign.yml'
