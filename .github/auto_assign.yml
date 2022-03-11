@@ -16,7 +16,7 @@ reviewers:
 # Set 0 to add all the reviewers (default: 0)
 numberOfReviewers: 1
 
-filterLabels:
+#filterLabels:
   # Run
-  include:
-    - review request PG
+#  include:
+#    - review request PG
