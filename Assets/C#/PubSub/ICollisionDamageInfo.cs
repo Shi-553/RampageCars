@@ -14,4 +14,6 @@ namespace RampageCars
     {
         public Collision Collision { get; set; }
     }
+
+
 }

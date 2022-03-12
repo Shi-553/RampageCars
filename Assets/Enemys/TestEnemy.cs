@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,25 +6,28 @@ using UnityEngine.Events;
 
 namespace RampageCars
 {
+    public class DeathInfo:IInfo
+    {
+    }
 
-    public class TestEnemy : MonoBehaviour, IEnemyTag, IAffectable<ICollisionDamageInfo>, IDeathable
+    public class TestEnemy : MonoBehaviour, IEnemyTag, ISubscribeable<ICollisionDamageInfo>, IPublishable<ICollisionDamageInfo>, ISubscribeable<DeathInfo>
     {
         [SerializeField]
         private float healthPoint = 100;
-
-        ActionWrapper<ICollisionDamageInfo> onAffect = new();
-        public ISubscribeableAction<ICollisionDamageInfo> OnAffect => onAffect;
-
-        ActionWrapper onDeath = new();
-        public ISubscribeableAction OnDeath => onDeath;
 
         [SerializeField]
         float destroyDelayTime = 1;
         public bool IsDeath => healthPoint <= 0;
 
 
+        ActionWrapper<DeathInfo> onDeath = new();
+        public Action Subscribe(Action<DeathInfo> add) => onDeath.Subscribe(add);
 
-        public void Affect(ICollisionDamageInfo info)
+
+        ActionWrapper<ICollisionDamageInfo> onDamage = new();
+        public Action Subscribe(Action<ICollisionDamageInfo> add) => onDamage.Subscribe(add);
+
+        public void Publish(ICollisionDamageInfo info)
         {
             if (IsDeath)
             {
@@ -35,7 +39,7 @@ namespace RampageCars
 
             GetComponent<Rigidbody>().AddForce(f, ForceMode.Impulse);
 
-            onAffect?.Invoke(info);
+            onDamage?.Publish(info);
             healthPoint -= info.Value;
 
             if (IsDeath)
@@ -48,7 +52,7 @@ namespace RampageCars
         {
             yield return new WaitForSeconds(destroyDelayTime);
 
-            onDeath?.Invoke();
+            onDeath?.Publish(new());
             Destroy(gameObject);
         }
 

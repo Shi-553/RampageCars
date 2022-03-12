@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RampageCars
 {
-    public interface IDamageInfo: IAffectInfo
+    public interface IDamageInfo: IInfo
     {
         public float Value { get; }
     }

@@ -14,16 +14,16 @@ namespace RampageCars
 
         private void Start()
         {
-            OnDestroyed += GetComponent<IAffectable<ICollisionDamageInfo>>().OnAffect.Subscribe(OnDamage);
+            OnDestroyed += GetComponent<ISubscribeable<ICollisionDamageInfo>>().Subscribe(OnDamage);
 
-            OnDestroyed += GetComponent<IDeathable>().OnDeath.Subscribe(OnDeath);
+            OnDestroyed += GetComponent<ISubscribeable<DeathInfo>>().Subscribe(OnDeath);
         }
 
         private void OnDamage(ICollisionDamageInfo info)
         {
             AudioSource.PlayClipAtPoint(hit, transform.position, 1);
         }
-        private void OnDeath()
+        private void OnDeath(DeathInfo n)
         {
             AudioSource.PlayClipAtPoint(explosion, transform.position, 1);
         }

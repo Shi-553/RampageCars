@@ -122,10 +122,10 @@ namespace RampageCars
         {
             collisionDamageInfo.Collision = collision;
 
-            var damageable = collision.gameObject.GetComponent<IAffectable<ICollisionDamageInfo>>();
+            var damageable = collision.gameObject.GetComponent<IPublishable<ICollisionDamageInfo>>();
             if (damageable is not null and IEnemyTag)
             {
-                damageable.Affect(collisionDamageInfo);
+                damageable.Publish(collisionDamageInfo);
             }
         }
     }
