@@ -4,32 +4,29 @@ using UnityEngine;
 
 namespace RampageCars
 {
-    public class HitAudio : MonoBehaviour
+    public class HitAudio : MonoEventReceiver
     {
-        public AudioClip hit,explosion;
-        AudioSource audioSource;
+        [SerializeField]
+        AudioClip hit;
+        [SerializeField]
+        AudioClip explosion;
+
+
         private void Start()
         {
-            audioSource = GetComponent<AudioSource>();
+            OnDestroyed += GetComponent<ISubscribeable<ICollisionDamageInfo>>().Subscribe(OnDamage);
+
+            OnDestroyed += GetComponent<ISubscribeable<DeathInfo>>().Subscribe(OnDeath);
         }
 
-        private void PlayExplosion()
+        private void OnDamage(ICollisionDamageInfo info)
         {
-            audioSource.PlayOneShot(explosion);
+            AudioSource.PlayClipAtPoint(hit, transform.position, 1);
+        }
+        private void OnDeath(DeathInfo n)
+        {
+            AudioSource.PlayClipAtPoint(explosion, transform.position, 1);
         }
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (collision.gameObject.name=="Capsule")
-            {
-                audioSource.PlayOneShot(hit);
-                Invoke("PlayExplosion", 1);
-            }
-            if (collision.gameObject.name == "TestEnemy(Clone)")
-            {
-                audioSource.PlayOneShot(hit);
-                Invoke("PlayExplosion", 1);
-            }
-        }
     }
 }

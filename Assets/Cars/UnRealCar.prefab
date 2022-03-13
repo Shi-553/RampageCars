@@ -916,7 +916,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 975
+  m_VersionIndex: 981
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1120,7 +1120,6 @@ GameObject:
   - component: {fileID: 6250986090857139766}
   - component: {fileID: 6458540396161758449}
   - component: {fileID: 6250986090857139769}
-  - component: {fileID: 4088751428438853234}
   - component: {fileID: 679347267058413624}
   - component: {fileID: 5803539830043723447}
   m_Layer: 0
@@ -1178,14 +1177,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81440c12bcbb858448ffd24b22bf039a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 200
+  speed: 300
   boostPower: 400
   jumpPower: 50
-  steeringMax: 1.5
-  steeringThreshold: 60
+  steeringMax: 2
+  steeringThreshold: 100
   steeringVisualMax: 20
   drag: 10
-  dragFactor: {x: 1, y: 0, z: 0.1}
+  dragFactor: {x: 10, y: 0, z: 0.3}
+  collisionDamageInfo:
+    value: 100
 --- !u!114 &6458540396161758449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1210,20 +1211,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 556742a9dfe96eb429157abe264894b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4088751428438853234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6458540396161758453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d3b1044d5385fc4994c962f41d7e60c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hit: {fileID: 8300000, guid: 95eb4e0a98e1a554a975d1bb7fc342e2, type: 3}
-  explosion: {fileID: 8300000, guid: ba54e8c31d90d3c4db861069d98e2eb7, type: 3}
 --- !u!82 &679347267058413624
 AudioSource:
   m_ObjectHideFlags: 0
