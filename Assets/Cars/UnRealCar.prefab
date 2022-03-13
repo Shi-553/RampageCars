@@ -1320,8 +1320,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   limit: 50
-  limitedDrag: 3
-  limitedAngularDrag: 5
+  limitedDrag: 450
+  limitedAngularDrag: 750
 --- !u!1 &6458540396641731329
 GameObject:
   m_ObjectHideFlags: 0
