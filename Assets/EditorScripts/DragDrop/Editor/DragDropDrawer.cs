@@ -5,7 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace DragDrop {
+namespace EditorScripts {
     public class DragDropDrawerBase : PropertyDrawer {
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
             var isDammy = fieldInfo.FieldType == typeof(DammyNextDragDropProperty);
