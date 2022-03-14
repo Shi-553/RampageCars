@@ -41,7 +41,7 @@ namespace UnityEditor
                         var fieldName = ObjectNames.NicifyVariableName(field.Name);
                         var className = ObjectNames.NicifyVariableName(component.GetType().Name);
 
-                        string message = $"<b>{component.name}</b> in <b>{className}</b> in <b>{fieldName}</b> is null!";
+                        string message = $"<b>{component.name}</b> -> <b>{className}</b> -> <b>{fieldName}</b> is null!";
 
                         // こうするとダブルクリックしてもこの行に飛ばない
                         Debug.unityLogger.logHandler.LogFormat(LogType.Error, component, message);
