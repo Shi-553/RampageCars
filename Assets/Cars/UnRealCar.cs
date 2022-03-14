@@ -115,7 +115,10 @@ namespace RampageCars
 
         public void Jamp()
         {
-            rb.AddForce(transform.up* jumpPower, ForceMode.Impulse);
+            if (isGrounded)
+            {
+                rb.AddForce(transform.up * jumpPower, ForceMode.Impulse);
+            }
         }
 
         private void OnCollisionEnter(Collision collision)
