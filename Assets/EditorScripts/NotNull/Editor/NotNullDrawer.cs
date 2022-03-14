@@ -40,7 +40,7 @@ namespace UnityEditor
                         isError = true;
 
                         var fieldName = ObjectNames.NicifyVariableName(field.Name);
-                        var className = ObjectNames.GetClassName(component);
+                        var className = ObjectNames.NicifyVariableName(component.GetType().Name);
 
                         string message = $"<b>{component.name}</b> in <b>{className}</b> in <b>{fieldName}</b> is null!";
 
@@ -57,6 +57,8 @@ namespace UnityEditor
         }
     }
 
+    // 参考
+    // https://hacchi-man.hatenablog.com/entry/2021/01/01/220000
     [CustomPropertyDrawer(typeof(NotNullAttribute))]
     public class NotNullDrawer : PropertyDrawer
     {
