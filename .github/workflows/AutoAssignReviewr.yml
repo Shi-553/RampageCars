@@ -14,8 +14,9 @@ jobs:
       - uses: Khan/pull-request-comment-trigger@1.0.0
         id: check
         with:
-          trigger: '@ReAssign'
+          trigger: 'reassign'
           reaction: rocket
+          prefix_only: 'true'
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           
