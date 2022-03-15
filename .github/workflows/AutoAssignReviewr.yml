@@ -8,7 +8,7 @@ on:
 jobs:
   add-reviews:
     runs-on: ubuntu-latest
-    if: github.event.type == 'Created' || (! github.event.pull_request.draft) && contains(toJson(github.event.pull_request.requested_reviewers), '[]' )
+    if: github.event.type == 'IssueComment' || (! github.event.pull_request.draft) && contains(toJson(github.event.pull_request.requested_reviewers), '[]' )
     steps:
     
       - uses: Khan/pull-request-comment-trigger@1.0.0
@@ -19,7 +19,7 @@ jobs:
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           
-      - if: github.event.type != 'Created' || steps.check.outputs.triggered == 'true'
+      - if: github.event.type != 'IssueComment' || steps.check.outputs.triggered == 'true'
         uses: kentaro-m/auto-assign-action@v1.2.1
         with:
           configuration-path: '.github/auto_assign.yml'
