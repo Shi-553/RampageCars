@@ -11,7 +11,7 @@ jobs:
     if: (! github.event.pull_request.draft) && contains(toJson(github.event.pull_request.requested_reviewers), '[]' )
     steps:
     
-      - uses: khan/pull-request-comment-trigger@master
+      - uses: Khan/pull-request-comment-trigger@1.0.0
         id: check
         with:
           trigger: '@もう一回'
