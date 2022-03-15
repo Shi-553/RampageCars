@@ -10,9 +10,9 @@ namespace RampageCars
         float limit = 50;
         [Header("limitで抑えているときの速度と角速度の抵抗力")]
         [SerializeField]
-        float limitedDrag = 5.0f;
+        float limitedDrag = 3.0f;
         [SerializeField]
-        float limitedAngularDrag = 10.0f;
+        float limitedAngularDrag = 5.0f;
 
         Quaternion initialRotation = Quaternion.identity;
         bool isLimited = false;
@@ -41,7 +41,7 @@ namespace RampageCars
         {
             if (isLimited)
             {
-                Debug.Log("limited!");
+                Debug.Log("limited!"+ (rb.velocity * -limitedDrag));
                 //Drag
                 rb.AddForce(rb.velocity * -limitedDrag);
                 rb.AddTorque(rb.angularVelocity * -limitedAngularDrag);
