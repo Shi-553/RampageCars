@@ -21,11 +21,11 @@ namespace RampageCars
 
         private void OnDamage(ICollisionDamageInfo info)
         {
-            AudioSource.PlayClipAtPoint(hit, transform.position, 1);
+            Singleton.Get<SEManager>().Play(hit, transform.position, 1);
         }
         private void OnDeath(DeathInfo n)
         {
-            AudioSource.PlayClipAtPoint(explosion, transform.position, 1);
+            Singleton.Get<SEManager>().Play(explosion, transform.position, 1);
         }
 
     }

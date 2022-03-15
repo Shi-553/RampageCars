@@ -21,6 +21,7 @@ namespace RampageCars
         private void OnDamage(ICollisionDamageInfo info)
         {
             Instantiate(hit, transform.position, Quaternion.identity);
+
         }
         private void OnDeath(DeathInfo n)
         {
