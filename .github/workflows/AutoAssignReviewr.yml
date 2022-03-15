@@ -1,10 +1,7 @@
 name: 'Auto Assign Reviewr'
 on:
   pull_request:
-    types: 
-     - opened
-     - labeled
-     - unassigned
+    types: [opened, reopened]
 
 jobs:
   add-reviews:
