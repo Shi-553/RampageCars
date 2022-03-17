@@ -32,6 +32,6 @@ jobs:
                 
       - name: Get version
         id: vars
-        run: echo ::set-output name=json::$(cat decoded.json)
+        run: echo ::set-output name=json::$(cat decoded.json | tr -d '\n')
       - name: Test output
         run: echo ${{ steps.vars.outputs.json }}
