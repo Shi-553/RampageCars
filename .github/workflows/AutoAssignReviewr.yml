@@ -31,4 +31,4 @@ jobs:
           echo $JSON_DECODE | base64 --decode > decoded.json
                 
       - name: Test output
-        run: echo ${{ fromJson($(cat decoded.json))["Shi-553"] }}
+        run: echo ${{ fromJson(cat decoded.json)["Shi-553"] }}
