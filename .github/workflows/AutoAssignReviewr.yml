@@ -25,7 +25,7 @@ jobs:
           JSON_DECODE: ${{ secrets.GITHAB_NAME_TO_DISCORD_ID }}
           KEY: ${{ fromJson(steps.api.outputs.response).data.requested_reviewers[0].login }}
         run: |
-          echo $JSON_DECODE | base64 --decode | jq '."$KEY"' -r
+          echo $JSON_DECODE | base64 --decode | jq ."$KEY" -r
                 
                 
       
