@@ -40,5 +40,5 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@0.3.2
         with:
-          args: '<@${{ steps.setID.outputs.DISCORD_ID }}> レビュ－お願いします。\n${{ github.event.pull_request._links.self.href }}'
+          args: '<@${{ steps.setID.outputs.DISCORD_ID }}> レビュ－お願いします。\n ${{ github.event.pull_request.html_url }}'
                 
