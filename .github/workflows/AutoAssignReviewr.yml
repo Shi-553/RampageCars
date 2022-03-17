@@ -26,7 +26,11 @@ jobs:
           KEY: Shi-553 #${{ fromJson(steps.api.outputs.response).data.requested_reviewers[0].login }}
         run: |
           echo $JSON_DECODE | base64 --decode | jq -r '."${{ env.KEY }}"' >> id.txt
+          
+      - run: |
           echo "DISCORD_ID=$(cat id.txt)" >> $GITHUB_ENV
+          
+      - run: |
           echo $DISCORD_ID
           
       - name: Discord notification
@@ -34,7 +38,7 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: '@$DISCORD_ID '
+          args: test
                 
       
         
