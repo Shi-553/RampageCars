@@ -23,6 +23,6 @@ jobs:
           
   send-discord:
     runs-on: ubuntu-latest
-    if: env.ADDED == 'true'
+    if: $ADDED == 'true'
     steps:
       - run: echo toJson(github.event.pull_request.requested_reviewers)
