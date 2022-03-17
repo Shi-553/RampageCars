@@ -14,4 +14,5 @@ jobs:
         with:
           configuration-path: '.github/auto_assign.yml'
           
-      - run: echo github.event.pull_request.requested_reviewers
+      - run: |
+          echo "ths is env=${{ github.event.pull_request.requested_reviewers }}"
