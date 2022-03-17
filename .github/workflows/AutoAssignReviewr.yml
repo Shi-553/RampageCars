@@ -18,4 +18,4 @@ jobs:
           configuration-path: '.github/auto_assign.yml'
           
       - run: |
-          echo "ths is env=${{ steps.assign.outputs }}"
+          echo "ths is env=${{ toJSON(steps.assign.outputs) }}"
