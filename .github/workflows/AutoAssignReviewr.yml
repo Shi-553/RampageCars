@@ -27,18 +27,16 @@ jobs:
         run: |
           echo $JSON_DECODE | base64 --decode | jq -r '."${{ env.KEY }}"' >> id.txt
           
-      - run: |
-          echo "DISCORD_ID=$(cat id.txt)" >> $GITHUB_ENV
-          
-      - run: |
-          echo $DISCORD_ID
+      - id: vars
+        run: |
+          echo ::set-output name=DISCORD_ID::$(cat id.txt))
           
       - name: Discord notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        uses: Ilshidur/action-discord@master
+        uses: Ilshidur/action-discord@0.3.2
         with:
-          args: test
+          args:  '@{{ steps.vars.outputs.version }} test.'
                 
       
         
