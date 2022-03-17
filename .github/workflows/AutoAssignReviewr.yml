@@ -17,7 +17,7 @@ jobs:
       - uses: octokit/request-action@v2.x
         id: get_latest_release
         with:
-          route: GET ${{ github.event.pull_request._links.self }}
+          route: GET "${{ github.event.pull_request._links.self }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
