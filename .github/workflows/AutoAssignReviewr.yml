@@ -10,34 +10,35 @@ jobs:
     runs-on: ubuntu-latest
     if: (! github.event.pull_request.draft) && contains(toJson(github.event.pull_request.requested_reviewers), '[]' )
     steps:
-      - uses: kentaro-m/auto-assign-action@v1.2.1
+    
+      - name: 自動割り当て
+        uses: kentaro-m/auto-assign-action@v1.2.1
         with:
           configuration-path: '.github/auto_assign.yml'
           
-      - name: 'Call API'
+      - name: 誰に割り当てられたか確認するために同じページを呼ぶ
         uses: indiesdev/curl@v1
         id: api
         with:
           url: ${{ github.event.pull_request._links.self.href }}
         
-      - name: Translate secrets of base64 into json
+      - name: GITHAB_NAME_TO_DISCORD_IDをデコードして割り当てられた人をKEYとしてDiscordIDをファイルに保存
         env:
           JSON_DECODE: ${{ secrets.GITHAB_NAME_TO_DISCORD_ID }}
-          KEY: Shi-553 #${{ fromJson(steps.api.outputs.response).data.requested_reviewers[0].login }}
+          KEY: ${{ fromJson(steps.api.outputs.response).data.requested_reviewers[0].login }}
         run: |
-          echo $JSON_DECODE | base64 --decode | jq -r '."${{ env.KEY }}"' >> id.txt
+          echo $JSON_DECODE | base64 --decode | jq -r '."${{ env.KEY }}"' >> TEMP_DISCORD_ID.txt
           
-      - id: vars
+      - name: DiscordIDをファイルから変数に
+        id: setID
         run: |
-          echo ::add-mask::$(cat id.txt)
-          echo ::set-output name=DISCORD_ID::$(cat id.txt)
+          echo ::add-mask::$(cat TEMP_DISCORD_ID.txt)
+          echo ::set-output name=DISCORD_ID::$(cat TEMP_DISCORD_ID.txt)
           
-      - name: Discord notification
+      - name: Discordに通知
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@0.3.2
         with:
-          args:  '<@${{ steps.vars.outputs.DISCORD_ID }}> test.'
+          args: '<@${{ steps.setID.outputs.DISCORD_ID }}> レビュ－お願いします。\n${{ github.event.pull_request._links.self.href }}'
                 
-      
-        
