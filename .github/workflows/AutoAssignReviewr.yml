@@ -5,8 +5,6 @@ on:
   pull_request:
     types: [opened, ready_for_review, reopened]
 
-env:
-  OUT: ''
 jobs:
   add-reviews:
     runs-on: ubuntu-latest
@@ -18,4 +16,4 @@ jobs:
           configuration-path: '.github/auto_assign.yml'
           
       - run: |
-          echo "ths is env=${{ toJSON(steps.assign.outputs) }}"
+          echo "${{ toJSON(steps) }}"
