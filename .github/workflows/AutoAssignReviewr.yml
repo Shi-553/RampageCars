@@ -15,4 +15,4 @@ jobs:
           configuration-path: '.github/auto_assign.yml'
           
       - run: |
-          echo "ths is env=${{ github.event.pull_request.requested_reviewers }}"
+          echo "ths is env=${{ toJson(github.event.pull_request.requested_reviewers) }}"
