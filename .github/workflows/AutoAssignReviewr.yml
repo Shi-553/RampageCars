@@ -30,8 +30,5 @@ jobs:
         run: |
           echo $JSON_DECODE | base64 --decode > decoded.json
                 
-      - name: Get version
-        id: vars
-        run: echo ::set-output name=json::$(cat decoded.json | tr -d '\n')
       - name: Test output
-        run: echo ${{ steps.vars.outputs.json }}
+        run: echo ${{ fromJson($(cat decoded.json))["Shi-553"] }}
