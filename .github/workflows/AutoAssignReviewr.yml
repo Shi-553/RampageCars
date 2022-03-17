@@ -39,7 +39,7 @@ jobs:
         with:
           nodetail: true
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          title: '<@${{ steps.setID.outputs.DISCORD_ID }}> レビューリクエスト'
+          title: 'レビューリクエスト'
           username: GitHub Actions
-          description: ${{ github.event.pull_request.html_url }}
+          description: <@${{ steps.setID.outputs.DISCORD_ID }}> ${{ github.event.pull_request.html_url }}
           color: 0xf5f2e9
