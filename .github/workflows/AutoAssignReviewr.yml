@@ -29,7 +29,7 @@ jobs:
           
       - id: vars
         run: |
-          echo ::set-output name=DISCORD_ID::$(cat id.txt))
+          echo ::set-output name=DISCORD_ID::$(cat id.txt)
           
       - name: Discord notification
         env:
