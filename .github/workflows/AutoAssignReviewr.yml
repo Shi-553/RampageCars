@@ -37,6 +37,6 @@ jobs:
           
       - uses: sarisia/actions-status-discord@v1
         with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          title: "<@${{ steps.setID.outputs.DISCORD_ID }}>レビューリクエスト"
+          title: '<@${{ steps.setID.outputs.DISCORD_ID }}> レビューリクエスト'
           username: GitHub Actions
+          description: ${{ github.event.pull_request.html_url }}
