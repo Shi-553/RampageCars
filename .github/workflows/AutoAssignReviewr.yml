@@ -36,7 +36,7 @@ jobs:
         env:
           KEY: ${{ fromJson(steps.api.outputs.response).data.requested_reviewers[0].login }}
         with:
-          cmd: 'jq . "Shi-553" decoded.json -r'
+          cmd: 'jq ."Shi-553" decoded.json -r'
       
       - name: Show my version
         run: 'echo "ID ${{ steps.ExtractID.outputs.value }}"'
