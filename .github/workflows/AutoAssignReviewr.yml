@@ -31,4 +31,4 @@ jobs:
           echo "::set-output name=JSON::$JSON_DECODE | base64 --decode "
           
       - run: |
-          echo "${{ fromJson(steps.set_JSON.outputs.JSON)[fromJson(steps.api.outputs.response).data.requested_reviewers[0].login] }}"
+          echo "${{ steps.set_JSON.outputs.JSON }}"
