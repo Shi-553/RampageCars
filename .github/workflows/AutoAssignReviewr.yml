@@ -11,9 +11,6 @@ jobs:
     if: (! github.event.pull_request.draft) && contains(toJson(github.event.pull_request.requested_reviewers), '[]' )
     steps:
       - uses: kentaro-m/auto-assign-action@v1.2.1
-        id: assign
         with:
           configuration-path: '.github/auto_assign.yml'
-          
-      - run: |
-          echo "${{ toJSON(steps) }}"
+
