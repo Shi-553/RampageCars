@@ -35,10 +35,8 @@ jobs:
           echo ::add-mask::$(cat TEMP_DISCORD_ID.txt)
           echo ::set-output name=DISCORD_ID::$(cat TEMP_DISCORD_ID.txt)
           
-      - name: Discordに通知
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        uses: Ilshidur/action-discord@0.3.2
+      - uses: sarisia/actions-status-discord@v1
         with:
-          args: '<@${{ steps.setID.outputs.DISCORD_ID }}> レビュ－お願いします。\n ${{ github.event.pull_request.html_url }}'
-                
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: "<@${{ steps.setID.outputs.DISCORD_ID }}>レビューリクエスト"
+          username: GitHub Actions
