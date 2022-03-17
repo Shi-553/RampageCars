@@ -4,7 +4,10 @@ on:
     
   pull_request:
     types: [opened, ready_for_review, reopened]
-
+    
+env:
+  ADDED: 'false'
+  
 jobs:
   add-reviews:
     runs-on: ubuntu-latest
@@ -13,4 +16,13 @@ jobs:
       - uses: kentaro-m/auto-assign-action@v1.2.1
         with:
           configuration-path: '.github/auto_assign.yml'
-
+          
+      - name: Set ADDED
+          
+        run: echo "ADDED='true'" >> $GITHUB_ENV 
+          
+  send-discord:
+    runs-on: ubuntu-latest
+    if: ${ADDED} == 'true'
+    steps:
+      - run: echo toJson(github.event.pull_request.requested_reviewers)
