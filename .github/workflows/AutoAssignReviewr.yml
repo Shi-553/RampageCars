@@ -29,6 +29,9 @@ jobs:
           JSON_DECODE: ${{ secrets.GITHAB_NAME_TO_DISCORD_ID }}
         run: |
           echo $JSON_DECODE | base64 --decode > decoded.json
-          
-      - run: |
-          echo "${{ cat decoded.json }}"
+                
+      - name: Get version
+        id: vars
+        run: echo ::set-output name=json::$(cat decoded.json)
+      - name: Test output
+        run: echo ${{ steps.vars.outputs.json }}
