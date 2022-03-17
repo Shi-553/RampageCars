@@ -24,14 +24,11 @@ jobs:
         run: echo ${{ fromJson(steps.api.outputs.response).data.requested_reviewers[0].login }}
         
       - name: Translate secrets of base64 into json
+        id: set_JSON
         env:
           JSON_DECODE: ${{ secrets.GITHAB_NAME_TO_DISCORD_ID }}
-          
         run: |
-          echo-n $JSON_DECODE | base64 --decode > ./config/credential.json
+          echo "::set-output name=JSON::$JSON_DECODE | base64 --decode "
           
-          
-      - name: Download a Build Artifact
-        uses: actions/download-artifact@v3.0.0
-        with:
-          path: ./config/credential.json
+      - run: |
+          echo "${{ fromJson(steps.set_JSON.outputs.JSON)[fromJson(steps.api.outputs.response).data.requested_reviewers[0].login] }}"
