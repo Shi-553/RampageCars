@@ -28,7 +28,7 @@ jobs:
         env:
           JSON_DECODE: ${{ secrets.GITHAB_NAME_TO_DISCORD_ID }}
         run: |
-          echo "::set-output name=JSON::$(JSON_DECODE | base64 --decode)"
+          echo "::set-output name=JSON::($JSON_DECODE | base64 --decode)"
           
       - run: |
           echo "${{ steps.set_JSON.outputs.JSON }}"
