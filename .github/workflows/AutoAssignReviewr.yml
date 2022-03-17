@@ -19,15 +19,13 @@ jobs:
         id: api
         with:
           url: ${{ github.event.pull_request._links.self.href }}
-          
-      - name: 'Use response'
-        run: echo ${{ fromJson(steps.api.outputs.response).data.requested_reviewers[0].login }}
         
       - name: Translate secrets of base64 into json
         env:
           JSON_DECODE: ${{ secrets.GITHAB_NAME_TO_DISCORD_ID }}
+          KEY: ${{ fromJson(steps.api.outputs.response).data.requested_reviewers[0].login }}
         run: |
-          echo $JSON_DECODE | base64 --decode | jq '."Shi-553"' -r
+          echo $JSON_DECODE | base64 --decode | jq '."$KEY"' -r
                 
                 
       
