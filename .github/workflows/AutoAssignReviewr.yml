@@ -19,10 +19,10 @@ jobs:
           
       - name: Set ADDED
           
-        run: echo "ADDED='true'" >> $GITHUB_ENV 
+        run: echo "ADDED=true" >> $GITHUB_ENV 
           
   send-discord:
     runs-on: ubuntu-latest
-    if: ${ADDED} == 'true'
+    if: env.ADDED == 'true'
     steps:
       - run: echo toJson(github.event.pull_request.requested_reviewers)
