@@ -19,4 +19,4 @@ jobs:
     needs: add-reviews
     runs-on: ubuntu-latest
     steps:
-      - run: echo toJson(github.event.pull_request.requested_reviewers)
+      - run: echo '${ toJson(github.event.pull_request.requested_reviewers) }'
