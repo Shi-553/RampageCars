@@ -32,6 +32,6 @@ jobs:
                 
       - name: Extract ID from decoded.json 
         run: |
-         echo jq '."Shi-553" decoded.json -r' 
+         echo jq '."Shi-553"' decoded.json -r
       
         
