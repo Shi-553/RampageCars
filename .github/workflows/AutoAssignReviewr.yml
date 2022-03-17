@@ -24,11 +24,18 @@ jobs:
         run: echo ${{ fromJson(steps.api.outputs.response).data.requested_reviewers[0].login }}
         
       - name: Translate secrets of base64 into json
-        id: set_JSON
         env:
           JSON_DECODE: ${{ secrets.GITHAB_NAME_TO_DISCORD_ID }}
         run: |
           echo $JSON_DECODE | base64 --decode > decoded.json
                 
-      - name: Test output
-        run: echo ${{ fromJson(cat decoded.json)["Shi-553"] }}
+                
+      - name: Extract ID from decoded.json 
+        uses: sergeysova/jq-action@v2
+        id: ExtractID
+        with:
+          cmd: 'jq .Shi-553 decoded.json -r'
+      
+      - name: Show my version
+        run: 'echo "ID ${{ steps.ExtractID.outputs.value }}"'
+        
