@@ -27,11 +27,8 @@ jobs:
         env:
           JSON_DECODE: ${{ secrets.GITHAB_NAME_TO_DISCORD_ID }}
         run: |
-          echo $JSON_DECODE | base64 --decode > decoded.json
+          echo $JSON_DECODE | base64 --decode | jp '."Shi-553"' -r
                 
                 
-      - name: Extract ID from decoded.json 
-        run: |
-         echo jq '."Shi-553"' decoded.json -r
       
         
