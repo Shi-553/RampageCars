@@ -23,9 +23,9 @@ jobs:
       - name: Translate secrets of base64 into json
         env:
           JSON_DECODE: ${{ secrets.GITHAB_NAME_TO_DISCORD_ID }}
-          KEY: "Shi-553" #${{ fromJson(steps.api.outputs.response).data.requested_reviewers[0].login }}
+          KEY: Shi-553 #${{ fromJson(steps.api.outputs.response).data.requested_reviewers[0].login }}
         run: |
-          echo $JSON_DECODE | base64 --decode | jq .$KEY -r
+          echo $JSON_DECODE | base64 --decode | jq -r '."${{ env.KEY }}"'
                 
                 
       
