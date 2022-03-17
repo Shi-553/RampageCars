@@ -14,11 +14,11 @@ jobs:
         with:
           configuration-path: '.github/auto_assign.yml'
           
-      - uses: octokit/request-action@v2.x
-        id: get_latest_release
+      - name: 'Call API'
+        uses: indiesdev/curl@v1
+        id: api
         with:
-          route: GET "${{ github.event.pull_request._links.self }}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          url: ${{ github.event.pull_request._links.self.href }}
           
-      - run: "echo data: ${{ steps.get_latest_release.outputs.data }}"
+      - name: 'Use response'
+        run: echo ${{ steps.api.outputs.response }}
