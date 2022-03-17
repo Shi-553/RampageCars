@@ -21,4 +21,4 @@ jobs:
           url: ${{ github.event.pull_request._links.self.href }}
           
       - name: 'Use response'
-        run: echo ${{ steps.api.outputs.response.data }}
+        run: echo ${{ toJson(steps.api.outputs.response).data }}
