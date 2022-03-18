@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using EditorScripts;
 using UnityEngine;
 
 namespace RampageCars
 {
     public class HitAudio : MonoEventReceiver
     {
-        [SerializeField]
+        [SerializeField, NotNull]
         AudioClip hit;
-        [SerializeField]
+        [SerializeField, NotNull]
         AudioClip explosion;
 
 
