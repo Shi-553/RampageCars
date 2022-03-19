@@ -21,11 +21,7 @@ namespace RampageCars
 
             if (keyboard.pKey.wasPressedThisFrame)
             {
-#if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-#else
                 SceneManager.LoadScene("SampleScene");
-#endif
             }
 
             var gamepad = Gamepad.current;
@@ -38,11 +34,7 @@ namespace RampageCars
             if (gamepad.startButton.wasPressedThisFrame)
             {
 
-#if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-#else
                 SceneManager.LoadScene("SampleScene");
-#endif
             }
         }
 
