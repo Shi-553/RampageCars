@@ -9,36 +9,18 @@ namespace RampageCars
     public class QuitGame : MonoBehaviour
     {
 
-        // Start is called before the first frame update
         void Start()
         {
 
         }
 
-        // Update is called once per frame
         void Update()
         {
             var keyboard = Keyboard.current;
-
-            if (keyboard.lKey.wasPressedThisFrame)
-            {
-#if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-#else
-                Application.Quit();
-#endif
-            }
-
             var gamepad = Gamepad.current;
 
-            if (gamepad == null)
+            if (keyboard.lKey.wasPressedThisFrame || (gamepad?.selectButton.wasPressedThisFrame ?? false))
             {
-                return;
-            }
-
-            if (gamepad.selectButton.wasPressedThisFrame)
-            {
-
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
 #else

@@ -17,29 +17,15 @@ namespace RampageCars
 
         void Update()
         {
-            var loader = Singleton.Get<SceneLoader>();
-
             var keyboard = Keyboard.current;
-
-            if (keyboard.pKey.wasPressedThisFrame)
-            {
-                loader.ChangeScene(loader.CurrentType);
-            }
-
             var gamepad = Gamepad.current;
 
-            if (gamepad == null)
+            if (keyboard.pKey.wasPressedThisFrame || (gamepad?.startButton.wasPressedThisFrame ?? false))
             {
-                return;
-            }
+                var loader = Singleton.Get<SceneLoader>();
 
-            if (gamepad.startButton.wasPressedThisFrame)
-            {
-
-                SceneManager.LoadScene("SampleScene");
+                loader.ChangeScene(loader.CurrentType);
             }
         }
-
-
     }
 }
