@@ -34,7 +34,7 @@ namespace EditorScripts
         {
             if (isLocked)
             {
-                UnLock();
+                Unlock();
             }
             else
             {
@@ -45,7 +45,7 @@ namespace EditorScripts
         [MenuItem(FORCE_MENU_PATH)]
         private static void ForceCompile()
         {
-            UnLock();
+            Unlock();
 
             AssetDatabase.Refresh();
             CompilationPipeline.RequestScriptCompilation();
@@ -53,7 +53,7 @@ namespace EditorScripts
 
         private static void Lock()
         {
-            Debug.Log("Lock Reload Assemblies");
+            Debug.Log("<b>Lock</b> Reload Assemblies");
 
             EditorApplication.LockReloadAssemblies();
             isLocked = true;
@@ -61,9 +61,9 @@ namespace EditorScripts
             Menu.SetChecked(LOCK_MENU_PATH, isLocked);
         }
 
-        private static void UnLock()
+        private static void Unlock()
         {
-            Debug.Log("Unlock Reload Assemblies");
+            Debug.Log("<b>Unlock</b> Reload Assemblies");
 
             EditorApplication.UnlockReloadAssemblies();
             isLocked = false;
