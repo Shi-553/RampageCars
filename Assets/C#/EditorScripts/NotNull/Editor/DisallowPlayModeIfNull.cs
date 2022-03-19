@@ -36,7 +36,7 @@ namespace EditorScripts
 
         private static void LogNullError(PlayModeStateChange state)
         {
-            if (state != PlayModeStateChange.ExitingEditMode)
+            if (state != PlayModeStateChange.EnteredPlayMode)
             {
                 return;
             }
