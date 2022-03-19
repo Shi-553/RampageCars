@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace RampageCars
 {
     class UnRealCar : MonoBehaviour, ICar
@@ -120,6 +121,8 @@ namespace RampageCars
                 rb.AddForce(transform.up * jumpPower, ForceMode.Impulse);
             }
         }
+
+
 
         private void OnCollisionEnter(Collision collision)
         {
