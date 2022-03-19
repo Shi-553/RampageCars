@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using EditorScripts;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -9,7 +10,7 @@ namespace RampageCars
 {
     public class TestEnemySponer : MonoBehaviour
     {
-        [SerializeField]
+        [SerializeField, NotNull]
         GameObject testEnemy;
 
         float time;

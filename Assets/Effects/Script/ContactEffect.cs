@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using EditorScripts;
 using UnityEngine;
 
 namespace RampageCars
 {
-
     public class ContactEffect : MonoEventReceiver
     {
-        [SerializeField]
+        [SerializeField, NotNull]
         GameObject hit;
-        [SerializeField]
+        [SerializeField, NotNull]
         GameObject explosion;
 
         private void Start()
@@ -21,6 +21,7 @@ namespace RampageCars
         private void OnDamage(ICollisionDamageInfo info)
         {
             Instantiate(hit, transform.position, Quaternion.identity);
+
         }
         private void OnDeath(DeathInfo n)
         {

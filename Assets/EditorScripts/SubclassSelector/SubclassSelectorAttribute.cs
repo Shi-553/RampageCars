@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace SubclassSelector {
+namespace EditorScripts {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
     public class SubclassSelectorAttribute : PropertyAttribute {
         private bool m_includeMono;
