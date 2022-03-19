@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEditor;
 using System.Collections;
 using System.Linq;
@@ -20,22 +20,22 @@ namespace EditorScripts
         {
             List<Object> list = new();
 
-            //ƒ}ƒEƒX‚ÌˆÊ’u‚ªD&D‚Ì”ÍˆÍ‚É‚È‚¯‚ê‚ÎƒXƒ‹[
+            //ãƒã‚¦ã‚¹ã®ä½ç½®ãŒD&Dã®ç¯„å›²ã«ãªã‘ã‚Œã°ã‚¹ãƒ«ãƒ¼
             if (!rect.Contains(Event.current.mousePosition))
             {
                 return list;
             }
 
-            //Œ»İ‚ÌƒCƒxƒ“ƒg‚ğæ“¾
+            //ç¾åœ¨ã®ã‚¤ãƒ™ãƒ³ãƒˆã‚’å–å¾—
             EventType eventType = Event.current.type;
 
-            //ƒhƒ‰ƒbƒO•ƒhƒƒbƒv‚Å‘€ì‚ª XV‚³‚ê‚½‚Æ‚« or Às‚µ‚½‚Æ‚«
+            //ãƒ‰ãƒ©ãƒƒã‚°ï¼†ãƒ‰ãƒ­ãƒƒãƒ—ã§æ“ä½œãŒ æ›´æ–°ã•ã‚ŒãŸã¨ã or å®Ÿè¡Œã—ãŸã¨ã
             if (eventType == EventType.DragUpdated || eventType == EventType.DragPerform)
             {
-                //ƒJ[ƒ\ƒ‹‚É+‚ÌƒAƒCƒRƒ“‚ğ•\¦
+                //ã‚«ãƒ¼ã‚½ãƒ«ã«+ã®ã‚¢ã‚¤ã‚³ãƒ³ã‚’è¡¨ç¤º
                 DragAndDrop.visualMode = DragAndDropVisualMode.Copy;
 
-                //ƒhƒƒbƒv‚³‚ê‚½ƒIƒuƒWƒFƒNƒg‚ğƒŠƒXƒg‚É“o˜^
+                //ãƒ‰ãƒ­ãƒƒãƒ—ã•ã‚ŒãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ãƒªã‚¹ãƒˆã«ç™»éŒ²
                 if (eventType == EventType.DragPerform)
                 {
                     if (includeSubAsset)
@@ -49,11 +49,11 @@ namespace EditorScripts
                     {
                         list = new(DragAndDrop.objectReferences);
                     }
-                    //ƒhƒ‰ƒbƒO‚ğó‚¯•t‚¯‚é(ƒhƒ‰ƒbƒO‚µ‚ÄƒJ[ƒ\ƒ‹‚É‚­‚Á•t‚¢‚Ä‚½ƒIƒuƒWƒFƒNƒg‚ª–ß‚ç‚È‚­‚È‚é)
+                    //ãƒ‰ãƒ©ãƒƒã‚°ã‚’å—ã‘ä»˜ã‘ã‚‹(ãƒ‰ãƒ©ãƒƒã‚°ã—ã¦ã‚«ãƒ¼ã‚½ãƒ«ã«ãã£ä»˜ã„ã¦ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒæˆ»ã‚‰ãªããªã‚‹)
                     DragAndDrop.AcceptDrag();
                 }
 
-                //ƒCƒxƒ“ƒg‚ğg—pÏ‚İ‚É‚·‚é
+                //ã‚¤ãƒ™ãƒ³ãƒˆã‚’ä½¿ç”¨æ¸ˆã¿ã«ã™ã‚‹
                 Event.current.Use();
             }
 
