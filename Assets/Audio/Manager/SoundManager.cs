@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using EditorScripts;
 using UnityEngine;
 
 namespace RampageCars
 {
     public abstract class SoundManager : SingletonBase
     {
-        [SerializeField]
+        [SerializeField, NotNull]
         GameObject audioSourcePrefab;
 
         List<AudioSource> audioSources = new();
