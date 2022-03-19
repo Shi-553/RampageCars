@@ -12,7 +12,14 @@ namespace RampageCars
             Init();
         }
 
+
+        protected void OnDestroy()
+        {
+            Singleton.Remove(this);
+            Uninit();
+        }
         protected virtual void Init() { }
+        protected virtual void Uninit() { }
     }
 
     public static class Singleton
@@ -34,8 +41,12 @@ namespace RampageCars
 #endif
             instances.Add(singleton);
         }
+        public static void Remove(SingletonBase singleton)
+        {
+            instances.Remove(singleton);
+        }
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+            [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void SingletonSceneInitialize()
         {
             string managerSceneName = "Manager";
