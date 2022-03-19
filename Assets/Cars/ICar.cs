@@ -13,6 +13,5 @@ namespace RampageCars
         void SetSteerAngle(float steerAngle);
         void Boost(Vector3 v);
         void Jamp();
-        void GameReset();
     }
 }

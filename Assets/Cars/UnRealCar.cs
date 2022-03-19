@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 namespace RampageCars
@@ -123,10 +122,6 @@ namespace RampageCars
             }
         }
 
-        public void GameReset()
-        {
-            SceneManager.LoadScene("SampleScene");
-        }
 
 
         private void OnCollisionEnter(Collision collision)

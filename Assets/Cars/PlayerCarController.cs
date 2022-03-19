@@ -31,7 +31,6 @@ namespace RampageCars
             action.Player.Boost.performed += BoostPerformed;
             action.Player.Boost.canceled += BoostCanceled;
             action.Player.Jump.started += JumpStarted; ;
-            action.Player.Reset.started += ResetStarted;
 
             car.SetMotorTorque(1);
         }
@@ -61,12 +60,6 @@ namespace RampageCars
             var steer = obj.ReadValue<float>();
             car.SetSteerAngle(steer);
         }
-
-        private void ResetStarted(InputAction.CallbackContext obj)
-        {
-            car.GameReset();
-        }
-
 
         void Update()
         {
