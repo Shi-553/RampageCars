@@ -1,10 +1,12 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using UnityEditor;
 
-namespace UnityEditor {
+namespace EditorScripts
+{
     public abstract class InspectorExtension<T> : Editor where T : Component {
         //Unity's built-in editor
         protected Editor defaultEditor;

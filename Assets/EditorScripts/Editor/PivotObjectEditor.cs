@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEditor.EditorTools;
+using UnityEditor;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace UnityEditor {
+namespace EditorScripts{
 
     public abstract class PivotObjectEditor<T> : InspectorExtension<T> where T : Transform {
         bool isPivot = false;

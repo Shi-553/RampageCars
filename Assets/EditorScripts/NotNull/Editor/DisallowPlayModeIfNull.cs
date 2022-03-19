@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Reflection;
-using EditorScripts;
+using UnityEditor;
 
-namespace UnityEditor
+namespace EditorScripts
 {
     [InitializeOnLoad]
     public static class DisallowPlayModeIfNull

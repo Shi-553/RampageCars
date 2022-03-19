@@ -1,7 +1,7 @@
 using UnityEngine;
-using EditorScripts;
+using UnityEditor;
 
-namespace UnityEditor
+namespace EditorScripts
 {
     // 参考
     // https://hacchi-man.hatenablog.com/entry/2021/01/01/220000
