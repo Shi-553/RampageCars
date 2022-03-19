@@ -9,7 +9,7 @@ namespace RampageCars
     public class CameraController : MonoBehaviour
     {
         PlayerAction action;
-        ICamera camera;
+        new ICamera camera;
 
         private void OnEnable()
         {
