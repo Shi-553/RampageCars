@@ -7,7 +7,7 @@ namespace RampageCars
 {
     class UnRealCar : MonoBehaviour, ICar
     {
-         IAxle[] axles;
+        IAxle[] axles;
 
 
         [SerializeField]
@@ -31,9 +31,9 @@ namespace RampageCars
         float motorTorque;
 
         [SerializeField]
-         float drag = 1f;
+        float drag = 1f;
         [SerializeField]
-         Vector3 dragFactor =new Vector3(1,1,1);
+        Vector3 dragFactor = new Vector3(1, 1, 1);
 
         SpeedMeasure speedMeasure;
 
@@ -52,8 +52,8 @@ namespace RampageCars
         }
         private void Update()
         {
-           var ray = new Ray(transform.position, transform.up * -1.0f);
-            isGrounded = Physics.SphereCast(ray, 0.5f,1);
+            var ray = new Ray(transform.position, transform.up * -1.0f);
+            isGrounded = Physics.SphereCast(ray, 0.5f, 1);
         }
 
         private void FixedUpdate()
@@ -84,7 +84,7 @@ namespace RampageCars
             else
             {
                 //空中回転
-                rb.MoveRotation(transform.localRotation * Quaternion.AngleAxis(steerAngle * steeringMax , Vector3.up));
+                rb.MoveRotation(transform.localRotation * Quaternion.AngleAxis(steerAngle * steeringMax, Vector3.up));
 
             }
             //rb.velocity*= brakeTorque==0?1:0.99f;
@@ -105,7 +105,7 @@ namespace RampageCars
 
             foreach (var axle in axles)
             {
-               axle.SetSteerAngle(steerAngle * steeringVisualMax);
+                axle.SetSteerAngle(steerAngle * steeringVisualMax);
             }
         }
 

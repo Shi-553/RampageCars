@@ -7,7 +7,7 @@ namespace RampageCars
 {
     class VirtualAxle : MonoBehaviour, IAxle
     {
-        List<Transform> wheelMeshs = new ();
+        List<Transform> wheelMeshs = new();
 
         [SerializeField]
         bool isMotor;
@@ -29,8 +29,8 @@ namespace RampageCars
         private void Awake()
         {
             wheelMeshs.Clear();
-            wheelMeshs = transform.Cast<Transform>().Select(t=>t.GetChild(1)).ToList();
-             speedMeasure = GetComponentInParent<SpeedMeasure>();
+            wheelMeshs = transform.Cast<Transform>().Select(t => t.GetChild(1)).ToList();
+            speedMeasure = GetComponentInParent<SpeedMeasure>();
         }
 
 

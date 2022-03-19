@@ -5,18 +5,22 @@ using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
-namespace EditorScripts {
+namespace EditorScripts
+{
     [CustomPropertyDrawer(typeof(SubclassSelectorAttribute))]
-    public class SubclassSelectorDrawer : PropertyDrawer {
+    public class SubclassSelectorDrawer : PropertyDrawer
+    {
         bool initialized = false;
         Type[] inheritedTypes;
         string[] typePopupNameArray;
         string[] typeFullNameArray;
         int currentTypeIndex;
 
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
             if (property.propertyType != SerializedPropertyType.ManagedReference) return;
-            if (!initialized) {
+            if (!initialized)
+            {
                 Initialize(property);
                 initialized = true;
             }
@@ -26,21 +30,25 @@ namespace EditorScripts {
             EditorGUI.PropertyField(position, property, label, true);
         }
 
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
             return EditorGUI.GetPropertyHeight(property, true);
         }
 
-        private void Initialize(SerializedProperty property) {
+        private void Initialize(SerializedProperty property)
+        {
             SubclassSelectorAttribute utility = (SubclassSelectorAttribute)attribute;
             GetAllInheritedTypes(GetFieldType(property), utility.IsIncludeMono());
             GetInheritedTypeNameArrays();
         }
 
-        private void GetCurrentTypeIndex(string typeFullName) {
+        private void GetCurrentTypeIndex(string typeFullName)
+        {
             currentTypeIndex = Array.IndexOf(typeFullNameArray, typeFullName);
         }
 
-        private void GetAllInheritedTypes(Type baseType, bool includeMono) {
+        private void GetAllInheritedTypes(Type baseType, bool includeMono)
+        {
             Type monoType = typeof(MonoBehaviour);
             inheritedTypes = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
@@ -49,18 +57,21 @@ namespace EditorScripts {
                 .ToArray();
         }
 
-        private void GetInheritedTypeNameArrays() {
+        private void GetInheritedTypeNameArrays()
+        {
             typePopupNameArray = inheritedTypes.Select(type => type == null ? "<null>" : type.ToString()).ToArray();
             typeFullNameArray = inheritedTypes.Select(type => type == null ? "" : string.Format("{0} {1}", type.Assembly.ToString().Split(',')[0], type.FullName)).ToArray();
         }
 
-        public static Type GetFieldType(SerializedProperty property) {
+        public static Type GetFieldType(SerializedProperty property)
+        {
             string[] fieldTypename = property.managedReferenceFieldTypename.Split(' ');
             var assembly = Assembly.Load(fieldTypename[0]);
             return assembly.GetType(fieldTypename[1]);
         }
 
-        private void UpdatePropertyToSelectedTypeIndex(SerializedProperty property, int selectedTypeIndex) {
+        private void UpdatePropertyToSelectedTypeIndex(SerializedProperty property, int selectedTypeIndex)
+        {
             if (currentTypeIndex == selectedTypeIndex) return;
             currentTypeIndex = selectedTypeIndex;
             Type selectedType = inheritedTypes[selectedTypeIndex];
@@ -68,7 +79,8 @@ namespace EditorScripts {
                 selectedType == null ? null : Activator.CreateInstance(selectedType);
         }
 
-        private Rect GetPopupPosition(Rect currentPosition) {
+        private Rect GetPopupPosition(Rect currentPosition)
+        {
             Rect popupPosition = new Rect(currentPosition);
             popupPosition.width -= EditorGUIUtility.labelWidth;
             popupPosition.x += EditorGUIUtility.labelWidth;

@@ -5,20 +5,25 @@ using UnityEditor;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace EditorScripts{
+namespace EditorScripts
+{
 
-    public abstract class PivotObjectEditor<T> : InspectorExtension<T> where T : Transform {
+    public abstract class PivotObjectEditor<T> : InspectorExtension<T> where T : Transform
+    {
         bool isPivot = false;
 
-        public override void OnInspectorGUI() {
+        public override void OnInspectorGUI()
+        {
             //１つでも子供がいないのを選択していたらお断りする
-            if (components.Any(t => t.childCount == 0)) {
+            if (components.Any(t => t.childCount == 0))
+            {
                 defaultEditor.OnInspectorGUI();
                 isPivot = false;
                 return;
             }
             //ピボットモードじゃなかったらトグルを用意してさようなら
-            if (!isPivot) {
+            if (!isPivot)
+            {
                 defaultEditor.OnInspectorGUI();
                 isPivot = GUILayout.Toggle(isPivot, "Edit Pivot", "Button", GUILayout.Width(100));
                 return;
@@ -26,9 +31,11 @@ namespace EditorScripts{
 
 
             //子たち
-            var childrens = components.SelectMany(t => {
+            var childrens = components.SelectMany(t =>
+            {
                 List<Transform> c = new List<Transform>();
-                for (int i = 0; i < t.childCount; i++) {
+                for (int i = 0; i < t.childCount; i++)
+                {
                     c.Add(t.GetChild(i));
                 }
                 return c;
@@ -41,11 +48,13 @@ namespace EditorScripts{
             defaultEditor.OnInspectorGUI();
             isPivot = GUILayout.Toggle(isPivot, "Edit Pivot", "Button", GUILayout.Width(100));
 
-            if (EditorGUI.EndChangeCheck()) {
+            if (EditorGUI.EndChangeCheck())
+            {
                 Undo.RecordObjects(childrens, typeof(T).Name);
 
 
-                for (int i = 0; i < childrens.Length; i++) {
+                for (int i = 0; i < childrens.Length; i++)
+                {
                     Transform t = childrens[i];
                     t.rotation = posRotates[i].Item2;
                     t.position = posRotates[i].Item1;
@@ -56,15 +65,19 @@ namespace EditorScripts{
 
     [CanEditMultipleObjects]
     [CustomEditor(typeof(Transform))]
-    public class PivotTransformEditor : PivotObjectEditor<Transform> {
-        protected override string GetTypeName() {
+    public class PivotTransformEditor : PivotObjectEditor<Transform>
+    {
+        protected override string GetTypeName()
+        {
             return "UnityEditor.TransformInspector";
         }
     }
     [CanEditMultipleObjects]
     [CustomEditor(typeof(RectTransform))]
-    public class PivotRectTransformEditor : PivotObjectEditor<RectTransform> {
-        protected override string GetTypeName() {
+    public class PivotRectTransformEditor : PivotObjectEditor<RectTransform>
+    {
+        protected override string GetTypeName()
+        {
             return "UnityEditor.RectTransformEditor";
         }
     }
@@ -75,8 +88,10 @@ namespace EditorScripts{
     /// Pivot的なオブジェクトを子供を気にせずに動かしたいときにどうぞ。Scaleは面倒みないから注意
     /// </summary>
     [EditorTool("Pivot Move Rotate Tool")]
-    public class PivotObjectEditorTool : EditorTool {
-        public override void OnToolGUI(EditorWindow window) {
+    public class PivotObjectEditorTool : EditorTool
+    {
+        public override void OnToolGUI(EditorWindow window)
+        {
 
             // これ以降に定義されるGUIの変更を監視する
             EditorGUI.BeginChangeCheck();
@@ -87,9 +102,11 @@ namespace EditorScripts{
             Handles.TransformHandle(ref pos, ref rotate);
 
             // 監視してたGUIが変更されていればこのif内に入る
-            if (EditorGUI.EndChangeCheck()) {
+            if (EditorGUI.EndChangeCheck())
+            {
                 //１つでも子供がいないのを選択していたらお断りする
-                if (Selection.transforms.Any(t => t.childCount == 0)) {
+                if (Selection.transforms.Any(t => t.childCount == 0))
+                {
                     Debug.LogWarning("子供がないオブジェクトが含まれています。");
                     return;
                 }
@@ -99,9 +116,11 @@ namespace EditorScripts{
                 var parentCount = parents.Length;
 
                 //子たち
-                var childrens = parents.SelectMany(t => {
+                var childrens = parents.SelectMany(t =>
+                {
                     List<Transform> c = new List<Transform>();
-                    for (int i = 0; i < t.childCount; i++) {
+                    for (int i = 0; i < t.childCount; i++)
+                    {
                         c.Add(t.GetChild(i));
                     }
                     return c;
@@ -122,13 +141,15 @@ namespace EditorScripts{
 
 
                 // その差分を現在ヒエラルキーで選択しているすべてのオブジェクトに対して適用する
-                for (int i = 0; i < parentCount; i++) {
+                for (int i = 0; i < parentCount; i++)
+                {
                     parentAndChilds[i].rotation = deltaRotate * rotates[i];
                     parentAndChilds[i].position = poss[i] + deltaPosition;
                 }
 
                 // その子供に影響のないようにする
-                for (int i = parentCount; i < parentAndChilds.Length; i++) {
+                for (int i = parentCount; i < parentAndChilds.Length; i++)
+                {
                     parentAndChilds[i].rotation = rotates[i];
                     parentAndChilds[i].position = poss[i];
                 }

@@ -26,11 +26,11 @@ namespace RampageCars
                 cinemaFreeLook.m_RecenterToTargetHeading.m_enabled = false;
                 cinemaFreeLook.m_YAxisRecentering.m_enabled = false;
             }
-            
+
         }
         public void ViewReset()
         {
-            cinemaFreeLook.m_RecenterToTargetHeading.m_enabled=true;
+            cinemaFreeLook.m_RecenterToTargetHeading.m_enabled = true;
             cinemaFreeLook.m_YAxisRecentering.m_enabled = true;
             resetCount = 30;
         }

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace RampageCars
 {
-    public class DeathInfo:IInfo
+    public class DeathInfo : IInfo
     {
     }
 

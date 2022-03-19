@@ -13,7 +13,7 @@ namespace RampageCars
 
         private void OnEnable()
         {
-            action = new ();
+            action = new();
             action.Enable();
         }
 

@@ -41,7 +41,7 @@ namespace RampageCars
         {
             if (isLimited)
             {
-                Debug.Log("limited!"+ (rb.velocity * -limitedDrag));
+                Debug.Log("limited!" + (rb.velocity * -limitedDrag));
                 //Drag
                 rb.AddForce(rb.velocity * -limitedDrag);
                 rb.AddTorque(rb.angularVelocity * -limitedAngularDrag);

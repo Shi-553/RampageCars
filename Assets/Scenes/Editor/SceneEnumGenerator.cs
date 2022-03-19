@@ -66,7 +66,7 @@ namespace EditorScripts
             if (state == PlayModeStateChange.ExitingEditMode)
             {
                 AssetDatabase.Refresh();
-                EditorApplication.playModeStateChanged-= ChangedToRefresh;
+                EditorApplication.playModeStateChanged -= ChangedToRefresh;
             }
         }
 

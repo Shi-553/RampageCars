@@ -6,7 +6,7 @@ namespace RampageCars
 {
     public class Axle : MonoBehaviour, IAxle
     {
-        WheelCollider[] wheels=new WheelCollider[0];
+        WheelCollider[] wheels = new WheelCollider[0];
 
         [SerializeField]
         bool isMotor;
@@ -42,7 +42,7 @@ namespace RampageCars
         {
             if (!IsMotor)
             {
-                return ;
+                return;
             }
 
             foreach (var wheel in wheels)
@@ -54,7 +54,7 @@ namespace RampageCars
         {
             if (!IsBrake)
             {
-                return ;
+                return;
             }
 
             foreach (var wheel in wheels)
@@ -66,7 +66,7 @@ namespace RampageCars
         {
             if (!IsSteering)
             {
-                return ;
+                return;
             }
 
             foreach (var wheel in wheels)

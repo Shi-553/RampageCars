@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RampageCars
 {
-    class SpeedMeasure: MonoBehaviour
+    class SpeedMeasure : MonoBehaviour
     {
 
         Rigidbody rigid;

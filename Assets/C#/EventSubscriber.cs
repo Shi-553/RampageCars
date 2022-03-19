@@ -7,7 +7,7 @@ namespace RampageCars
 {
     public class MonoEventReceiver : MonoBehaviour
     {
-       public event Action OnDestroyed;
+        public event Action OnDestroyed;
         protected virtual void OnDestroy()
         {
             OnDestroyed?.Invoke();

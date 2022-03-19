@@ -50,12 +50,12 @@ namespace RampageCars
             GetComponent<MeshFilter>().sharedMesh = mesh;
             GetComponent<MeshFilter>().sharedMesh.name = "myMesh";
         }
-    
+
 
         // Update is called once per frame
         void Update()
         {
-        
+
         }
     }
 }
