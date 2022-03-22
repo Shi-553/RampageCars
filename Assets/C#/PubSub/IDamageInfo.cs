@@ -1,10 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace RampageCars
 {
-    public interface IDamageInfo: IInfo
+    public interface IDamageInfo : IInfo
     {
         public float Value { get; }
     }

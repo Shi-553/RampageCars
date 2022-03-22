@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace RampageCars
 {
-    public class ActionWrapper<T0> : ISubscribeable<T0> ,IPublishable<T0> where T0 : IInfo
+    public class ActionWrapper<T0> : ISubscribeable<T0>, IPublishable<T0> where T0 : IInfo
     {
         Action<T0> action;
         public ActionWrapper() { }
