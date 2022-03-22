@@ -8,7 +8,7 @@ on:
 jobs:
   add-reviews:
     runs-on: ubuntu-latest
-    if: (! contains(github.event.pull_request.bodyText,'NoReview')) && (! github.event.pull_request.draft) && contains(toJson(github.event.pull_request.requested_reviewers), '[]' )
+    if: (! contains(github.event.pull_request.body,'NoReview')) && (! github.event.pull_request.draft) && contains(toJson(github.event.pull_request.requested_reviewers), '[]' )
     steps:
     
       - name: 自動割り当て
