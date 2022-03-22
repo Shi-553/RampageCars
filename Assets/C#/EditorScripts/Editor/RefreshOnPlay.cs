@@ -8,7 +8,7 @@ namespace EditorScripts
     public static class RefreshOnPlay
     {
         private const string LOCK_MENU_PATH = "Tools/RefreshOnPlay/Lock Compile";
-        private const string FORCE_MENU_PATH = "Tools/RefreshOnPlay/Force Compile %r";
+        private const string FORCE_MENU_PATH = "Tools/RefreshOnPlay/Force Compile #%r";
 
         private static bool isLocked = false;
 
