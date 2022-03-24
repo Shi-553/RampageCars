@@ -27,10 +27,9 @@ namespace RampageCars
         [SerializeField]
         float drag = 1f;
         [SerializeField]
-        Vector3 dragFactor = new Vector3(1, 1, 1);
+        Vector3 dragFactor = new Vector3(1, 0, 1);
 
         SpeedMeasure speedMeasure;
-
 
         [SerializeField, NotNull]
         GroundChecker groundChecker;
