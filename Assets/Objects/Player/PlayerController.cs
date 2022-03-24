@@ -63,8 +63,7 @@ namespace RampageCars
 
         void Update()
         {
-            var motor = action.Player.Motor.ReadValue<float>();
-            car.SetMotorTorque(motor);
+            car.SetMotorTorque(1);
         }
     }
 }
