@@ -14,23 +14,19 @@ namespace EditorScripts
             EditorApplication.playModeStateChanged += LogNullError;
         }
 
-        static IEnumerable<FieldInfo> GetFields(Type t)
-        {
-            if (t == null)
-            {
-                yield break;
-            }
 
-            BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic |
-                                 BindingFlags.Static | BindingFlags.Instance |
-                                 BindingFlags.DeclaredOnly;
-            foreach (var f in t.GetFields(flags))
+        static IEnumerable<SerializedProperty> GetFields(Component obj)
+        {
+            var serializedObject = new SerializedObject(obj);
+
+            var property = serializedObject.GetIterator();
+
+            while (property.NextVisible(true))
             {
-                yield return f;
-            }
-            foreach (var f in GetFields(t.BaseType))
-            {
-                yield return f;
+                if (property.propertyType == SerializedPropertyType.ObjectReference)
+                {
+                    yield return property;
+                }
             }
         }
 
@@ -45,29 +41,32 @@ namespace EditorScripts
 
             foreach (var component in GameObject.FindObjectsOfType<Component>(true))
             {
-                foreach (var field in GetFields(component.GetType()))
+                foreach (var field in GetFields(component))
                 {
-                    var attribute = field.GetCustomAttribute<NotNullAttribute>(true);
+                    // 真のnullと偽装nullで2重チェック
+                    if ((System.Object)field.objectReferenceValue != null && ((UnityEngine.Object)field.objectReferenceValue) != null)
+                    {
+                        continue;
+                    }
+
+                    var attribute = field.GetFieldInfo()?.GetCustomAttribute<NotNullAttribute>(true);
 
                     if (attribute is null)
                     {
                         continue;
                     }
-                    var val = field.GetValue(component);
 
-                    // 真のnullと偽装nullで2重チェック
-                    if (val == null || (UnityEngine.Object)val == null)
-                    {
-                        isError = true;
+                    isError = true;
 
-                        var fieldName = ObjectNames.NicifyVariableName(field.Name);
-                        var className = ObjectNames.NicifyVariableName(component.GetType().Name);
+                    var name = attribute.IsWrapper ? field.propertyPath.Split(".")[^2] : field.name;
 
-                        string message = $"<b>{component.name}</b> -> <b>{className}</b> -> <b>{fieldName}</b> is null!";
+                    var fieldName = ObjectNames.NicifyVariableName(name);
+                    var className = ObjectNames.NicifyVariableName(component.GetType().Name);
 
-                        // こうするとダブルクリックしてもこの行に飛ばない
-                        Debug.unityLogger.logHandler.LogFormat(LogType.Error, component, message);
-                    }
+                    string message = $"<b>{component.name}</b> -> <b>{className}</b> -> <b>{fieldName}</b> is null!";
+
+
+                    Debug.unityLogger.logHandler.LogFormat(LogType.Error, component, message);
                 }
             }
 
