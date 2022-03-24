@@ -5,12 +5,12 @@ using UnityEngine.InputSystem;
 
 namespace RampageCars
 {
-    [RequireComponent(typeof(ICar))]
+    [RequireComponent(typeof(IPlayer))]
     [RequireComponent(typeof(SpeedMeasure))]
-    public class PlayerCarController : MonoBehaviour
+    public class PlayerController : MonoBehaviour
     {
         PlayerAction action;
-        ICar car;
+        IPlayer car;
 
         private void OnEnable()
         {
@@ -25,7 +25,7 @@ namespace RampageCars
 
         void Start()
         {
-            car = GetComponent<ICar>();
+            car = GetComponent<IPlayer>();
             action.Player.Steer.performed += SteerPerformed;
             action.Player.Steer.canceled += SteerCanceled;
             action.Player.Boost.performed += BoostPerformed;

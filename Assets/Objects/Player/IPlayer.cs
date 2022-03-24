@@ -6,10 +6,9 @@ using UnityEngine;
 
 namespace RampageCars
 {
-    interface ICar
+    interface IPlayer
     {
         void SetMotorTorque(float motorTorque);
-        void SetBrakeTorque(float brakeTorque);
         void SetSteerAngle(float steerAngle);
         void Boost(Vector3 v);
         void Jamp();

@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+﻿using EditorScripts;
+using UnityEngine;
 
 
 namespace RampageCars
 {
-    class UnRealCar : MonoBehaviour, ICar
+    class Player : MonoBehaviour, IPlayer
     {
-        IAxle[] axles;
 
 
         [SerializeField]
@@ -18,13 +18,10 @@ namespace RampageCars
         float steeringMax = 10;
         [SerializeField]
         float steeringThreshold = 10;
-        [SerializeField]
-        float steeringVisualMax = 10;
 
         Rigidbody rb;
 
 
-        float brakeTorque;
         float steerAngle;
         float motorTorque;
 
@@ -37,7 +34,8 @@ namespace RampageCars
 
         Vector3 boost;
 
-        bool isGrounded;
+        [SerializeField, NotNull]
+        GroundChecker groundChecker;
 
         [SerializeField]
         CollisionDamageInfo collisionDamageInfo;
@@ -46,12 +44,9 @@ namespace RampageCars
         {
             rb = GetComponent<Rigidbody>();
             speedMeasure = GetComponent<SpeedMeasure>();
-            axles = GetComponentsInChildren<IAxle>();
         }
         private void Update()
         {
-            var ray = new Ray(transform.position, transform.up * -1.0f);
-            isGrounded = Physics.SphereCast(ray, 0.5f, 1);
         }
 
         private void FixedUpdate()
@@ -62,7 +57,7 @@ namespace RampageCars
             //ブースト
             rb.AddForce((boost * boostPower), ForceMode.Force);
 
-            if (isGrounded)
+            if (groundChecker.IsGrounded)
             {
                 //地上回転
                 var absF = Mathf.Abs(speedMeasure.SpeedForward);
@@ -85,13 +80,7 @@ namespace RampageCars
                 rb.MoveRotation(transform.localRotation * Quaternion.AngleAxis(steerAngle * steeringMax, Vector3.up));
 
             }
-            //rb.velocity*= brakeTorque==0?1:0.99f;
         }
-        public void SetBrakeTorque(float brakeTorque)
-        {
-            this.brakeTorque = brakeTorque;
-        }
-
         public void SetMotorTorque(float motorTorque)
         {
             this.motorTorque = motorTorque;
@@ -100,11 +89,6 @@ namespace RampageCars
         public void SetSteerAngle(float steerAngle)
         {
             this.steerAngle = steerAngle;
-
-            foreach (var axle in axles)
-            {
-                axle.SetSteerAngle(steerAngle * steeringVisualMax);
-            }
         }
 
         public void Boost(Vector3 v)
@@ -114,12 +98,11 @@ namespace RampageCars
 
         public void Jamp()
         {
-            if (isGrounded)
+            if (groundChecker.IsGrounded)
             {
                 rb.AddForce(transform.up * jumpPower, ForceMode.Impulse);
             }
         }
-
 
 
         private void OnCollisionEnter(Collision collision)
