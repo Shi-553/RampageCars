@@ -6,11 +6,7 @@ using UnityEngine.Events;
 
 namespace RampageCars
 {
-    public class DeathInfo : IInfo
-    {
-    }
-
-    public class TestEnemy : MonoBehaviour, IEnemyTag, ISubscribeable<ICollisionDamageInfo>, IPublishable<ICollisionDamageInfo>, ISubscribeable<DeathInfo>
+    public class TestEnemy : MonoBehaviour, IEnemyTag, ISubscribeable<CollisionDamageInfo>, IPublishable<CollisionDamageInfo>, ISubscribeable<DeathInfo>
     {
         [SerializeField]
         private float healthPoint = 100;
@@ -24,23 +20,20 @@ namespace RampageCars
         public Action Subscribe(Action<DeathInfo> add) => onDeath.Subscribe(add);
 
 
-        ActionWrapper<ICollisionDamageInfo> onDamage = new();
-        public Action Subscribe(Action<ICollisionDamageInfo> add) => onDamage.Subscribe(add);
+        ActionWrapper<CollisionDamageInfo> onDamage = new();
+        public Action Subscribe(Action<CollisionDamageInfo> add) => onDamage.Subscribe(add);
 
-        public void Publish(ICollisionDamageInfo info)
+        public void Publish(CollisionDamageInfo info)
         {
             if (IsDeath)
             {
                 return;
             }
 
-            var f = info.Collision.impulse;
-            f.y += 1;
-
-            GetComponent<Rigidbody>().AddForce(f, ForceMode.Impulse);
+            GetComponent<Rigidbody>().AddForce(info.fixedImpulse, ForceMode.Impulse);
 
             onDamage?.Publish(info);
-            healthPoint -= info.Value;
+            healthPoint -= info.damage;
 
             if (IsDeath)
             {

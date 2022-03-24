@@ -4,16 +4,23 @@ using UnityEngine;
 
 namespace RampageCars
 {
-    public interface ICollisionDamageInfo : IDamageInfo
+    public readonly struct CollisionDamageInfo
     {
-        public Collision Collision { get; }
+        public readonly float damage;
+        public readonly Vector3 fixedImpulse;
+        public readonly Collision collision;
+        public CollisionDamageInfo(float damage,  Collision collision, Vector3 fixedImpulse)
+        {
+            this.damage = damage;
+            this.collision = collision;
+            this.fixedImpulse = fixedImpulse;
+        }
+        public CollisionDamageInfo(float damage,  Collision collision)
+        {
+            this.damage = damage;
+            this.collision = collision;
+            this.fixedImpulse = collision.impulse;
+        }
     }
-
-    [System.Serializable]
-    public class CollisionDamageInfo : DamageInfo, ICollisionDamageInfo
-    {
-        public Collision Collision { get; set; }
-    }
-
 
 }
