@@ -9,7 +9,7 @@ namespace RampageCars
         void Do();
         void Finish();
 
-        bool IsPlaying { get; }
+        bool CanChange { get; }
         void OnCollisionEnter(Collision collision);
     }
 }

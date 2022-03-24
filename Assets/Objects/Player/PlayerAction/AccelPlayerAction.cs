@@ -13,7 +13,7 @@ namespace RampageCars
         float speed = 100;
         [SerializeField]
         float duration = 1;
-        public bool IsPlaying { get; private set; }
+        public bool CanChange { get; private set; } = true;
 
         Rigidbody rb;
         private void Start()
@@ -22,7 +22,7 @@ namespace RampageCars
         }
         private void FixedUpdate()
         {
-            if (IsPlaying)
+            if (!CanChange)
             {
                 rb.AddForce((transform.forward * speed), ForceMode.Force);
             }
@@ -32,12 +32,12 @@ namespace RampageCars
         {
             yield return new WaitForSeconds(duration);
 
-            IsPlaying = false;
+            CanChange = true;
         }
 
         public void Do()
         {
-            IsPlaying = true;
+            CanChange = false;
             StartCoroutine(WaitFinish());
         }
 

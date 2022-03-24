@@ -1,10 +1,12 @@
-﻿using EditorScripts;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using EditorScripts;
 
 
 namespace RampageCars
 {
-    class Player : MonoBehaviour, IPlayer
+    public class PlayerMover : MonoBehaviour
     {
 
 
@@ -33,10 +35,6 @@ namespace RampageCars
         [SerializeField, NotNull]
         GroundChecker groundChecker;
 
-        [SerializeField]
-        int normalDamage = 3;
-
-        IPlayerAction current = new DammyPlayerAction();
 
         void Awake()
         {
@@ -88,48 +86,6 @@ namespace RampageCars
             if (groundChecker.IsGrounded)
             {
                 rb.AddForce(transform.up * jumpPower, ForceMode.Impulse);
-            }
-        }
-
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (current.IsPlaying)
-            {
-                current.OnCollisionEnter(collision);
-                return;
-            }
-
-            var damageable = collision.gameObject.GetComponent<IPublishable<CollisionDamageInfo>>();
-            if (damageable is not null and IEnemyTag)
-            {
-                damageable.Publish(new(normalDamage, collision, collision.impulse * 0.5f));
-            }
-        }
-
-        public void DoAction<T>() where T : IPlayerAction
-        {
-            if (!current.IsPlaying)
-            {
-                current = GetComponent<T>();
-                current.Do();
-
-                Debug.Log($"Do {typeof(T).Name}!");
-            }
-        }
-        public void FinishAction<T>() where T : IPlayerAction
-        {
-            if (!current.IsPlaying)
-            {
-                return;
-            }
-
-            IPlayerAction finidhed = GetComponent<T>();
-            if (current == finidhed)
-            {
-                current.Finish();
-
-                Debug.Log($"Finish {nameof(T)}!");
             }
         }
     }

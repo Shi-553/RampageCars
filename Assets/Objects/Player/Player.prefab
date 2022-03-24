@@ -974,7 +974,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1059
+  m_VersionIndex: 1083
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1083,12 +1083,14 @@ GameObject:
   m_Component:
   - component: {fileID: 6458540396161758448}
   - component: {fileID: 6458540396161758451}
+  - component: {fileID: 1404180798}
   - component: {fileID: 6250986090857139766}
+  - component: {fileID: 5798098726601703369}
+  - component: {fileID: 1404180796}
   - component: {fileID: 6458540396161758449}
   - component: {fileID: 6250986090857139769}
   - component: {fileID: 679347267058413624}
   - component: {fileID: 5803539830043723447}
-  - component: {fileID: 1404180796}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1131,6 +1133,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &1404180798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6458540396161758453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e60337371dce9d46aadbc0dad6bf180, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 500
+  jumpPower: 50
+  steeringMax: 2
+  steeringThreshold: 100
+  drag: 40
+  dragFactor: {x: 1, y: 0, z: 0.2}
+  groundChecker: {fileID: 7671428934813331096}
 --- !u!114 &6250986090857139766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1143,14 +1164,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81440c12bcbb858448ffd24b22bf039a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 500
-  jumpPower: 50
-  steeringMax: 2
-  steeringThreshold: 100
-  drag: 40
-  dragFactor: {x: 1, y: 0, z: 0.2}
-  groundChecker: {fileID: 7671428934813331096}
+--- !u!114 &5798098726601703369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6458540396161758453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3473228af7d571744a76b4fed6cccd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   normalDamage: 3
+--- !u!114 &1404180796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6458540396161758453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98457671d2bca854eaa8290148c471c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack: 10
+  speed: 500
+  duration: 1
 --- !u!114 &6458540396161758449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1286,21 +1327,6 @@ MonoBehaviour:
   limit: 50
   limitedDrag: 450
   limitedAngularDrag: 750
---- !u!114 &1404180796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6458540396161758453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98457671d2bca854eaa8290148c471c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attack: 10
-  speed: 500
-  duration: 1
 --- !u!1 &6458540397557552366
 GameObject:
   m_ObjectHideFlags: 0
