@@ -28,9 +28,8 @@ namespace RampageCars
             car = GetComponent<IPlayer>();
             action.Player.Steer.performed += SteerPerformed;
             action.Player.Steer.canceled += SteerCanceled;
-            action.Player.Boost.performed += BoostPerformed;
-            action.Player.Boost.canceled += BoostCanceled;
-            action.Player.Jump.started += JumpStarted; ;
+            action.Player.Accel.performed += BoostPerformed;
+            action.Player.Jump.started += JumpStarted;
 
             car.SetMotorTorque(1);
         }
@@ -38,10 +37,6 @@ namespace RampageCars
         private void JumpStarted(InputAction.CallbackContext obj)
         {
             car.Jamp();
-        }
-
-        private void BoostCanceled(InputAction.CallbackContext obj)
-        {
         }
 
         private void SteerCanceled(InputAction.CallbackContext obj)
