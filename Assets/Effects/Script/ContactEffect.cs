@@ -14,11 +14,11 @@ namespace RampageCars
 
         private void Start()
         {
-            OnDestroyed += GetComponent<ISubscribeable<ICollisionDamageInfo>>().Subscribe(OnDamage);
+            OnDestroyed += GetComponent<ISubscribeable<CollisionDamageInfo>>().Subscribe(OnDamage);
 
             OnDestroyed += GetComponent<ISubscribeable<DeathInfo>>().Subscribe(OnDeath);
         }
-        private void OnDamage(ICollisionDamageInfo info)
+        private void OnDamage(CollisionDamageInfo info)
         {
             Instantiate(hit, transform.position, Quaternion.identity);
 

@@ -42,7 +42,6 @@ namespace RampageCars
 
         private void BoostCanceled(InputAction.CallbackContext obj)
         {
-            car.Boost(Vector3.zero);
         }
 
         private void SteerCanceled(InputAction.CallbackContext obj)
@@ -52,7 +51,7 @@ namespace RampageCars
 
         private void BoostPerformed(InputAction.CallbackContext obj)
         {
-            car.Boost(transform.forward);
+            car.DoAction<AccelPlayerAction>();
         }
 
         private void SteerPerformed(InputAction.CallbackContext obj)
@@ -63,7 +62,15 @@ namespace RampageCars
 
         void Update()
         {
-            car.SetMotorTorque(1);
+            var motor = action.Player.Motor.ReadValue<float>();
+            if (motor < 0)
+            {
+                car.SetMotorTorque(motor);
+            }
+            else
+            {
+                car.SetMotorTorque(1);
+            }
         }
     }
 }

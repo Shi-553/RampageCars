@@ -4,20 +4,13 @@ using UnityEngine;
 
 namespace RampageCars
 {
-    public interface IDamageInfo : IInfo
-    {
-        public float Value { get; }
-    }
 
-    [System.Serializable]
-    public class DamageInfo : IDamageInfo
+    public readonly struct DamageInfo 
     {
-        [SerializeField]
-        float value;
-        public float Value
+        public readonly float value;
+        public DamageInfo(float v)
         {
-            get => value;
-            set => this.value = value;
+            value = v;
         }
     }
 }

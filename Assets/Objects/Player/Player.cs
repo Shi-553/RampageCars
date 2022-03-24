@@ -11,8 +11,6 @@ namespace RampageCars
         [SerializeField]
         float speed = 1;
         [SerializeField]
-        float boostPower = 100;
-        [SerializeField]
         float jumpPower = 10;
         [SerializeField]
         float steeringMax = 10;
@@ -20,7 +18,6 @@ namespace RampageCars
         float steeringThreshold = 10;
 
         Rigidbody rb;
-
 
         float steerAngle;
         float motorTorque;
@@ -32,30 +29,25 @@ namespace RampageCars
 
         SpeedMeasure speedMeasure;
 
-        Vector3 boost;
 
         [SerializeField, NotNull]
         GroundChecker groundChecker;
 
         [SerializeField]
-        CollisionDamageInfo collisionDamageInfo;
+        int normalDamage = 3;
+
+        IPlayerAction current = new DammyPlayerAction();
 
         void Awake()
         {
             rb = GetComponent<Rigidbody>();
             speedMeasure = GetComponent<SpeedMeasure>();
         }
-        private void Update()
-        {
-        }
 
         private void FixedUpdate()
         {
             //重力
             rb.AddForce(Physics.gravity, ForceMode.Acceleration);
-
-            //ブースト
-            rb.AddForce((boost * boostPower), ForceMode.Force);
 
             if (groundChecker.IsGrounded)
             {
@@ -91,11 +83,6 @@ namespace RampageCars
             this.steerAngle = steerAngle;
         }
 
-        public void Boost(Vector3 v)
-        {
-            boost = v;
-        }
-
         public void Jamp()
         {
             if (groundChecker.IsGrounded)
@@ -107,12 +94,42 @@ namespace RampageCars
 
         private void OnCollisionEnter(Collision collision)
         {
-            collisionDamageInfo.Collision = collision;
+            if (current.IsPlaying)
+            {
+                current.OnCollisionEnter(collision);
+                return;
+            }
 
-            var damageable = collision.gameObject.GetComponent<IPublishable<ICollisionDamageInfo>>();
+            var damageable = collision.gameObject.GetComponent<IPublishable<CollisionDamageInfo>>();
             if (damageable is not null and IEnemyTag)
             {
-                damageable.Publish(collisionDamageInfo);
+                damageable.Publish(new(normalDamage, collision, collision.impulse * 0.5f));
+            }
+        }
+
+        public void DoAction<T>() where T : IPlayerAction
+        {
+            if (!current.IsPlaying)
+            {
+                current = GetComponent<T>();
+                current.Do();
+
+                Debug.Log($"Do {typeof(T).Name}!");
+            }
+        }
+        public void FinishAction<T>() where T : IPlayerAction
+        {
+            if (!current.IsPlaying)
+            {
+                return;
+            }
+
+            IPlayerAction finidhed = GetComponent<T>();
+            if (current == finidhed)
+            {
+                current.Finish();
+
+                Debug.Log($"Finish {nameof(T)}!");
             }
         }
     }

@@ -10,7 +10,8 @@ namespace RampageCars
     {
         void SetMotorTorque(float motorTorque);
         void SetSteerAngle(float steerAngle);
-        void Boost(Vector3 v);
         void Jamp();
+        void DoAction<T>() where T : IPlayerAction;
+        void FinishAction<T>() where T : IPlayerAction;
     }
 }

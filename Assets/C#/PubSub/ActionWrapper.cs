@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace RampageCars
 {
-    public class ActionWrapper<T0> : ISubscribeable<T0>, IPublishable<T0> where T0 : IInfo
+    public class ActionWrapper<T0> : ISubscribeable<T0>, IPublishable<T0> 
     {
         Action<T0> action;
         public ActionWrapper() { }
