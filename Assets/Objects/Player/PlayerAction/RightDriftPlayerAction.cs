@@ -9,12 +9,12 @@ namespace RampageCars
     {
         [SerializeField, NotNull]
         GroundChecker groundChecker;
+        [Header("抵抗力と回転力")]
         [SerializeField]
-        float addRelative;
+        float addRelative=100;
+        [SerializeField]
+        float rotatePower = 5;
         Rigidbody rb;
-
-        [SerializeField]
-        float rotatePower = 10;
         public bool CanChange { get; private set; } = true;
 
         private void Start()
@@ -28,7 +28,7 @@ namespace RampageCars
             {
                 if (groundChecker.IsGrounded)
                 {
-                    rb.AddRelativeForce(new Vector3(addRelative, addRelative, addRelative));
+                    rb.AddRelativeForce(new Vector3(-addRelative, -addRelative, -addRelative));
 
                     rb.MoveRotation(transform.localRotation * Quaternion.AngleAxis(rotatePower, Vector3.up));
                 }
