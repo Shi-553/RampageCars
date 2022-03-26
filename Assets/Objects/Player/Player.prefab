@@ -1091,6 +1091,9 @@ GameObject:
   - component: {fileID: 6250986090857139769}
   - component: {fileID: 679347267058413624}
   - component: {fileID: 5803539830043723447}
+  - component: {fileID: -6043487210033764178}
+  - component: {fileID: -297400424362045699}
+  - component: {fileID: -3234992874514921803}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1327,6 +1330,57 @@ MonoBehaviour:
   limit: 50
   limitedDrag: 450
   limitedAngularDrag: 750
+--- !u!114 &-6043487210033764178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6458540396161758453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17efa1207aa1aee4aaee03f3dd25154d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundChecker: {fileID: 0}
+  addRalative: 0
+  duration: 1
+--- !u!114 &-297400424362045699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6458540396161758453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e80ab6d44dcb5499d13cadddb23d05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundChecker: {fileID: 0}
+  addRalative: 0
+  duration: 1
+  groundChecker: {fileID: 0}
+  steeringMax: 10
+  steeringThreshold: 10
+--- !u!114 &-3234992874514921803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6458540396161758453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0e5076aa6e4c3747a449cb22f76e47c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundChecker: {fileID: 0}
+  addRalative: 0
+  duration: 1
+  groundChecker: {fileID: 0}
+  steeringMax: 10
+  steeringThreshold: 10
 --- !u!1 &6458540397557552366
 GameObject:
   m_ObjectHideFlags: 0
