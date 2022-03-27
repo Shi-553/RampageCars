@@ -974,7 +974,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1083
+  m_VersionIndex: 1095
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1150,8 +1150,8 @@ MonoBehaviour:
   speed: 500
   jumpPower: 50
   steeringMax: 2
-  steeringThreshold: 100
-  drag: 40
+  steeringThreshold: 50
+  drag: 50
   dragFactor: {x: 1, y: 0, z: 0.2}
   groundChecker: {fileID: 7671428934813331096}
 --- !u!114 &6250986090857139766
@@ -1341,9 +1341,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e80ab6d44dcb5499d13cadddb23d05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundChecker: {fileID: 0}
-  addRelative: 100
-  rotatePower: 5
+  groundChecker: {fileID: 7671428934813331096}
+  attack: 3
+  drag: {x: -30, y: 0, z: -20}
+  rotatePower: 3
 --- !u!114 &-3234992874514921803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1356,9 +1357,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0e5076aa6e4c3747a449cb22f76e47c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundChecker: {fileID: 0}
-  addRelative: 100
-  rotatePower: 5
+  groundChecker: {fileID: 7671428934813331096}
+  attack: 3
+  drag: {x: -30, y: 0, z: -20}
+  rotatePower: 3
 --- !u!1 &6458540397557552366
 GameObject:
   m_ObjectHideFlags: 0

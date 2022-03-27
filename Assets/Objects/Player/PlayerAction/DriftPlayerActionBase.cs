@@ -13,7 +13,7 @@ namespace RampageCars
 
         [Header("抵抗力と回転力")]
         [SerializeField]
-        float addRelative = 100;
+        Vector3 drag = new(1,0,1);
 
         public abstract float RotatePower { get; }
 
@@ -31,7 +31,12 @@ namespace RampageCars
             {
                 if (groundChecker.IsGrounded)
                 {
-                    rb.AddRelativeForce(new Vector3(-addRelative, -addRelative, -addRelative));
+                    var localV = transform.InverseTransformDirection(rb.velocity);
+                    float forceX = - drag.x * localV.x;
+                    float forceY = - drag.y * localV.y;
+                    float forceZ = - drag.z * localV.z;
+                    rb.AddRelativeForce(new Vector3(forceX, forceY, forceZ));
+
 
                     rb.MoveRotation(transform.localRotation * Quaternion.AngleAxis(RotatePower, Vector3.up));
                 }
