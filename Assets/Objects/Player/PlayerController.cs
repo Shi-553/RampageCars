@@ -29,6 +29,8 @@ namespace RampageCars
             player = GetComponent<PlayerMover>();
             action.Player.Accel.performed += BoostPerformed;
             action.Player.Jump.started += JumpStarted;
+            action.Player.DriftL.canceled += DriftLCanceled;
+            action.Player.DriftR.canceled += DriftRCanceled;
 
             player.SetMotorTorque(1);
         }
@@ -44,7 +46,14 @@ namespace RampageCars
             actionManager.DoAction<AccelPlayerAction>();
         }
 
-
+        private void DriftLCanceled(InputAction.CallbackContext obj)
+        {
+            actionManager.FinishAction<LeftDriftPlayerAction>();
+        }
+        private void DriftRCanceled(InputAction.CallbackContext obj)
+        {
+            actionManager.FinishAction<RightDriftPlayerAction>();
+        }
         void Update()
         {
             var steer = action.Player.Steer.ReadValue<float>();
@@ -58,6 +67,17 @@ namespace RampageCars
             else
             {
                 player.SetMotorTorque(1);
+            }
+
+
+            if (action.Player.DriftL.IsPressed())
+            {
+                actionManager.DoAction<LeftDriftPlayerAction>();
+            }
+
+            if (action.Player.DriftR.IsPressed())
+            {
+                actionManager.DoAction<RightDriftPlayerAction>();
             }
         }
     }
