@@ -974,7 +974,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1095
+  m_VersionIndex: 1101
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1327,8 +1327,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   limit: 50
-  limitedDrag: 450
-  limitedAngularDrag: 750
+  limitedDrag: 100
+  dampenFactor: 0.3
+  adjustFactor: 0.8
+  groundChecker: {fileID: 7671428934813331096}
 --- !u!114 &-297400424362045699
 MonoBehaviour:
   m_ObjectHideFlags: 0

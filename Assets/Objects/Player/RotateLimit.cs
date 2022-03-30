@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using EditorScripts;
 using UnityEngine;
 
 namespace RampageCars
@@ -12,11 +13,14 @@ namespace RampageCars
         [SerializeField]
         float limitedDrag = 3.0f;
         [SerializeField]
-        float limitedAngularDrag = 5.0f;
+        float dampenFactor = 0.8f;
+        [SerializeField]
+        float adjustFactor = 0.5f; 
 
         Quaternion initialRotation = Quaternion.identity;
         bool isLimited = false;
-
+        [SerializeField,NotNull]
+        GroundChecker groundChecker;
         Rigidbody rb;
 
         private void Awake()
@@ -39,12 +43,20 @@ namespace RampageCars
 
         private void FixedUpdate()
         {
-            if (isLimited)
+            if (isLimited && groundChecker.IsGrounded)
             {
                 Debug.Log("limited!" + (rb.velocity * -limitedDrag));
                 //Drag
                 rb.AddForce(rb.velocity * -limitedDrag);
-                rb.AddTorque(rb.angularVelocity * -limitedAngularDrag);
+
+                // https://stackoverflow.com/questions/58419942/stabilize-hovercraft-rigidbody-upright-using-torque/58420316#58420316
+                var deltaQuat = Quaternion.FromToRotation(transform.up, Vector3.up);
+
+                deltaQuat.ToAngleAxis(out float angle, out Vector3 axis);
+
+                rb.AddTorque(-rb.angularVelocity * dampenFactor, ForceMode.Acceleration);
+
+                rb.AddTorque(adjustFactor * angle * axis.normalized, ForceMode.Acceleration);
             }
         }
 
