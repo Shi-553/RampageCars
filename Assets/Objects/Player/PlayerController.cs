@@ -29,8 +29,19 @@ namespace RampageCars
             player = GetComponent<PlayerMover>();
             action.Player.Accel.performed += BoostPerformed;
             action.Player.Jump.started += JumpStarted;
+            action.Player.Wiper.started += WiperStarted;
+            action.Player.Wiper.canceled += WiperCanceled;
 
             player.SetMotorTorque(1);
+        }
+
+        private void WiperStarted(InputAction.CallbackContext obj)
+        {
+            actionManager.DoAction<WiperPlayerAction>();
+        }
+        private void WiperCanceled(InputAction.CallbackContext obj)
+        {
+            actionManager.FinishAction<WiperPlayerAction>();
         }
 
         private void JumpStarted(InputAction.CallbackContext obj)
@@ -58,6 +69,7 @@ namespace RampageCars
             {
                 player.SetMotorTorque(1);
             }
+            player.SetMotorTorque(motor);
 
 
             if (action.Player.DriftL.IsPressed())

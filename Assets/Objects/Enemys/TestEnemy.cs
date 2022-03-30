@@ -29,7 +29,6 @@ namespace RampageCars
             {
                 return;
             }
-
             GetComponent<Rigidbody>().AddForce(info.fixedImpulse, ForceMode.Impulse);
 
             onDamage?.Publish(info);
