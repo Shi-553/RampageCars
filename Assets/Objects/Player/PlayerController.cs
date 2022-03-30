@@ -79,7 +79,6 @@ namespace RampageCars
             {
                 player.SetMotorTorque(1);
             }
-            player.SetMotorTorque(motor);
 
 
             if (action.Player.DriftL.IsPressed())
