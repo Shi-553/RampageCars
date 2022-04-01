@@ -37,6 +37,7 @@ namespace RampageCars
 
         private void JumpStarted(InputAction.CallbackContext obj)
         {
+            actionManager.DoAction<DivePlayerAction>();
             player.Jamp();
         }
 
