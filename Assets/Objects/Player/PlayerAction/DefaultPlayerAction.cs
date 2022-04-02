@@ -12,7 +12,7 @@ namespace RampageCars
 
         public void Do() { }
         public void Finish() { }
-        public void OnCollisionEnter(Collision collision)
+        public void CollisionEnter(Collision collision)
         {
 
             var damageable = collision.gameObject.GetComponent<IPublishable<CollisionDamageInfo>>();
