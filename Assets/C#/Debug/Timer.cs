@@ -9,7 +9,7 @@ namespace RampageCars
     public class Timer : MonoBehaviour
     {
         [SerializeField]
-        float TimeLimit = 180;
+        float timeLimit = 180;
 
         TMP_Text time;
 
@@ -21,15 +21,15 @@ namespace RampageCars
 
         void Update()
         {
-            TimeLimit -= Time.deltaTime;
+            timeLimit -= Time.deltaTime;
 
             // 残り秒数が0になったとき用
-            if (TimeLimit <= 0.0)
+            if (timeLimit <= 0.0)
             {
-                TimeLimit = 0.0f;
+                timeLimit = 0.0f;
             }
 
-            time.text = TimeLimit.ToString("F2");
+            time.text = timeLimit.ToString("F2");
         }
 
     }
