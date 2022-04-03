@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 
 namespace RampageCars
 {
@@ -12,21 +13,31 @@ namespace RampageCars
         float timeLimit = 180;
 
         TMP_Text time;
+        bool isEnableTimer = false;
+
+        public event UnityAction OnTimerEnd;
 
         void Start()
         {
             var texts = GetComponentsInChildren<TMP_Text>();
             time = texts[0];
+            isEnableTimer = true;
         }
 
         void Update()
         {
+            if (!isEnableTimer)
+            {
+                return;
+            }
             timeLimit -= Time.deltaTime;
 
             // 残り秒数が0になったとき用
             if (timeLimit <= 0.0)
             {
                 timeLimit = 0.0f;
+                OnTimerEnd?.Invoke();
+                isEnableTimer = false;
             }
 
             time.text = timeLimit.ToString("F2");
