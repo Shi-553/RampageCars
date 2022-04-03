@@ -19,8 +19,7 @@ namespace RampageCars
 
         void Start()
         {
-            var texts = GetComponentsInChildren<TMP_Text>();
-            time = texts[0];
+            time = GetComponentInChildren<TMP_Text>();
             isEnableTimer = true;
         }
 
