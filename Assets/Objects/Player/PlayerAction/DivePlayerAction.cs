@@ -26,33 +26,48 @@ namespace RampageCars
         }
         private void FixedUpdate()
         {
-            if (!CanChange)
-            {
-                if (groundChecker.IsGrounded)
-                {
-                    obj = Instantiate(rangeObj, this.transform.position, Quaternion.identity);
-                    obj.transform.localScale = new Vector3(range * 2, range * 2, range * 2);
-                    Collider[] targets = Physics.OverlapSphere(this.transform.position, range);
-                    foreach (Collider colliders in targets)
-                    {
-                        var damageable = colliders.gameObject.GetComponent<IPublishable<CollisionDamageInfo>>();
-                        if (damageable is not null and IEnemyTag)
-                        {
-                            damageable.Publish(new (diveAttack, null, new Vector3(0.0f, 0.0f, 0.0f)));
-                        }
-                    }
-                    CanChange = true;
-                }
-            }
         }
 
         public void Do()
         {
             if (!groundChecker.IsGrounded)
             {
-                CanChange = false;
-                Destroy(obj);
+                StartCoroutine(Dive());
             }
+        }
+
+        IEnumerator Dive()
+        {
+            CanChange = false;
+            Destroy(obj);
+
+            while (true)
+            {
+                if (groundChecker.IsGrounded)
+                {
+                    break;
+                }
+                if (CanChange)
+                {
+                    yield break;
+                }
+
+                yield return null;
+            }
+
+            obj = Instantiate(rangeObj, this.transform.position, Quaternion.identity);
+            obj.transform.localScale = new Vector3(range * 2, range * 2, range * 2);
+            Collider[] targets = Physics.OverlapSphere(this.transform.position, range);
+            foreach (Collider colliders in targets)
+            {
+                var damageable = colliders.gameObject.GetComponent<IPublishable<CollisionDamageInfo>>();
+                if (damageable is not null and IEnemyTag)
+                {
+                    var impulse = (colliders.transform.position - obj.transform.position).normalized * 2;
+                    damageable.Publish(new(diveAttack, null, impulse));
+                }
+            }
+            CanChange = true;
         }
 
         public void Finish()
@@ -63,7 +78,7 @@ namespace RampageCars
             var damageable = collision.gameObject.GetComponent<IPublishable<CollisionDamageInfo>>();
             if (damageable is not null and IEnemyTag)
             {
-                damageable.Publish(new (attack, collision));
+                damageable.Publish(new(attack, collision));
             }
         }
     }
