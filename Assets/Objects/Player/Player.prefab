@@ -974,7 +974,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1098
+  m_VersionIndex: 1104
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1149,7 +1149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 500
-  jumpPower: 50
+  jumpPower: 150
   steeringMax: 2
   steeringThreshold: 50
   drag: 50
@@ -1378,6 +1378,7 @@ MonoBehaviour:
   attack: 3
   diveAttack: 10
   range: 5
+  diveSpeed: {x: 0, y: 300, z: 0}
   rangeObj: {fileID: 6065665293073880980, guid: d9c668afabb81c9439ae754c9ab3d264,
     type: 3}
 --- !u!1 &6458540397557552366

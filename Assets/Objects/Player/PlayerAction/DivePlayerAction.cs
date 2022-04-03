@@ -15,9 +15,11 @@ namespace RampageCars
         float diveAttack = 10;
         [SerializeField]
         float range = 5;
+        [SerializeField]
+        Vector3 diveSpeed = new(0, 1, 1);
         public bool CanChange { get; private set; } = true;
 
-        [SerializeField,NotNull]
+        [SerializeField, NotNull]
         GameObject rangeObj;
         private GameObject obj;
         Rigidbody rb;
@@ -41,6 +43,8 @@ namespace RampageCars
         {
             CanChange = false;
             Destroy(obj);
+
+            rb.AddForce(transform.forward * diveSpeed.z + Vector3.down * diveSpeed.y, ForceMode.Impulse);
 
             while (true)
             {
