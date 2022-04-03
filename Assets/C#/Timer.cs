@@ -39,7 +39,7 @@ namespace RampageCars
                 isEnableTimer = false;
             }
 
-            time.text = timeLimit.ToString("F2");
+            time.text = Mathf.FloorToInt(timeLimit).ToString();
         }
 
     }
