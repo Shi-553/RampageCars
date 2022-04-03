@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using EditorScripts;
 using UnityEngine;
 
 namespace RampageCars
@@ -15,9 +16,9 @@ namespace RampageCars
         [SerializeField]
         float range = 5;
         public bool CanChange { get; private set; } = true;
-        public bool isFirst { get; private set; } = true;
 
-        public GameObject rangeObj;
+        [SerializeField,NotNull]
+        GameObject rangeObj;
         private GameObject obj;
         Rigidbody rb;
         private void Start()
