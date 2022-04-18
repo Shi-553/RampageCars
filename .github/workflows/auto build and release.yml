@@ -48,12 +48,12 @@ jobs:
           buildName: RampageCars
           versioning: None
 
-    #  - name: rename
-    #    run: mv "./build/StandaloneWindows64" "./build/RampageCars"
-    #    shell: bash
+      - name: rename
+        run: mv "./build/StandaloneWindows64" "./build/RampageCars"
+        shell: bash
         
       - name: Zip
-        run: 7z a "./RampageCars.zip" "./build" -tzip
+        run: 7z a "./RampageCars.zip" "./build/RampageCars" -tzip
 
       - name: Set releaser settings
         run: |
