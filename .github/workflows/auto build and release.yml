@@ -49,7 +49,7 @@ jobs:
           versioning: None
 
       - name: rename
-        run: mv "./build/StandaloneWindows64" "./build/RampageCars"
+        run: sudo mv "./build/StandaloneWindows64" "./build/RampageCars"
         shell: bash
         
       - name: Zip
