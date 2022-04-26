@@ -13,7 +13,7 @@ namespace RampageCars
         [SerializeField]
         float speed = 1;
         [SerializeField]
-        float jumpPower = 10;
+        float jumpPower = 20;
         [SerializeField]
         float steeringMax = 10;
         [SerializeField]
