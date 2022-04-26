@@ -10,7 +10,7 @@ namespace RampageCars
     public class Timer : MonoBehaviour
     {
         [SerializeField]
-        float timeLimit = 180;
+        float timeLimit = 4000;
 
         TMP_Text time;
         bool isEnableTimer = false;
