@@ -43,7 +43,7 @@ namespace EditorScripts
                 }
 
                 if (fieldInfo == null)
-                    throw new Exception("Invalid FieldInfo. " + property.propertyPath);
+                    return null;
 
                 parentType = fieldInfo.FieldType;
             }
@@ -57,7 +57,7 @@ namespace EditorScripts
         {
             FieldInfo GetField(Type type, string path)
             {
-                return type.GetField(path, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                return type?.GetField(path, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
             }
 
             var parentType = property.serializedObject.targetObject.GetType();
@@ -79,13 +79,17 @@ namespace EditorScripts
                 }
                 else
                 {
+                    if (i >= splits.Length)
+                    {
+                        return null;
+                    }
                     fieldInfo = i + 1 < splits.Length && splits[i + 1] == "Array"
                         ? GetField(parentType, splits[i])
-                        : GetField(fieldInfo.FieldType, splits[i]);
+                        : GetField(fieldInfo?.FieldType, splits[i]);
                 }
 
                 if (fieldInfo == null)
-                    throw new Exception("Invalid FieldInfo. " + property.propertyPath);
+                    return null;
 
                 parentType = fieldInfo.FieldType;
             }
