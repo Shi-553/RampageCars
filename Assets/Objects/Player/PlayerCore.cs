@@ -9,13 +9,13 @@ namespace RampageCars
     public class PlayerCore : MonoBehaviour, IPlayerTag, ISubscribeable<CollisionDamageInfo>, IPublishable<CollisionDamageInfo>, ISubscribeable<DeathInfo>
     {
         [SerializeField]
-        private float healthPoint = 30;
+        private float healthPointMax = 30;
 
         [SerializeField]
         float destroyDelayTime = 1;
-        public bool IsDeath => healthPoint <= 0;
+        public bool IsDeath => healthPointMax <= 0;
 
-        public float CurrentHP;
+        public float healthPoint;
         public Slider slider;
 
         ActionWrapper<DeathInfo> onDeath = new();
@@ -35,11 +35,15 @@ namespace RampageCars
 
             onDamage?.Publish(info);
             healthPoint -= info.damage;
+            slider.value = healthPoint / healthPointMax;
 
             if (IsDeath)
             {
                 StartCoroutine(DelayDestroy());
             }
+
+
+
         }
 
         IEnumerator DelayDestroy()
@@ -53,19 +57,9 @@ namespace RampageCars
         void Start()
         {
             slider.value = 1;
-            CurrentHP = healthPoint;
+            healthPoint = healthPointMax;
         }
 
-        private void OnTriggerEnter(Collider collider)
-        {
-            if(collider.gameObject.tag == "Enemy")
-            {
-                float Damage = 1.0f;
 
-                CurrentHP -= Damage;
-                slider.value = CurrentHP / healthPoint;
-
-            }
-        }
     }
 }
