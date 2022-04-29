@@ -7,6 +7,7 @@ namespace RampageCars
 
         DefaultPlayerAction defaultPlayerAction;
         IPlayerAction current;
+        IPlayerAction EnabledCurrent => current.CanChange ? defaultPlayerAction : current;
 
         private void Awake()
         {
@@ -16,12 +17,15 @@ namespace RampageCars
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (!current.CanChange)
-            {
-                current.OnCollisionEnter(collision);
-                return;
-            }
-            defaultPlayerAction.OnCollisionEnter(collision);
+            EnabledCurrent.CollisionEnter(collision);
+        }
+        private void OnCollisionStay(Collision collision)
+        {
+            EnabledCurrent.CollisionStay(collision);
+        }
+        private void OnCollisionExit(Collision collision)
+        {
+            EnabledCurrent.CollisionExit(collision);
         }
 
         public void DoAction<T>() where T : IPlayerAction

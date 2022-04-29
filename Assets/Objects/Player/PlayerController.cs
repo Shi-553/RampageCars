@@ -29,21 +29,12 @@ namespace RampageCars
             player = GetComponent<PlayerMover>();
             action.Player.Accel.performed += BoostPerformed;
             action.Player.Jump.started += JumpStarted;
+            action.Player.Wiper.started += WiperStarted;
+            action.Player.Wiper.canceled += WiperCanceled;
             action.Player.DriftL.canceled += DriftLCanceled;
             action.Player.DriftR.canceled += DriftRCanceled;
 
             player.SetMotorTorque(1);
-        }
-
-        private void JumpStarted(InputAction.CallbackContext obj)
-        {
-            player.Jamp();
-        }
-
-
-        private void BoostPerformed(InputAction.CallbackContext obj)
-        {
-            actionManager.DoAction<AccelPlayerAction>();
         }
 
         private void DriftLCanceled(InputAction.CallbackContext obj)
@@ -54,6 +45,27 @@ namespace RampageCars
         {
             actionManager.FinishAction<RightDriftPlayerAction>();
         }
+        private void WiperStarted(InputAction.CallbackContext obj)
+        {
+            actionManager.DoAction<WiperPlayerAction>();
+        }
+        private void WiperCanceled(InputAction.CallbackContext obj)
+        {
+            actionManager.FinishAction<WiperPlayerAction>();
+        }
+
+        private void JumpStarted(InputAction.CallbackContext obj)
+        {
+            actionManager.DoAction<DivePlayerAction>();
+            player.Jamp();
+        }
+
+
+        private void BoostPerformed(InputAction.CallbackContext obj)
+        {
+            actionManager.DoAction<AccelPlayerAction>();
+        }
+
         void Update()
         {
             var steer = action.Player.Steer.ReadValue<float>();

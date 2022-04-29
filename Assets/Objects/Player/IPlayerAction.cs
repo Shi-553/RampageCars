@@ -10,6 +10,8 @@ namespace RampageCars
         void Finish();
 
         bool CanChange { get; }
-        void OnCollisionEnter(Collision collision);
+        void CollisionEnter(Collision collision) { }
+        void CollisionStay(Collision collision) { }
+        void CollisionExit(Collision collision) { }
     }
 }

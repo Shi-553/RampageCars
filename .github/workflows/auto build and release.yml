@@ -17,7 +17,7 @@ jobs:
   build:
     if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     name: Build my project ✨
-    runs-on: windows-2019
+    runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       RELEASE_IT_VERSION: 14
@@ -49,7 +49,7 @@ jobs:
           versioning: None
 
       - name: rename
-        run: mv "./build/StandaloneWindows64" "./build/RampageCars"
+        run: sudo mv "./build/StandaloneWindows64" "./build/RampageCars"
         shell: bash
         
       - name: Zip

@@ -2,19 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace RampageCars
 {
-    public class TestEnemy : MonoBehaviour, IEnemyTag, ISubscribeable<CollisionDamageInfo>, IPublishable<CollisionDamageInfo>, ISubscribeable<DeathInfo>
+    public class PlayerCore : MonoBehaviour, IPlayerTag, ISubscribeable<CollisionDamageInfo>, IPublishable<CollisionDamageInfo>, ISubscribeable<DeathInfo>
     {
         [SerializeField]
-        private float healthPoint = 100;
+        private float healthPointMax = 30;
 
         [SerializeField]
         float destroyDelayTime = 1;
-        public bool IsDeath => healthPoint <= 0;
+        public bool IsDeath => healthPointMax <= 0;
 
+        public float healthPoint;
+        public Slider slider;
 
         ActionWrapper<DeathInfo> onDeath = new();
         public Action Subscribe(Action<DeathInfo> add) => onDeath.Subscribe(add);
@@ -33,11 +35,15 @@ namespace RampageCars
 
             onDamage?.Publish(info);
             healthPoint -= info.damage;
+            slider.value = healthPoint / healthPointMax;
 
             if (IsDeath)
             {
                 StartCoroutine(DelayDestroy());
             }
+
+
+
         }
 
         IEnumerator DelayDestroy()
@@ -47,6 +53,13 @@ namespace RampageCars
             onDeath?.Publish(new());
             Destroy(gameObject);
         }
+
+        void Start()
+        {
+            slider.value = 1;
+            healthPoint = healthPointMax;
+        }
+
 
     }
 }
