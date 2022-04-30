@@ -974,7 +974,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1098
+  m_VersionIndex: 1107
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1192,7 +1192,6 @@ GameObject:
   - component: {fileID: -3234992874514921803}
   - component: {fileID: 1703302268}
   - component: {fileID: -441253928698191471}
-  - component: {fileID: 8483927498797883584}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1500,26 +1499,7 @@ MonoBehaviour:
   impulseScale: 3
   beard: {fileID: 8656564045699640553}
   maxBeardSize: {x: 10, y: 1, z: 1}
-  knockback: 50
---- !u!114 &8483927498797883584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6458540396161758453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a122b37e1bc2504fbc4e4bd7cf1f996, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundChecker: {fileID: 7671428934813331096}
-  attack: 3
-  diveAttack: 10
-  range: 5
-  diveSpeed: {x: 0, y: 1, z: 1}
-  rangeObj: {fileID: 6065665293073880980, guid: d9c668afabb81c9439ae754c9ab3d264,
-    type: 3}
+  knockback: 10
 --- !u!1 &6458540397557552366
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,6 +1512,7 @@ GameObject:
   - component: {fileID: 6458540397557552362}
   - component: {fileID: 6458540397557552365}
   - component: {fileID: 6458540397557552364}
+  - component: {fileID: 7906385571206670499}
   m_Layer: 0
   m_Name: Body
   m_TagString: Player
@@ -1617,6 +1598,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7906385571206670499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6458540397557552366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d55f5ec7c78205746bd007836b4830de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthPointMax: 30
+  destroyDelayTime: 1
+  healthPoint: 30
+  slider: {fileID: 0}
 --- !u!1 &6458540397592222639
 GameObject:
   m_ObjectHideFlags: 0

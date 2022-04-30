@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace RampageCars
 {
-    public class TestEnemy : MonoBehaviour, IEnemyTag, ISubscribeable<CollisionDamageInfo>, IPublishable<CollisionDamageInfo>, ISubscribeable<DeathInfo>
+    public class TestEnemyCore : MonoBehaviour, IEnemyTag, ISubscribeable<CollisionDamageInfo>, IPublishable<CollisionDamageInfo>, ISubscribeable<DeathInfo>
     {
         [SerializeField]
         private float healthPoint = 100;
@@ -29,7 +29,7 @@ namespace RampageCars
             {
                 return;
             }
-            GetComponent<Rigidbody>().AddForce(info.fixedImpulse, ForceMode.Impulse);
+            GetComponentInParent<Rigidbody>().AddForce(info.fixedImpulse, ForceMode.Impulse);
 
             onDamage?.Publish(info);
             healthPoint -= info.damage;
@@ -45,7 +45,7 @@ namespace RampageCars
             yield return new WaitForSeconds(destroyDelayTime);
 
             onDeath?.Publish(new());
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
 
     }

@@ -65,7 +65,7 @@ namespace RampageCars
             Collider[] targets = Physics.OverlapSphere(this.transform.position, range);
             foreach (Collider colliders in targets)
             {
-                var damageable = colliders.gameObject.GetComponent<IPublishable<CollisionDamageInfo>>();
+                var damageable = colliders.GetComponent<IPublishable<CollisionDamageInfo>>();
                 if (damageable is not null and IEnemyTag)
                 {
                     var impulse = (colliders.transform.position - obj.transform.position).normalized * 2;

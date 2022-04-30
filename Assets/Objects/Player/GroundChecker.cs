@@ -10,18 +10,21 @@ namespace RampageCars
 
         public bool IsGrounded => groundCount != 0;
 
-        void Start()
-        {
-
-        }
+        string groundTag = "Ground";
 
         private void OnTriggerEnter(Collider other)
         {
-            groundCount++;
+            if (other.tag == groundTag)
+            {
+                groundCount++;
+            }
         }
         private void OnTriggerExit(Collider other)
         {
-            groundCount--;
+            if (other.tag == groundTag)
+            {
+                groundCount--;
+            }
         }
     }
 }
