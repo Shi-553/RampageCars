@@ -11,12 +11,14 @@ namespace RampageCars
         [SerializeField]
         SerializeInterface<ISubscribeable<CollisionReceiveInfo>> collisionReceiver;
         Coroutine attackCo;
+        [SerializeField]
+        float attackDamage = 1;
+        [SerializeField]
+        float impulseScale = 2;
 
         [SerializeField]
         [Tooltip("最大回転角速度")]
         float maxDeltaDegree = 5.0f;
-        [Tooltip("起き上がるとき最大回転角速度")]
-        float maxResetDeltaDegree = 5.0f;
 
         [SerializeField]
         [Tooltip("攻撃を始める許容角度")]
@@ -25,6 +27,8 @@ namespace RampageCars
         float attackPower = 100.0f;
         [SerializeField]
         float attackPosY = 5.0f;
+
+        bool isAttacking = false;
 
         private void Start()
         {
@@ -91,6 +95,8 @@ namespace RampageCars
 
             rb.AddForceAtPosition(-dotSign * attackPower * force, forcedPos,ForceMode.Impulse);
 
+            isAttacking=true;
+
             yield return new WaitForSeconds(1.0f);
 
             attackCo = null;
@@ -103,6 +109,15 @@ namespace RampageCars
                 return;
             }
             transform.LookAt(transform.forward, Vector3.up);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            var com=collision.collider.GetComponent<IPublishable<CollisionDamageInfo>>();
+            if (com is not null and IPlayerTag)
+            {
+                com.Publish(new(attackDamage,  collision.impulse * impulseScale));
+            }
         }
     }
 }

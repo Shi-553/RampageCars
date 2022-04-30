@@ -69,7 +69,7 @@ namespace RampageCars
                 if (damageable is not null and IEnemyTag)
                 {
                     var impulse = (colliders.transform.position - obj.transform.position).normalized * 2;
-                    damageable.Publish(new(diveAttack, null, impulse));
+                    damageable.Publish(new(diveAttack, impulse));
                 }
             }
             CanChange = true;
@@ -83,7 +83,7 @@ namespace RampageCars
             var damageable = collision.gameObject.GetComponent<IPublishable<CollisionDamageInfo>>();
             if (damageable is not null and IEnemyTag)
             {
-                damageable.Publish(new(attack, collision));
+                damageable.Publish(new(attack, collision.impulse));
             }
         }
     }
