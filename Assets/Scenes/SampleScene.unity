@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -350,6 +350,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6195103, y: 0.38831323, z: 1}
   m_Center: {x: -0.030619483, y: 0.010283351, z: 0}
+--- !u!114 &189243316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189243312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d55f5ec7c78205746bd007836b4830de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthPointMax: 30
+  destroyDelayTime: 1
+  healthPoint: 30
+  slider: {fileID: 1963749426}
 --- !u!114 &229843208 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7671428934813331096, guid: 157b707dc855994408170d06d138c449,
@@ -1624,28 +1640,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1272386404 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6458540397557552366, guid: 157b707dc855994408170d06d138c449,
-    type: 3}
-  m_PrefabInstance: {fileID: 6840068}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1272386410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1272386404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d55f5ec7c78205746bd007836b4830de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthPointMax: 30
-  destroyDelayTime: 1
-  healthPoint: 30
-  slider: {fileID: 1963749426}
 --- !u!1 &1313021400
 GameObject:
   m_ObjectHideFlags: 3
@@ -1699,7 +1693,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.8175046, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2058,7 +2052,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.8175046, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2709,7 +2703,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1963749425}
   - component: {fileID: 1963749426}
-  - component: {fileID: 1963749427}
   m_Layer: 5
   m_Name: HPBar
   m_TagString: Untagged
@@ -2790,22 +2783,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1963749427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1963749424}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d55f5ec7c78205746bd007836b4830de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthPointMax: 30
-  healthPoint: 30
-  destroyDelayTime: 1
-  slider: {fileID: 1963749426}
 --- !u!1 &2017230717
 GameObject:
   m_ObjectHideFlags: 3
@@ -2859,7 +2836,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.8175046, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3140,7 +3117,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.8175046, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
