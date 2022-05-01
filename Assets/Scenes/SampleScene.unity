@@ -143,7 +143,7 @@ PrefabInstance:
     - target: {fileID: 4245535267587195700, guid: 157b707dc855994408170d06d138c449,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 1098
+      value: 1101
       objectReference: {fileID: 0}
     - target: {fileID: 5444943430541332836, guid: 157b707dc855994408170d06d138c449,
         type: 3}
@@ -208,6 +208,11 @@ PrefabInstance:
     - target: {fileID: 6458540396161758453, guid: 157b707dc855994408170d06d138c449,
         type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8194985831438718663, guid: 157b707dc855994408170d06d138c449,
+        type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -326,6 +331,41 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7721399548950014348}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &189243312 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8194985831438718663, guid: 157b707dc855994408170d06d138c449,
+    type: 3}
+  m_PrefabInstance: {fileID: 6840068}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &189243314
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189243312}
+  m_Material: {fileID: 13400000, guid: 94fec68f5eaaf3c4dbcf9f5fd6840f47, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6195103, y: 0.38831323, z: 1}
+  m_Center: {x: -0.030619483, y: 0.010283351, z: 0}
+--- !u!114 &189243316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189243312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d55f5ec7c78205746bd007836b4830de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthPointMax: 30
+  destroyDelayTime: 1
+  healthPoint: 30
+  slider: {fileID: 1963749426}
 --- !u!114 &229843208 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7671428934813331096, guid: 157b707dc855994408170d06d138c449,
@@ -1600,6 +1640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
 --- !u!1 &1272386404 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6458540397557552366, guid: 157b707dc855994408170d06d138c449,
@@ -1636,6 +1677,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   self: {fileID: 6840069}
   target: {fileID: 1833367892}
+=======
+>>>>>>> 4129e0180ddddd58a11292a92faa3df663f219e1
 --- !u!1 &1313021400
 GameObject:
   m_ObjectHideFlags: 3
@@ -1689,7 +1732,11 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
+<<<<<<< HEAD
     m_SensorSize: {x: 1.8141264, y: 1}
+=======
+    m_SensorSize: {x: 1.7777778, y: 1}
+>>>>>>> 4129e0180ddddd58a11292a92faa3df663f219e1
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2048,7 +2095,11 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
+<<<<<<< HEAD
     m_SensorSize: {x: 1.8141264, y: 1}
+=======
+    m_SensorSize: {x: 1.7777778, y: 1}
+>>>>>>> 4129e0180ddddd58a11292a92faa3df663f219e1
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2685,7 +2736,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1963749425}
   - component: {fileID: 1963749426}
-  - component: {fileID: 1963749427}
   m_Layer: 5
   m_Name: HPBar
   m_TagString: Untagged
@@ -2766,22 +2816,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1963749427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1963749424}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d55f5ec7c78205746bd007836b4830de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthPointMax: 30
-  destroyDelayTime: 1
-  healthPoint: 30
-  slider: {fileID: 1963749426}
 --- !u!1 &2017230717
 GameObject:
   m_ObjectHideFlags: 3
@@ -2835,7 +2869,11 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
+<<<<<<< HEAD
     m_SensorSize: {x: 1.8141264, y: 1}
+=======
+    m_SensorSize: {x: 1.7777778, y: 1}
+>>>>>>> 4129e0180ddddd58a11292a92faa3df663f219e1
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3116,7 +3154,11 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
+<<<<<<< HEAD
     m_SensorSize: {x: 1.8141264, y: 1}
+=======
+    m_SensorSize: {x: 1.7777778, y: 1}
+>>>>>>> 4129e0180ddddd58a11292a92faa3df663f219e1
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
