@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace RampageCars
 {
@@ -37,6 +38,8 @@ namespace RampageCars
                 timeLimit = 0.0f;
                 OnTimerEnd?.Invoke();
                 isEnableTimer = false;
+                var loader = Singleton.Get<SceneLoader>();
+                loader.ChangeScene(SceneType.GameOver);
             }
 
             time.text = Mathf.FloorToInt(timeLimit).ToString();
