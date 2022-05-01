@@ -123,9 +123,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionReceiver:
     obj: {fileID: 3600241141582326349}
+  attackDamage: 1
+  impulseScale: 500
   maxDeltaDegree: 3
   startAttackDegree: 10
-  attackPower: 0.75
+  attackPower: 1
   attackPosY: 1.5
 --- !u!1 &7841668867381929465
 GameObject:

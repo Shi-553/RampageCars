@@ -23,6 +23,11 @@ namespace RampageCars
         [SerializeField]
         [Tooltip("攻撃を始める許容角度")]
         float startAttackDegree = 10.0f;
+
+        [SerializeField]
+        [Tooltip("攻撃の準備時間")]
+        float attackWaitTime = 0.8f;
+
         [SerializeField]
         float attackPower = 100.0f;
         [SerializeField]
@@ -74,10 +79,10 @@ namespace RampageCars
                 }
                 if (isNext)
                 {
-                    var add = Quaternion.AngleAxis(dotSign * -20, transform.forward);
+                    var add = Quaternion.AngleAxis(dotSign * -30, transform.forward);
                     targetQ *= add;
                     time += Time.deltaTime;
-                    if (time > 1)
+                    if (time > attackWaitTime)
                     {
                         break;
                     }
@@ -98,6 +103,7 @@ namespace RampageCars
             isAttacking=true;
 
             yield return new WaitForSeconds(1.0f);
+            isAttacking = false;
 
             attackCo = null;
         }
@@ -113,10 +119,14 @@ namespace RampageCars
 
         private void OnCollisionEnter(Collision collision)
         {
+            if (!isAttacking) {
+                return;
+            }
             var com=collision.collider.GetComponent<IPublishable<CollisionDamageInfo>>();
             if (com is not null and IPlayerTag)
             {
-                com.Publish(new(attackDamage,  collision.impulse * impulseScale));
+                Vector3 direction = collision.collider.transform.position - transform.position;
+                com.Publish(new(attackDamage, direction.normalized * impulseScale));
             }
         }
     }
