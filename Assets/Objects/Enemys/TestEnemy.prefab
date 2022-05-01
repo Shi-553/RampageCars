@@ -127,7 +127,8 @@ MonoBehaviour:
   impulseScale: 500
   maxDeltaDegree: 3
   startAttackDegree: 10
-  attackPower: 1
+  attackWaitTime: 0.8
+  attackPower: 0.5
   attackPosY: 1.5
 --- !u!1 &7841668867381929465
 GameObject:
