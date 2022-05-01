@@ -31,7 +31,7 @@ namespace RampageCars
             {
                 return;
             }
-            GetComponent<Rigidbody>().AddForce(info.fixedImpulse, ForceMode.Impulse);
+            GetComponentInParent<Rigidbody>().AddForce(info.fixedImpulse, ForceMode.Impulse);
 
             onDamage?.Publish(info);
             healthPoint -= info.damage;
