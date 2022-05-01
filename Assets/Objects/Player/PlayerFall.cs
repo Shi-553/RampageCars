@@ -6,21 +6,12 @@ namespace RampageCars
 {
     public class PlayerFall : MonoBehaviour
     {
-        public static PlayerFall instance;
-        
         [SerializeField]
         private Transform self;
         
         [SerializeField]
         private Transform target;
-
-        public void Awake()
-        {
-            if (instance == null)
-            {
-                instance = this;
-            }
-        }
+        
         // Start is called before the first frame update
         void Start()
         {
@@ -36,7 +27,7 @@ namespace RampageCars
         public void Respawn()
         {
             self.LookAt(target);
-            this.transform.position = FetchNearObjectWithTag("Spawn").position;
+            this.transform.parent.position = FetchNearObjectWithTag("Spawn").position;
         }
 
         // １番近いオブジェクトを取得する
@@ -51,7 +42,7 @@ namespace RampageCars
             foreach (var target in targets)
             {
                 // 前回計測したオブジェクトよりも近くにあれば記録
-                var targetDistance = Vector3.Distance(transform.position, target.transform.position);
+                var targetDistance = Vector3.SqrMagnitude(transform.position - target.transform.position);
                 if (!(targetDistance < minTargetDistance)) continue;
                 minTargetDistance = targetDistance;
                 result = target.transform.gameObject;
