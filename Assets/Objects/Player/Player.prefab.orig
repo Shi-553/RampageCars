@@ -177,7 +177,11 @@ GameObject:
   - component: {fileID: -3234992874514921803}
   - component: {fileID: 1703302268}
   - component: {fileID: -441253928698191471}
+<<<<<<< HEAD
+=======
+  - component: {fileID: 8483927498797883584}
   - component: {fileID: 1704070449170931736}
+>>>>>>> master
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -485,6 +489,31 @@ MonoBehaviour:
   beard: {fileID: 8656564045699640553}
   maxBeardSize: {x: 10, y: 1, z: 1}
   knockback: 10
+--- !u!114 &7906385571206670499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6458540397557552366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d55f5ec7c78205746bd007836b4830de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+<<<<<<< HEAD
+  healthPointMax: 30
+  destroyDelayTime: 1
+  healthPoint: 30
+  slider: {fileID: 0}
+=======
+  groundChecker: {fileID: 7671428934813331096}
+  attack: 3
+  diveAttack: 10
+  range: 5
+  diveSpeed: {x: 0, y: 1, z: 1}
+  rangeObj: {fileID: 6065665293073880980, guid: d9c668afabb81c9439ae754c9ab3d264,
+    type: 3}
 --- !u!114 &1704070449170931736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,6 +533,7 @@ MonoBehaviour:
   diveSpeed: {x: 0, y: 1, z: 1}
   rangeObj: {fileID: 6065665293073880980, guid: d9c668afabb81c9439ae754c9ab3d264,
     type: 3}
+>>>>>>> master
 --- !u!1 &6458540397592222639
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,6 +673,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6195103, y: 0.38831323, z: 1}
   m_Center: {x: -0.030619483, y: 0.010283351, z: 0}
+--- !u!114 &189243316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8194985831438718663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d55f5ec7c78205746bd007836b4830de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthPointMax: 30
+  destroyDelayTime: 1
+  healthPoint: 30
+  slider: {fileID: 0}
 --- !u!114 &4177397674915926744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -657,41 +703,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   self: {fileID: 6458540396161758448}
   target: {fileID: 0}
---- !u!114 &8679067480030645360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8194985831438718663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d55f5ec7c78205746bd007836b4830de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthPointMax: 30
-  destroyDelayTime: 1
-  healthPoint: 30
-  slider: {fileID: 0}
 --- !u!4 &8859038539341614205 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d2e9c8da14bdd8142ba58520ccbd252f,
     type: 3}
   m_PrefabInstance: {fileID: 9041849127718005654}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7906385571206670499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d55f5ec7c78205746bd007836b4830de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthPointMax: 30
-  destroyDelayTime: 1
-  healthPoint: 30
-  slider: {fileID: 0}

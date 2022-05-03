@@ -52,6 +52,11 @@ namespace EditorScripts
 
             foreach (var o in components)
             {
+                if (o is null)
+                {
+                    continue;
+                }
+
                 if (generic.IsAssignableFrom(o.GetType()))
                 {
                     property.objectReferenceValue = o;
