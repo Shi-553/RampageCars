@@ -14,7 +14,7 @@ namespace RampageCars
 
         [SerializeField]
         float destroyDelayTime = 1;
-        public bool IsDeath => healthPointMax <= 0;
+        public bool IsDeath => healthPoint <= 0;
 
         public float healthPoint;
         public Slider slider;
@@ -32,7 +32,7 @@ namespace RampageCars
             {
                 return;
             }
-            GetComponent<Rigidbody>().AddForce(info.fixedImpulse, ForceMode.Impulse);
+            GetComponentInParent<Rigidbody>().AddForce(info.fixedImpulse, ForceMode.Impulse);
 
             onDamage?.Publish(info);
             healthPoint -= info.damage;
