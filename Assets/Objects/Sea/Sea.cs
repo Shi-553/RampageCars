@@ -29,7 +29,7 @@ namespace RampageCars
             {
                 var impulse = new Vector3(0, 0, 0);
                 publishable.Publish(new (playerDamage,null, impulse));
-                PlayerFall.instance.Respawn();
+                collision.gameObject.GetComponent<PlayerFall>().Respawn();
             }
             if (publishable is not null and IEnemyTag)
             {
