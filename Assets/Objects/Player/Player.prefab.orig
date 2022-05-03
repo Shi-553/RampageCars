@@ -177,7 +177,11 @@ GameObject:
   - component: {fileID: -3234992874514921803}
   - component: {fileID: 1703302268}
   - component: {fileID: -441253928698191471}
+<<<<<<< HEAD
+=======
+  - component: {fileID: 8483927498797883584}
   - component: {fileID: 1704070449170931736}
+>>>>>>> master
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -497,10 +501,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d55f5ec7c78205746bd007836b4830de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   healthPointMax: 30
   destroyDelayTime: 1
   healthPoint: 30
   slider: {fileID: 0}
+=======
+  groundChecker: {fileID: 7671428934813331096}
+  attack: 3
+  diveAttack: 10
+  range: 5
+  diveSpeed: {x: 0, y: 1, z: 1}
+  rangeObj: {fileID: 6065665293073880980, guid: d9c668afabb81c9439ae754c9ab3d264,
+    type: 3}
 --- !u!114 &1704070449170931736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,6 +533,7 @@ MonoBehaviour:
   diveSpeed: {x: 0, y: 1, z: 1}
   rangeObj: {fileID: 6065665293073880980, guid: d9c668afabb81c9439ae754c9ab3d264,
     type: 3}
+>>>>>>> master
 --- !u!1 &6458540397592222639
 GameObject:
   m_ObjectHideFlags: 0

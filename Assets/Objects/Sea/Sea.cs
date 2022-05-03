@@ -28,13 +28,13 @@ namespace RampageCars
             if (publishable is not null and IPlayerTag)
             {
                 var impulse = new Vector3(0, 0, 0);
-                publishable.Publish(new (playerDamage,null, impulse));
+                publishable.Publish(new (playerDamage,impulse));
                 collision.gameObject.GetComponent<PlayerFall>().Respawn();
             }
             if (publishable is not null and IEnemyTag)
             {
                 var impulse = new Vector3(0, 0, 0);
-                publishable.Publish(new (enemyDamage,null, impulse));
+                publishable.Publish(new (enemyDamage, impulse));
             }
         }
     }

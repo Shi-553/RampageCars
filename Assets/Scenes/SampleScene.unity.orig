@@ -138,12 +138,21 @@ PrefabInstance:
         type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 1833367892}
+<<<<<<< HEAD
+      objectReference: {fileID: 1617846936}
     - target: {fileID: 4245535267587195700, guid: 157b707dc855994408170d06d138c449,
         type: 3}
       propertyPath: m_VersionIndex
       value: 1110
       objectReference: {fileID: 0}
+    - target: {fileID: 5444943430541332836, guid: 157b707dc855994408170d06d138c449,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1617846936}
+=======
+      objectReference: {fileID: 1833367892}
+>>>>>>> master
     - target: {fileID: 6458540396161758448, guid: 157b707dc855994408170d06d138c449,
         type: 3}
       propertyPath: m_RootOrder
@@ -204,11 +213,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 7906385571206670499, guid: 157b707dc855994408170d06d138c449,
         type: 3}
       propertyPath: slider
       value: 
       objectReference: {fileID: 1963749426}
+    - target: {fileID: 8194985831438718663, guid: 157b707dc855994408170d06d138c449,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+=======
+>>>>>>> master
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 157b707dc855994408170d06d138c449, type: 3}
 --- !u!4 &6840069 stripped
@@ -325,6 +342,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7721399548950014348}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
+--- !u!1 &189243312 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8194985831438718663, guid: 157b707dc855994408170d06d138c449,
+    type: 3}
+  m_PrefabInstance: {fileID: 6840068}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &189243314
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189243312}
+  m_Material: {fileID: 13400000, guid: 94fec68f5eaaf3c4dbcf9f5fd6840f47, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6195103, y: 0.38831323, z: 1}
+  m_Center: {x: -0.030619483, y: 0.010283351, z: 0}
 --- !u!114 &189243315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,6 +378,8 @@ MonoBehaviour:
   destroyDelayTime: 1
   healthPoint: 30
   slider: {fileID: 1963749426}
+=======
+>>>>>>> master
 --- !u!4 &260366239 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7383847596156283237, guid: 5367507a400031e47b75c88229e9377a,

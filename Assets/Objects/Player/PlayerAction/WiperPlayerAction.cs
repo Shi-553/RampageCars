@@ -37,16 +37,17 @@ namespace RampageCars
         {
             var halfSize = beard.localScale / 2;
             var pos = beard.position;
-            var raycasteds = Physics.BoxCastAll(pos, halfSize, beard.forward, beard.rotation, distance);
+            int layerMask = LayerMask.GetMask(new string[] { "Default" });
+            var raycasteds = Physics.BoxCastAll(pos, halfSize, beard.forward, beard.rotation, distance, layerMask);
 
             var rb = GetComponent<Rigidbody>();
 
             foreach (var hit in raycasteds)
             {
-                var damageable = hit.transform.GetComponent<IPublishable<CollisionDamageInfo>>();
+                var damageable = hit.collider.GetComponent<IPublishable<CollisionDamageInfo>>();
                 if (damageable is not null and IEnemyTag)
                 {
-                    damageable.Publish(new(attack, null, -hit.normal * impulseScale));
+                    damageable.Publish(new(attack, -hit.normal * impulseScale));
 
                     var knockbackForce = hit.normal * knockback;
                     knockbackForce.y = 0;
