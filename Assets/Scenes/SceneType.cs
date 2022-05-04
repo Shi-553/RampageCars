@@ -5,6 +5,8 @@ public enum SceneType
 {
     SampleScene,
 
+    GameOver,
+
     Manager,
 
 }

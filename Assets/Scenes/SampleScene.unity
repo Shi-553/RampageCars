@@ -130,20 +130,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 603092989}
     m_Modifications:
-    - target: {fileID: 189243316, guid: 157b707dc855994408170d06d138c449, type: 3}
-      propertyPath: slider
-      value: 
-      objectReference: {fileID: 1963749426}
     - target: {fileID: 4177397674915926744, guid: 157b707dc855994408170d06d138c449,
         type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1833367892}
-    - target: {fileID: 4245535267587195700, guid: 157b707dc855994408170d06d138c449,
-        type: 3}
-      propertyPath: m_VersionIndex
-      value: 1110
-      objectReference: {fileID: 0}
     - target: {fileID: 6458540396161758448, guid: 157b707dc855994408170d06d138c449,
         type: 3}
       propertyPath: m_RootOrder
@@ -204,7 +195,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7906385571206670499, guid: 157b707dc855994408170d06d138c449,
+    - target: {fileID: 8679067480030645360, guid: 157b707dc855994408170d06d138c449,
         type: 3}
       propertyPath: slider
       value: 
@@ -325,22 +316,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7721399548950014348}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &189243315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 189243312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d55f5ec7c78205746bd007836b4830de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthPointMax: 30
-  destroyDelayTime: 1
-  healthPoint: 30
-  slider: {fileID: 1963749426}
 --- !u!4 &260366239 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7383847596156283237, guid: 5367507a400031e47b75c88229e9377a,

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace RampageCars
 {
@@ -13,7 +14,7 @@ namespace RampageCars
 
         [SerializeField]
         float destroyDelayTime = 1;
-        public bool IsDeath => healthPointMax <= 0;
+        public bool IsDeath => healthPoint <= 0;
 
         public float healthPoint;
         public Slider slider;
@@ -40,6 +41,8 @@ namespace RampageCars
             if (IsDeath)
             {
                 StartCoroutine(DelayDestroy());
+                var loader = Singleton.Get<SceneLoader>();
+                loader.ChangeScene(SceneType.GameOver);
             }
 
 

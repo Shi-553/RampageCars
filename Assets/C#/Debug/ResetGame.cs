@@ -27,5 +27,13 @@ namespace RampageCars
                 loader.ChangeScene(loader.CurrentType);
             }
         }
+
+
+        public void OnClickStartButton()
+        {
+            var loader = Singleton.Get<SceneLoader>();
+            loader.ChangeScene(SceneType.SampleScene);
+        }
+
     }
 }
