@@ -27,7 +27,9 @@ namespace RampageCars
         public void Respawn()
         {
             self.LookAt(target);
+            self.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             this.transform.parent.position = FetchNearObjectWithTag("Spawn").position;
+
         }
 
         // １番近いオブジェクトを取得する
