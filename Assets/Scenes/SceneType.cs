@@ -3,12 +3,26 @@
 /// <summary>
 public enum SceneType
 {
-    GameTitle,
+    GameTitle = 0,
 
-    SampleScene,
+    GameOver = 1,
 
-    GameOver,
+    Manager = 2,
 
-    Manager,
+    SampleScene = 3,
 
+}
+public static class SceneTypeExtension
+{
+   public static int GetBuildIndex(this SceneType type)
+   {
+      return type switch                         
+      {                                          
+          SceneType.GameTitle => 0,              
+          SceneType.GameOver => 1,              
+          SceneType.Manager => 2,              
+          SceneType.SampleScene => 3,              
+          _ => 0,                                
+      };                                         
+   }
 }

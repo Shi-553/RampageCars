@@ -31,13 +31,13 @@ namespace RampageCars
             Time.timeScale = 0;
 
             yield return SceneManager.UnloadSceneAsync(Current);
-            var load=SceneManager.LoadSceneAsync((int)scene, LoadSceneMode.Additive);
+            var load=SceneManager.LoadSceneAsync(scene.GetBuildIndex(), LoadSceneMode.Additive);
 
             yield return Resources.UnloadUnusedAssets();
 
             yield return load;
 
-            Current = SceneManager.GetSceneByBuildIndex((int)scene);
+            Current = SceneManager.GetSceneByBuildIndex(scene.GetBuildIndex());
             SceneManager.SetActiveScene(Current);
 
             Debug.Log($"Changed to <b>{CurrentType}</b>");
