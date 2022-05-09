@@ -3,6 +3,8 @@
 /// <summary>
 public enum SceneType
 {
+    GameTitle,
+
     SampleScene,
 
     GameOver,
