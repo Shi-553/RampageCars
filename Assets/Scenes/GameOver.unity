@@ -712,19 +712,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 776258405}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 776258407}
-        m_TargetAssemblyTypeName: RampageCars.QuitGame, Assembly-CSharp
-        m_MethodName: OnClickStartButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &776258405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -772,7 +760,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 776258402}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5db45328a0e11564db0fe83826d7887c, type: 3}
+  m_Script: {fileID: 11500000, guid: 375eee7d5d5d7a6489dc0844306989f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1303973347
@@ -859,19 +847,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1303973350}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1303973352}
-        m_TargetAssemblyTypeName: RampageCars.ResetGame, Assembly-CSharp
-        m_MethodName: OnClickStartButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1303973350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -919,9 +895,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1303973347}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff754b1b199391d40a1404a2aa69f25c, type: 3}
+  m_Script: {fileID: 11500000, guid: fd310ac0260e63e45987a495619c77b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextScene: 0
 --- !u!1 &1435326370
 GameObject:
   m_ObjectHideFlags: 0
