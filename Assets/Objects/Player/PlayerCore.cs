@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 namespace RampageCars
 {
-    public class PlayerCore : MonoBehaviour, IPlayerTag, ISubscribeable<CollisionDamageInfo>, IPublishable<CollisionDamageInfo>, ISubscribeable<DeathInfo>
+    public class PlayerCore : MonoBehaviour, IPlayerTag, ISubscribeable<CollisionDamageInfo>, IPublishable<CollisionDamageInfo>, ISubscribeable<DeathInfo>, IPublishable<FallSeaInfo>, ISubscribeable<FallSeaInfo>
     {
         [SerializeField]
         private float healthPointMax = 30;
@@ -64,5 +64,8 @@ namespace RampageCars
         }
 
 
+        ActionWrapper<FallSeaInfo> onFallSea = new();
+        public void Publish(FallSeaInfo info) => onFallSea.Publish(info);
+        public Action Subscribe(Action<FallSeaInfo> add) => onFallSea.Subscribe(add);
     }
 }

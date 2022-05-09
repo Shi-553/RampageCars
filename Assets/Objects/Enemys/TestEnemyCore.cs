@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace RampageCars
 {
-    public class TestEnemyCore : MonoBehaviour, IEnemyTag, ISubscribeable<CollisionDamageInfo>, IPublishable<CollisionDamageInfo>, ISubscribeable<DeathInfo>
+    public class TestEnemyCore : MonoBehaviour, IEnemyTag, ISubscribeable<CollisionDamageInfo>, IPublishable<CollisionDamageInfo>, ISubscribeable<DeathInfo>, IPublishable<FallSeaInfo>, ISubscribeable<FallSeaInfo>
     {
         [SerializeField]
         private float healthPoint = 100;
@@ -48,5 +48,9 @@ namespace RampageCars
             Destroy(transform.parent.gameObject);
         }
 
+
+        ActionWrapper<FallSeaInfo> onFallSea = new();
+        public void Publish(FallSeaInfo info) => onFallSea.Publish(info);
+        public Action Subscribe(Action<FallSeaInfo> add) => onFallSea.Subscribe(add);
     }
 }
