@@ -31,12 +31,23 @@ namespace RampageCars
             action.Player.Jump.started += JumpStarted;
             action.Player.Wiper.started += WiperStarted;
             action.Player.Wiper.canceled += WiperCanceled;
+
+            action.Player.DriftL.started += DriftLStarted;
+            action.Player.DriftR.started += DriftRStarted;
             action.Player.DriftL.canceled += DriftLCanceled;
             action.Player.DriftR.canceled += DriftRCanceled;
 
             player.SetMotorTorque(1);
         }
 
+        private void DriftLStarted(InputAction.CallbackContext obj)
+        {
+            actionManager.DoAction<LeftDriftPlayerAction>();
+        }
+        private void DriftRStarted(InputAction.CallbackContext obj)
+        {
+            actionManager.DoAction<RightDriftPlayerAction>();
+        }
         private void DriftLCanceled(InputAction.CallbackContext obj)
         {
             actionManager.FinishAction<LeftDriftPlayerAction>();
@@ -81,16 +92,6 @@ namespace RampageCars
                 player.SetMotorTorque(1);
             }
 
-
-            if (action.Player.DriftL.IsPressed())
-            {
-                actionManager.DoAction<LeftDriftPlayerAction>();
-            }
-
-            if (action.Player.DriftR.IsPressed())
-            {
-                actionManager.DoAction<RightDriftPlayerAction>();
-            }
         }
     }
 }
