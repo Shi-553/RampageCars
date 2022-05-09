@@ -30,13 +30,15 @@ namespace RampageCars
 
         public void DoAction<T>() where T : IPlayerAction
         {
-            if (current.CanChange)
+            if (!current.CanChange)
             {
-                current = GetComponent<T>();
-                current.Do();
-
-                Debug.Log($"Do {typeof(T).Name}!");
+                current.Finish();
+                Debug.Log($"Finish {current.GetType().Name}!");
             }
+            current = GetComponent<T>();
+            current.Do();
+
+            Debug.Log($"Do {typeof(T).Name}!");
         }
         public void FinishAction<T>() where T : IPlayerAction
         {
@@ -50,7 +52,7 @@ namespace RampageCars
             {
                 current.Finish();
 
-                Debug.Log($"Finish {nameof(T)}!");
+                Debug.Log($"Finish {typeof(T).Name}!");
             }
         }
     }
