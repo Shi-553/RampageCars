@@ -3,7 +3,7 @@
 namespace RampageCars
 {
     // 当たることができる
-    public interface ICollisionPawn : IPawn, ISubscribeable<CollisionDamageInfo>, IPublishable<CollisionDamageInfo>
+    public interface ICollisionPawn : IPawn, ISubscribeableImpl<CollisionDamageInfo>, IPublishableImpl<CollisionDamageInfo>
     {
         // 衝突ダメージ
         void IPublishable<CollisionDamageInfo>.Publish(CollisionDamageInfo info)

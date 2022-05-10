@@ -2,7 +2,7 @@
 
 namespace RampageCars
 {
-    public interface IFallSeaPawn : IPawn, ISubscribeable<FallSeaInfo>, IPublishable<FallSeaInfo>
+    public interface IFallSeaPawn : IPawn, ISubscribeableImpl<FallSeaInfo>, IPublishableImpl<FallSeaInfo>
     {
         // 海に落ちた
         void IPublishable<FallSeaInfo>.Publish(FallSeaInfo info)

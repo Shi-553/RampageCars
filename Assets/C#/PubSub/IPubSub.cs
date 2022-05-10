@@ -4,23 +4,33 @@ namespace RampageCars
 {
     public interface IPubSub<T0>
     {
-        ActionWrapper<T0> PubSubAction { get; init; }
+        ActionWrapper<T0> PubSubAction { get; }
 
-        protected sealed void DefaultPublish(T0 info) => PubSubAction.Publish(info);
+        sealed void DefaultPublish(T0 info) => PubSubAction.Publish(info);
 
         /// <returns>UnScribeアクション</returns>
-        protected sealed Action DefaultSubscribe(Action<T0> add) => PubSubAction.Subscribe(add);
+        sealed Action DefaultSubscribe(Action<T0> add) => PubSubAction.Subscribe(add);
 
     }
 
-    public interface IPublishable<T0> : IPubSub<T0>
+    public interface IPublishable<T0>
     {
-        void Publish(T0 info) => DefaultPublish(info);
+        void Publish(T0 info);
     }
 
-    public interface ISubscribeable<T0> : IPubSub<T0>
+    public interface ISubscribeable<T0>
     {
         /// <returns>UnScribeアクション</returns>
-        Action Subscribe(Action<T0> add) => DefaultSubscribe(add);
+        Action Subscribe(Action<T0> add);
+    }
+    public interface IPublishableImpl<T0> : IPublishable<T0>, IPubSub<T0>
+    {
+        void IPublishable<T0>.Publish(T0 info) => DefaultPublish(info);
+    }
+
+    public interface ISubscribeableImpl<T0> : ISubscribeable<T0>, IPubSub<T0>
+    {
+        /// <returns>UnScribeアクション</returns>
+        Action ISubscribeable<T0>.Subscribe(Action<T0> add) => DefaultSubscribe(add);
     }
 }

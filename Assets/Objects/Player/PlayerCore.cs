@@ -14,10 +14,10 @@ namespace RampageCars
         [SerializeField]
         Slider slider;
         public float HealthPoint { get; set; }
-        ActionWrapper<DeathInfo> IPubSub<DeathInfo>.PubSubAction { get; init; } = new();
-        ActionWrapper<DamageInfo> IPubSub<DamageInfo>.PubSubAction { get; init; } = new();
-        ActionWrapper<CollisionDamageInfo> IPubSub<CollisionDamageInfo>.PubSubAction { get; init; } = new();
-        ActionWrapper<FallSeaInfo> IPubSub<FallSeaInfo>.PubSubAction { get; init; } = new();
+        ActionWrapper<DeathInfo> IPubSub<DeathInfo>.PubSubAction { get; } = new();
+        ActionWrapper<DamageInfo> IPubSub<DamageInfo>.PubSubAction { get; } = new();
+        ActionWrapper<CollisionDamageInfo> IPubSub<CollisionDamageInfo>.PubSubAction { get; } = new();
+        ActionWrapper<FallSeaInfo> IPubSub<FallSeaInfo>.PubSubAction { get; } = new();
 
         void Awake()
         {

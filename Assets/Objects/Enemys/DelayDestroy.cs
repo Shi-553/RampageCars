@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace RampageCars
 {
-    public class DelayDestroy : MonoBehaviour, ISubscribeable<DelayDestroyInfo>
+    public class DelayDestroy : MonoBehaviour, ISubscribeableImpl<DelayDestroyInfo>
     {
-        public ActionWrapper<DelayDestroyInfo> PubSubAction { get; init; } = new();
+        public ActionWrapper<DelayDestroyInfo> PubSubAction { get; } = new();
 
         [SerializeField]
         float destroyDelayTime = 1;
@@ -20,6 +20,7 @@ namespace RampageCars
             yield return new WaitForSeconds(destroyDelayTime);
 
             Destroy(transform.parent.gameObject);
+
             PubSubAction.Publish(new());
         }
     }

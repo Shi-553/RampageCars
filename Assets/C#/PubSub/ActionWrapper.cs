@@ -8,11 +8,10 @@ namespace RampageCars
 {
     public class ActionWrapper<T0> : ISubscribeable<T0>, IPublishable<T0>
     {
-        public ActionWrapper<T0> PubSubAction { get; init; }
 
         Action<T0> action;
 
-        public ActionWrapper() => PubSubAction = this;
+        public ActionWrapper() { }
 
         public ActionWrapper(Action<T0> action):this()
         {

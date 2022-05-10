@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿
 
 namespace RampageCars
 {
     // HPを持ち、ダメージを受け、死ぬことができる
-    public interface IPawn : ISubscribeable<DeathInfo>, ISubscribeable<DamageInfo>, IPublishable<DamageInfo>
+    public interface IPawn : ISubscribeableImpl<DeathInfo>, ISubscribeableImpl<DamageInfo>, IPublishableImpl<DamageInfo>
     {
         float HealthPoint { get; set; }
         bool IsDeath => HealthPoint <= 0;
