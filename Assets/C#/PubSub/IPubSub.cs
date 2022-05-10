@@ -2,6 +2,7 @@
 
 namespace RampageCars
 {
+    // Pub/SubのためにActionWrapperプロパティの実装を強制する
     public interface IPubSub<T0>
     {
         ActionWrapper<T0> PubSubAction { get; }
@@ -13,6 +14,9 @@ namespace RampageCars
 
     }
 
+
+    // 外から検索して使う用
+
     public interface IPublishable<T0>
     {
         void Publish(T0 info);
@@ -23,6 +27,10 @@ namespace RampageCars
         /// <returns>UnScribeアクション</returns>
         Action Subscribe(Action<T0> add);
     }
+
+
+    // 実装時にはこれらを使うと便利
+
     public interface IPublishableImpl<T0> : IPublishable<T0>, IPubSub<T0>
     {
         void IPublishable<T0>.Publish(T0 info) => DefaultPublish(info);
