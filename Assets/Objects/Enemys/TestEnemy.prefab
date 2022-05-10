@@ -262,6 +262,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthPoint: 100
   destroyDelayTime: 1
+--- !u!114 &1354673399711766440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303279323545598888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 413109852a00b7d44a97ae720ecc7211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigid: {fileID: 8535490417827609899}
+  root: {fileID: 7721399549093552583}
 --- !u!114 &8303660695726901702
 MonoBehaviour:
   m_ObjectHideFlags: 0
