@@ -8,9 +8,6 @@ namespace RampageCars
     public readonly struct FallSeaInfo
     {
         public readonly float damage;
-        public FallSeaInfo(float damage)
-        {
-            this.damage = damage;
-        }
+        public FallSeaInfo(float damage)=> this.damage = damage;
     }
 }

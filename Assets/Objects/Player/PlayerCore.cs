@@ -7,65 +7,27 @@ using UnityEngine.SceneManagement;
 
 namespace RampageCars
 {
-    public class PlayerCore : MonoBehaviour, IPlayerTag, ISubscribeable<CollisionDamageInfo>, IPublishable<CollisionDamageInfo>, ISubscribeable<DeathInfo>, IPublishable<FallSeaInfo>, ISubscribeable<FallSeaInfo>
+    public class PlayerCore : MonoBehaviour, IPlayerTag, ICollisionPawn, IFallSeaPawn
     {
         [SerializeField]
-        private float healthPointMax = 30;
-
+        float healthPointMax;
         [SerializeField]
-        float destroyDelayTime = 1;
-        public bool IsDeath => healthPoint <= 0;
+        Slider slider;
+        public float HealthPoint { get; set; }
+        ActionWrapper<DeathInfo> IPubSub<DeathInfo>.PubSubAction { get; init; } = new();
+        ActionWrapper<DamageInfo> IPubSub<DamageInfo>.PubSubAction { get; init; } = new();
+        ActionWrapper<CollisionDamageInfo> IPubSub<CollisionDamageInfo>.PubSubAction { get; init; } = new();
+        ActionWrapper<FallSeaInfo> IPubSub<FallSeaInfo>.PubSubAction { get; init; } = new();
 
-        public float healthPoint;
-        public Slider slider;
-
-        ActionWrapper<DeathInfo> onDeath = new();
-        public Action Subscribe(Action<DeathInfo> add) => onDeath.Subscribe(add);
-
-
-        ActionWrapper<CollisionDamageInfo> onDamage = new();
-        public Action Subscribe(Action<CollisionDamageInfo> add) => onDamage.Subscribe(add);
-
-        public void Publish(CollisionDamageInfo info)
+        void Awake()
         {
-            if (IsDeath)
-            {
-                return;
-            }
-            GetComponentInParent<Rigidbody>().AddForce(info.fixedImpulse, ForceMode.Impulse);
+            HealthPoint = healthPointMax;
 
-            onDamage?.Publish(info);
-            healthPoint -= info.damage;
-            slider.value = healthPoint / healthPointMax;
-
-            if (IsDeath)
-            {
-                StartCoroutine(DelayDestroy());
-                var loader = Singleton.Get<SceneLoader>();
-                loader.ChangeScene(SceneType.GameOver);
-            }
-
-
-
-        }
-
-        IEnumerator DelayDestroy()
-        {
-            yield return new WaitForSeconds(destroyDelayTime);
-
-            onDeath?.Publish(new());
-            Destroy(gameObject);
-        }
-
-        void Start()
-        {
+            slider.maxValue = 1;
             slider.value = 1;
-            healthPoint = healthPointMax;
+            this.StaticCast<ISubscribeable<DamageInfo>>().Subscribe((_) => slider.value = HealthPoint / healthPointMax);
+
+            this.StaticCast<ISubscribeable<DeathInfo>>().Subscribe((_) => Singleton.Get<SceneLoader>().ChangeScene(SceneType.GameOver));
         }
-
-
-        ActionWrapper<FallSeaInfo> onFallSea = new();
-        public void Publish(FallSeaInfo info) => onFallSea.Publish(info);
-        public Action Subscribe(Action<FallSeaInfo> add) => onFallSea.Subscribe(add);
     }
 }

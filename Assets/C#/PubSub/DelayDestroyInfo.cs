@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace RampageCars
 {
-    public readonly struct DamageInfo
+    public readonly struct DelayDestroyInfo
     {
-        public readonly float damage;
-
-        public DamageInfo(float damage) => this.damage = damage;
     }
 }

@@ -6,51 +6,21 @@ using UnityEngine.Events;
 
 namespace RampageCars
 {
-    public class TestEnemyCore : MonoBehaviour, IEnemyTag, ISubscribeable<CollisionDamageInfo>, IPublishable<CollisionDamageInfo>, ISubscribeable<DeathInfo>, IPublishable<FallSeaInfo>, ISubscribeable<FallSeaInfo>
+    public class TestEnemyCore : MonoBehaviour, IEnemyTag, ICollisionPawn, IFallSeaPawn
     {
         [SerializeField]
-        private float healthPoint = 100;
+        float healthPointMax = 6;
+        public float HealthPoint { get; set; }
 
-        [SerializeField]
-        float destroyDelayTime = 1;
-        public bool IsDeath => healthPoint <= 0;
-
-
-        ActionWrapper<DeathInfo> onDeath = new();
-        public Action Subscribe(Action<DeathInfo> add) => onDeath.Subscribe(add);
+        ActionWrapper<DeathInfo> IPubSub<DeathInfo>.PubSubAction { get; init; } = new();
+        ActionWrapper<DamageInfo> IPubSub<DamageInfo>.PubSubAction { get; init; } = new();
+        ActionWrapper<CollisionDamageInfo> IPubSub<CollisionDamageInfo>.PubSubAction { get; init; } = new();
+        ActionWrapper<FallSeaInfo> IPubSub<FallSeaInfo>.PubSubAction { get; init; } = new();
 
 
-        ActionWrapper<CollisionDamageInfo> onDamage = new();
-        public Action Subscribe(Action<CollisionDamageInfo> add) => onDamage.Subscribe(add);
-
-        public void Publish(CollisionDamageInfo info)
+        void Awake()
         {
-            if (IsDeath)
-            {
-                return;
-            }
-            GetComponentInParent<Rigidbody>().AddForce(info.fixedImpulse, ForceMode.Impulse);
-
-            onDamage?.Publish(info);
-            healthPoint -= info.damage;
-
-            if (IsDeath)
-            {
-                StartCoroutine(DelayDestroy());
-            }
+            HealthPoint = healthPointMax;
         }
-
-        IEnumerator DelayDestroy()
-        {
-            yield return new WaitForSeconds(destroyDelayTime);
-
-            onDeath?.Publish(new());
-            Destroy(transform.parent.gameObject);
-        }
-
-
-        ActionWrapper<FallSeaInfo> onFallSea = new();
-        public void Publish(FallSeaInfo info) => onFallSea.Publish(info);
-        public Action Subscribe(Action<FallSeaInfo> add) => onFallSea.Subscribe(add);
     }
 }

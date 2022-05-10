@@ -6,11 +6,18 @@ using UnityEngine.Events;
 
 namespace RampageCars
 {
-    public class ActionWrapper<T0> : ISubscribeable<T0>, IPublishable<T0> 
+    public class ActionWrapper<T0> : ISubscribeable<T0>, IPublishable<T0>
     {
+        public ActionWrapper<T0> PubSubAction { get; init; }
+
         Action<T0> action;
-        public ActionWrapper() { }
-        public ActionWrapper(Action<T0> action) { this.action = action; }
+
+        public ActionWrapper() => PubSubAction = this;
+
+        public ActionWrapper(Action<T0> action):this()
+        {
+            this.action = action;
+        }
 
         /// <returns>UnScribeアクション</returns>
         public Action Subscribe(Action<T0> add)

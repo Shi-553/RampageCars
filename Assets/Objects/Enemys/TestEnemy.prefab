@@ -260,8 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a41c891283c1fb54abfc2ac9e90f94ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoint: 100
-  destroyDelayTime: 1
+  healthPointMax: 6
 --- !u!114 &8303660695726901702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,6 +275,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hit: {fileID: 8300000, guid: 95eb4e0a98e1a554a975d1bb7fc342e2, type: 3}
   explosion: {fileID: 8300000, guid: ba54e8c31d90d3c4db861069d98e2eb7, type: 3}
+--- !u!114 &809353928926101514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303279323545598888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b5e5c09dac717c40af410ce35fe1c1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyDelayTime: 1
 --- !u!4 &1827895266154094866 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dc3db2e70f49c0c47a2ea2bd6f1d431c,
