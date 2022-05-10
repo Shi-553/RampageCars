@@ -13,6 +13,9 @@ namespace RampageCars
 
         Coroutine changeing;
 
+        [SerializeField, EditorScripts.NotNull]
+        GameObject loading;
+
         protected override void Init()
         {
             Current = SceneManager.GetActiveScene();
@@ -29,19 +32,22 @@ namespace RampageCars
         IEnumerator ChangeSceneAsync(SceneType scene)
         {
             Time.timeScale = 0;
+            loading.SetActive(true);
 
             yield return SceneManager.UnloadSceneAsync(Current);
-            var load=SceneManager.LoadSceneAsync((int)scene, LoadSceneMode.Additive);
+            var load=SceneManager.LoadSceneAsync(scene.GetBuildIndex(), LoadSceneMode.Additive);
 
             yield return Resources.UnloadUnusedAssets();
 
             yield return load;
 
-            Current = SceneManager.GetSceneByBuildIndex((int)scene);
+
+            Current = SceneManager.GetSceneByBuildIndex(scene.GetBuildIndex());
             SceneManager.SetActiveScene(Current);
 
             Debug.Log($"Changed to <b>{CurrentType}</b>");
 
+            loading.SetActive(false);
             Time.timeScale = 1;
             changeing = null;
         }

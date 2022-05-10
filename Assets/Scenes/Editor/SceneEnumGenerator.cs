@@ -6,6 +6,7 @@ using System.Linq;
 using System.IO;
 using System;
 using System.Text;
+using System.Collections.Generic;
 
 namespace EditorScripts
 {
@@ -72,9 +73,12 @@ namespace EditorScripts
 
         private static string CreateScriptString()
         {
-            var sceneNames = EditorBuildSettings.scenes
+            var sceneNamesOriginal = EditorBuildSettings.scenes
                 .Select(scene => Path.GetFileNameWithoutExtension(scene.path))
-                .Distinct();
+                .Distinct()
+                .ToList();
+
+            var sceneNames = new List<string>(sceneNamesOriginal);
 
             var builder = new StringBuilder()
                 .AppendLine("/// <summary>")
@@ -83,14 +87,52 @@ namespace EditorScripts
                 .AppendLine("public enum SceneType")
                 .AppendLine("{");
 
+            List<int> indexs = new();
+            
+            foreach (string type in typeof(SceneType).GetEnumNames())
+            {
+                if (sceneNames.Remove(type))
+                {
+                    int oldIndex = (int)Enum.Parse<SceneType>(type);
+
+                    builder.AppendLine($"    {type} = {oldIndex},{Environment.NewLine}");
+
+                    indexs.Add(oldIndex);
+                }
+            }
+
+            int index = indexs.Max()+1;
+
             foreach (var name in sceneNames)
             {
-                builder.AppendLine($"    {name},{Environment.NewLine}");
+                builder.AppendLine($"    {name} = {index},{Environment.NewLine}");
+                index++;
             }
 
             builder.AppendLine("}");
 
+            builder.AppendLine("public static class SceneTypeExtension");
+            builder.AppendLine("{");
+            builder.AppendLine("   public static int GetBuildIndex(this SceneType type)");
+            builder.AppendLine("   {");
+
+            builder.AppendLine("      return type switch                         ");
+            builder.AppendLine("      {                                          ");
+
+
+            for(int i=0;i< sceneNamesOriginal.Count;i++)
+            {
+                builder.AppendLine($"          SceneType.{sceneNamesOriginal[i]} => {i},              ");
+            }
+
+            builder.AppendLine("          _ => 0,                                ");
+            builder.AppendLine("      };                                         ");
+            builder.AppendLine("   }");
+            builder.AppendLine("}");
+
+
             return builder.ToString();
         }
     }
+
 }

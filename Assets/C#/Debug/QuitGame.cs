@@ -9,11 +9,6 @@ namespace RampageCars
     public class QuitGame : MonoBehaviour
     {
 
-        void Start()
-        {
-
-        }
-
         void Update()
         {
             var keyboard = Keyboard.current;
@@ -27,15 +22,6 @@ namespace RampageCars
                 Application.Quit();
 #endif
             }
-        }
-
-        public void OnClickStartButton()
-        {
-#if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
         }
     }
 }
