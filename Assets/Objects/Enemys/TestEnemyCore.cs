@@ -6,47 +6,21 @@ using UnityEngine.Events;
 
 namespace RampageCars
 {
-    public class TestEnemyCore : MonoBehaviour, IEnemyTag, ISubscribeable<CollisionDamageInfo>, IPublishable<CollisionDamageInfo>, ISubscribeable<DeathInfo>
+    public class TestEnemyCore : MonoBehaviour, IEnemyTag, ICollisionPawn, IFallSeaPawn
     {
         [SerializeField]
-        private float healthPoint = 100;
+        float healthPointMax = 6;
+        public float HealthPoint { get; set; }
 
-        [SerializeField]
-        float destroyDelayTime = 1;
-        public bool IsDeath => healthPoint <= 0;
-
-
-        ActionWrapper<DeathInfo> onDeath = new();
-        public Action Subscribe(Action<DeathInfo> add) => onDeath.Subscribe(add);
+        ActionWrapper<DeathInfo> IPubSub<DeathInfo>.PubSubAction { get; } = new();
+        ActionWrapper<DamageInfo> IPubSub<DamageInfo>.PubSubAction { get; } = new();
+        ActionWrapper<CollisionDamageInfo> IPubSub<CollisionDamageInfo>.PubSubAction { get; } = new();
+        ActionWrapper<FallSeaInfo> IPubSub<FallSeaInfo>.PubSubAction { get; } = new();
 
 
-        ActionWrapper<CollisionDamageInfo> onDamage = new();
-        public Action Subscribe(Action<CollisionDamageInfo> add) => onDamage.Subscribe(add);
-
-        public void Publish(CollisionDamageInfo info)
+        void Awake()
         {
-            if (IsDeath)
-            {
-                return;
-            }
-            GetComponentInParent<Rigidbody>().AddForce(info.fixedImpulse, ForceMode.Impulse);
-
-            onDamage?.Publish(info);
-            healthPoint -= info.damage;
-
-            if (IsDeath)
-            {
-                StartCoroutine(DelayDestroy());
-            }
+            HealthPoint = healthPointMax;
         }
-
-        IEnumerator DelayDestroy()
-        {
-            yield return new WaitForSeconds(destroyDelayTime);
-
-            onDeath?.Publish(new());
-            Destroy(transform.parent.gameObject);
-        }
-
     }
 }

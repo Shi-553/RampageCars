@@ -17,14 +17,14 @@ namespace RampageCars
         {
             OnDestroyed += GetComponent<ISubscribeable<CollisionDamageInfo>>().Subscribe(OnDamage);
 
-            OnDestroyed += GetComponent<ISubscribeable<DeathInfo>>().Subscribe(OnDeath);
+            OnDestroyed += GetComponent<ISubscribeable<DelayDestroyInfo>>().Subscribe(OnDeath);
         }
 
         private void OnDamage(CollisionDamageInfo info)
         {
             Singleton.Get<SEManager>().Play(hit, transform.position, 1);
         }
-        private void OnDeath(DeathInfo n)
+        private void OnDeath(DelayDestroyInfo n)
         {
             Singleton.Get<SEManager>().Play(explosion, transform.position, 1);
         }

@@ -13,6 +13,6 @@ namespace RampageCars
             this.damage = damage;
             this.fixedImpulse = fixedImpulse;
         }
-    }
 
+    }
 }
