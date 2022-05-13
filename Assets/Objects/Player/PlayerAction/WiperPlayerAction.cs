@@ -26,11 +26,11 @@ namespace RampageCars
         [SerializeField]
         float knockback = 1;
 
-        List<PlayerConstraint> playerConstraints = new();
+        List<ConstraintOnOtherObject> playerConstraints = new();
 
         public void CollisionEnter(Collision collision)
         {
-            var constraint =  collision?.collider?.GetComponent<PlayerConstraint>();
+            var constraint =  collision?.collider?.GetComponent<ConstraintOnOtherObject>();
             if (constraint == null) return;
             constraint.Constraint(transform);
             playerConstraints.Add(constraint);
