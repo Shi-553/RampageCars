@@ -212,6 +212,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: pengin_man
       objectReference: {fileID: 0}
+    - target: {fileID: 7483894711331120201, guid: dc3db2e70f49c0c47a2ea2bd6f1d431c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 440ccc8c95d086941a942d44512a5f0b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc3db2e70f49c0c47a2ea2bd6f1d431c, type: 3}
 --- !u!1 &1303279323545598888 stripped

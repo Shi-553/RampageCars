@@ -35,7 +35,12 @@ namespace RampageCars
         }
         public void Finish()
         {
-            var halfSize = beard.localScale / 2;
+            var halfSize = new Vector3(
+                beard.localScale.x/ beardSize.x,
+                beard.localScale.y / beardSize.y,
+                beard.localScale.z / beardSize.z)
+                /2;
+
             var pos = beard.position;
             int layerMask = LayerMask.GetMask(new string[] { "Default" });
             var raycasteds = Physics.BoxCastAll(pos, halfSize, beard.forward, beard.rotation, distance, layerMask);

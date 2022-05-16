@@ -385,7 +385,7 @@ MonoBehaviour:
   distance: 3
   impulseScale: 3
   beard: {fileID: 9046822759135755294}
-  maxBeardSize: {x: 600, y: 200, z: 100}
+  maxBeardSize: {x: 1000, y: 100, z: 100}
   knockback: 10
 --- !u!114 &1704070449170931736
 MonoBehaviour:
@@ -444,11 +444,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6458540396161758448}
     m_Modifications:
-    - target: {fileID: -9153605008158484600, guid: d2e9c8da14bdd8142ba58520ccbd252f,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d2e9c8da14bdd8142ba58520ccbd252f,
         type: 3}
       propertyPath: m_RootOrder
@@ -577,7 +572,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9041849127718005654}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &7466322225744912341
+--- !u!65 &1014968480
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -589,7 +584,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.002826544, y: 0.00007741989, z: 0.00074799365}
-  m_Center: {x: 5.820766e-11, y: -0.003974753, z: -0.0006564394}
+  m_Center: {x: -0.000000007392373, y: -0.003974753, z: -0.00065643986}
 --- !u!1 &8194985831438718663 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d2e9c8da14bdd8142ba58520ccbd252f,
