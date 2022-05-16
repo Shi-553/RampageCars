@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 namespace RampageCars
 {
-    [RequireComponent(typeof(Button))]
+    //[RequireComponent(typeof(Button))]
     public class Option : MonoBehaviour
     {
 
@@ -28,17 +27,10 @@ namespace RampageCars
         // Update is called once per frame
         void Update()
         {
-            if (!HowToMenu.activeInHierarchy)
-            {
-                GetComponent<Button>().onClick.AddListener(Open);
-            }
-            else
-            {
-                GetComponent<Button>().onClick.AddListener(Close);
-            }
+           
         }
 
-        void Open()
+        public void OpenHowTo()
         {
             HowToMenu.SetActive(true);
 
@@ -48,7 +40,8 @@ namespace RampageCars
             // 新しいオブジェクトを選択してセット
             EventSystem.current.SetSelectedGameObject(OptionFristButoom);
         }
-        void Close()
+
+        public void CloseHowTo()
         {
             HowToMenu.SetActive(false);
 

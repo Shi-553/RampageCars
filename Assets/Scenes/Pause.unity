@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -553,7 +553,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 198643825}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 295040939}
+        m_TargetAssemblyTypeName: RampageCars.Option, Assembly-CSharp
+        m_MethodName: CloseHowTo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &198643825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -604,8 +616,8 @@ GameObject:
   - component: {fileID: 295040936}
   - component: {fileID: 295040935}
   - component: {fileID: 295040934}
-  - component: {fileID: 295040939}
   - component: {fileID: 295040938}
+  - component: {fileID: 295040939}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -757,8 +769,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HowToMenu: {fileID: 434779890}
-  PauseFristButoom: {fileID: 198643822}
-  OptionFristButoom: {fileID: 649759611}
+  PauseFristButoom: {fileID: 649759611}
+  OptionFristButoom: {fileID: 198643822}
 --- !u!1 &434779890
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,7 +1967,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1398951260}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 295040939}
+        m_TargetAssemblyTypeName: RampageCars.Option, Assembly-CSharp
+        m_MethodName: OpenHowTo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1398951260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2411,7 +2435,7 @@ GameObject:
   - component: {fileID: 1776121150}
   - component: {fileID: 1776121149}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Pause
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
