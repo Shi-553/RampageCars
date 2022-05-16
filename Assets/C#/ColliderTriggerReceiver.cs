@@ -21,15 +21,18 @@ namespace RampageCars
             this.body = body;
         }
     }
-    public class ColliderTriggerReceiver : ReceiverBase<CollisionReceiveInfo>
+    public class ColliderTriggerReceiver : MonoBehaviour, ISubscribeableImpl<CollisionReceiveInfo>
     {
+        public ActionWrapper<CollisionReceiveInfo> PubSubAction { get; } = new();
+
+
         private void OnTriggerEnter(Collider other)
         {
-            actionWrapper.Publish(new(CollisionTiming.Enter, other));
+            PubSubAction.Publish(new(CollisionTiming.Enter, other));
         }
         private void OnTriggerExit(Collider other)
         {
-            actionWrapper.Publish(new(CollisionTiming.Exit, other));
+            PubSubAction.Publish(new(CollisionTiming.Exit, other));
         }
     }
 }

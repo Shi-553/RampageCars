@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RampageCars
 {
-    public struct DeathInfo
+    public readonly struct DeathInfo
     {
     }
 
