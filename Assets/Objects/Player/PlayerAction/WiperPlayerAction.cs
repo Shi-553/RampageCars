@@ -26,6 +26,17 @@ namespace RampageCars
         [SerializeField]
         float knockback = 1;
 
+        List<ConstraintOnOtherObject> playerConstraints = new();
+
+        public void CollisionEnter(Collision collision)
+        {
+            var constraint =  collision?.collider?.GetComponent<ConstraintOnOtherObject>();
+            if (constraint == null) return;
+            constraint.Constraint(transform);
+            playerConstraints.Add(constraint);
+        }
+
+
         public void Do()
         {
             CanChange = false;
@@ -35,6 +46,12 @@ namespace RampageCars
         }
         public void Finish()
         {
+            foreach (var item in playerConstraints)
+            {
+                item.UnConstraint();
+            }
+            playerConstraints.Clear();
+
             var halfSize = beard.localScale / 2;
             var pos = beard.position;
             int layerMask = LayerMask.GetMask(new string[] { "Default" });
@@ -48,6 +65,7 @@ namespace RampageCars
                 if (damageable is not null and IEnemyTag)
                 {
                     damageable.Publish(new(attack, -hit.normal * impulseScale));
+                    
 
                     var knockbackForce = hit.normal * knockback;
                     knockbackForce.y = 0;
@@ -67,6 +85,7 @@ namespace RampageCars
             var pos = beard.position;
             ExtDebug.DrawBoxCastBox(pos, halfSize, beard.rotation, beard.forward, distance , Color.green);
         }
+
 
     }
 }
