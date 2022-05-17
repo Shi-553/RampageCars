@@ -11,6 +11,8 @@ public enum SceneType
 
     SampleScene = 3,
 
+    Pause = 4,
+
 }
 public static class SceneTypeExtension
 {
@@ -22,6 +24,7 @@ public static class SceneTypeExtension
           SceneType.GameOver => 1,              
           SceneType.Manager => 2,              
           SceneType.SampleScene => 3,              
+          SceneType.Pause => 4,              
           _ => 0,                                
       };                                         
    }
