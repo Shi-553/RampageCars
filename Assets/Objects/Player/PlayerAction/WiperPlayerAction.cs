@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using EditorScripts;
 using UnityEngine;
+using System.Linq;
 
 namespace RampageCars
 {
@@ -30,9 +31,9 @@ namespace RampageCars
 
         public void CollisionEnter(Collision collision)
         {
-            var constraint =  collision?.collider?.GetComponent<ConstraintOnOtherObject>();
+            var constraint = collision?.collider?.GetComponent<ConstraintOnOtherObject>();
             if (constraint == null) return;
-            constraint.Constraint(transform);
+            constraint.Constraint(transform,collision.GetContact(0));
             playerConstraints.Add(constraint);
         }
 
@@ -46,13 +47,12 @@ namespace RampageCars
         }
         public void Finish()
         {
-            foreach (var item in playerConstraints)
-            {
-                item.UnConstraint();
-            }
-            playerConstraints.Clear();
+            var halfSize = new Vector3(
+                beard.localScale.x / beardSize.x,
+                beard.localScale.y / beardSize.y,
+                beard.localScale.z / beardSize.z)
+                / 2;
 
-            var halfSize = beard.localScale / 2;
             var pos = beard.position;
             int layerMask = LayerMask.GetMask(new string[] { "Default" });
             var raycasteds = Physics.BoxCastAll(pos, halfSize, beard.forward, beard.rotation, distance, layerMask);
@@ -62,16 +62,43 @@ namespace RampageCars
             foreach (var hit in raycasteds)
             {
                 var damageable = hit.collider.GetComponent<IPublishable<CollisionDamageInfo>>();
-                if (damageable is not null and IEnemyTag)
+                if (damageable != null && damageable is IEnemyTag)
                 {
+                    var constant=hit.collider.GetComponent<ConstraintOnOtherObject>();
+                    if (constant != null)
+                    {
+                        constant.UnConstraint();
+                    }
+
                     damageable.Publish(new(attack, -hit.normal * impulseScale));
-                    
+
 
                     var knockbackForce = hit.normal * knockback;
                     knockbackForce.y = 0;
                     rb.AddForceAtPosition(knockbackForce, hit.point, ForceMode.Impulse);
                 }
             }
+
+            foreach (var item in playerConstraints)
+            {
+                if (item != null&& item.IsConstant)
+                {
+                    item.UnConstraint();
+
+                    var damageable = item.GetComponent<IPublishable<CollisionDamageInfo>>();
+                    if (damageable is not null and IEnemyTag)
+                    {
+                        damageable.Publish(new(attack, -item.Contact.normal * impulseScale));
+
+
+                        var knockbackForce = item.Contact.normal * knockback;
+                        knockbackForce.y = 0;
+                        rb.AddForceAtPosition(knockbackForce, item.Contact.point, ForceMode.Impulse);
+                    }
+                }
+            }
+            playerConstraints.Clear();
+
             beard.localScale = beardSize;
             CanChange = true;
         }
@@ -83,7 +110,7 @@ namespace RampageCars
             }
             var halfSize = beard.localScale / 2;
             var pos = beard.position;
-            ExtDebug.DrawBoxCastBox(pos, halfSize, beard.rotation, beard.forward, distance , Color.green);
+            ExtDebug.DrawBoxCastBox(pos, halfSize, beard.rotation, beard.forward, distance, Color.green);
         }
 
 

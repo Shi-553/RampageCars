@@ -1,0 +1,7 @@
+M_Skybox　使用方法
+
+①上部メニュー Window→Rendering→Lighting　を開く
+
+②Lightingパネル内 Enviromentタブ　を開く
+
+③Environment内　Skybox Material　に　M_Skybox　を設定する

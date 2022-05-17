@@ -27,10 +27,13 @@ namespace RampageCars
         Transform other;
         Vector3 beforePos;
 
-        List<ColliderInfo> colliderInfos;
+        public ContactPoint Contact { get; private set; }
 
-        public void Constraint(Transform other)
+        List<ColliderInfo> colliderInfos=new();
+
+        public void Constraint(Transform other, ContactPoint contact)
         {
+            Contact = contact;
             IsConstant = true;
             rigid.isKinematic = true;
 
@@ -53,7 +56,10 @@ namespace RampageCars
 
             foreach (var info in colliderInfos)
             {
-                info.obj.layer = info.originalLayer;
+                if (info.obj!=null)
+                {
+                    info.obj.layer = info.originalLayer;
+                }
             }
             colliderInfos.Clear();
             other = null;
