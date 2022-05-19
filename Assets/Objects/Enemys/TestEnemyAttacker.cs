@@ -123,6 +123,7 @@ namespace RampageCars
                 {
                     StopCoroutine(attackCo);
                     attackCo = null;
+                    isAttacking = false;
                 }
                 return;
             }
