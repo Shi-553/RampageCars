@@ -262,6 +262,7 @@ MonoBehaviour:
   attackWaitTime: 0.8
   attackPower: 0.5
   attackPosY: 1.5
+  constraint: {fileID: 4617466664335276192}
 --- !u!1001 &282458322727782568
 PrefabInstance:
   m_ObjectHideFlags: 0

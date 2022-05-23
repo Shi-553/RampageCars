@@ -33,6 +33,9 @@ namespace RampageCars
         [SerializeField]
         float attackPosY = 5.0f;
 
+        [SerializeField]
+        ConstraintOnOtherObject constraint;
+
         bool isAttacking = false;
 
         private void Start()
@@ -42,6 +45,10 @@ namespace RampageCars
 
         void Collision(CollisionReceiveInfo info)
         {
+            if (constraint.IsConstant)
+            {
+                return;
+            }
             if (attackCo is not null || info.body.gameObject.GetComponent<IPlayerTag>() is null)
             {
                 return;
@@ -98,9 +105,9 @@ namespace RampageCars
             var force = transform.right;
             force.Normalize();
 
-            rb.AddForceAtPosition(-dotSign * attackPower * force, forcedPos,ForceMode.Impulse);
+            rb.AddForceAtPosition(-dotSign * attackPower * force, forcedPos, ForceMode.Impulse);
 
-            isAttacking=true;
+            isAttacking = true;
 
             yield return new WaitForSeconds(1.0f);
             isAttacking = false;
@@ -112,6 +119,12 @@ namespace RampageCars
         {
             if (attackCo != null)
             {
+                if (constraint.IsConstant)
+                {
+                    StopCoroutine(attackCo);
+                    attackCo = null;
+                    isAttacking = false;
+                }
                 return;
             }
             transform.LookAt(transform.forward, Vector3.up);
@@ -119,10 +132,11 @@ namespace RampageCars
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (!isAttacking) {
+            if (!isAttacking)
+            {
                 return;
             }
-            var com=collision.collider.GetComponent<IPublishable<CollisionDamageInfo>>();
+            var com = collision.collider.GetComponent<IPublishable<CollisionDamageInfo>>();
             if (com is not null and IPlayerTag)
             {
                 Vector3 direction = collision.collider.transform.position - transform.position;
