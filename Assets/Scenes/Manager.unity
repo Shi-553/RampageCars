@@ -187,6 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loading: {fileID: 754963854}
+  audioListener: {fileID: 1777271844}
 --- !u!4 &352884904
 Transform:
   m_ObjectHideFlags: 0
@@ -607,6 +608,7 @@ GameObject:
   - component: {fileID: 1777271840}
   - component: {fileID: 1777271843}
   - component: {fileID: 1777271841}
+  - component: {fileID: 1777271844}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -705,3 +707,11 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!81 &1777271844
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777271839}
+  m_Enabled: 1

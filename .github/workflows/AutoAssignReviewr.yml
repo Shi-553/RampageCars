@@ -17,10 +17,12 @@ jobs:
           configuration-path: '.github/auto_assign.yml'
           
       - name: 誰に割り当てられたか確認するために同じページを呼ぶ
-        uses: indiesdev/curl@v1
+        uses: indiesdev/curl@v1.1
         id: api
         with:
           url: ${{ github.event.pull_request._links.self.href }}
+          retries: 3
+
         
       - name: GITHAB_NAME_TO_DISCORD_IDをデコードして割り当てられた人をKEYとしてDiscordIDをファイルに保存
         env:

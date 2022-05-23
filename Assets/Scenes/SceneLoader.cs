@@ -16,6 +16,8 @@ namespace RampageCars
 
         [SerializeField, EditorScripts.NotNull]
         GameObject loading;
+        [SerializeField, EditorScripts.NotNull]
+        AudioListener audioListener;
 
         protected override void Init()
         {
@@ -34,6 +36,11 @@ namespace RampageCars
         {
             Time.timeScale = 0;
             loading.SetActive(true);
+            audioListener.enabled = false;
+
+            Singleton.Get<BGMManager>().StopAll();
+            Singleton.Get<SEManager>().StopAll();
+
             SceneManager.SetActiveScene(gameObject.scene);
 
             yield return SceneManager.UnloadSceneAsync(Current);
@@ -42,11 +49,14 @@ namespace RampageCars
                 yield return SceneManager.UnloadSceneAsync(SceneType.Pause.GetBuildIndex());
                 IsPause = false;
             }
-            var load = SceneManager.LoadSceneAsync(type.GetBuildIndex(), LoadSceneMode.Additive);
+            audioListener.enabled = true;
 
             yield return Resources.UnloadUnusedAssets();
 
-            yield return load;
+            yield return SceneManager.LoadSceneAsync(type.GetBuildIndex(), LoadSceneMode.Additive);
+
+            audioListener.enabled = false;
+
 
 
             Current = SceneManager.GetSceneByBuildIndex(type.GetBuildIndex());
