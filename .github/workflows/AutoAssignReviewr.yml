@@ -21,6 +21,8 @@ jobs:
         id: api
         with:
           url: ${{ github.event.pull_request._links.self.href }}
+          retries: 3
+
         
       - name: GITHAB_NAME_TO_DISCORD_IDをデコードして割り当てられた人をKEYとしてDiscordIDをファイルに保存
         env:
