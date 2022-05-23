@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Pause.unity
     guid: 33842fe99f6c9a843aacfd1b74e5ad58
+  - enabled: 1
+    path: Assets/Scenes/GameClear.unity
+    guid: 3e0d9e192c296be429b5ae87c0581eca
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: f4eb68b3874c20b4aafca295114658e0,
       type: 2}
