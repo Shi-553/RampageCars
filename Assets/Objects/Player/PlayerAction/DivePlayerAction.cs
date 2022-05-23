@@ -9,10 +9,12 @@ namespace RampageCars
     {
         [SerializeField]
         GroundChecker groundChecker;
-        [SerializeField]
+        [SerializeField,Tooltip("ダイブ中に敵にあたったときの攻撃力")]
         float attack = 3;
-        [SerializeField]
+        [SerializeField, Tooltip("衝撃波の攻撃力")]
         float diveAttack = 10;
+        [SerializeField, Tooltip("衝撃波の吹っ飛ばす力")]
+        float impulseScale = 5;
         [SerializeField]
         float range = 5;
         [SerializeField]
@@ -68,7 +70,7 @@ namespace RampageCars
                 var damageable = colliders.GetComponent<IPublishable<CollisionDamageInfo>>();
                 if (damageable is not null and IEnemyTag)
                 {
-                    var impulse = (colliders.transform.position - obj.transform.position).normalized * 2;
+                    var impulse = (colliders.transform.position - obj.transform.position).normalized * impulseScale;
                     damageable.Publish(new(diveAttack, impulse));
                 }
             }

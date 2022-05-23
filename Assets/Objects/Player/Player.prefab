@@ -80,7 +80,6 @@ GameObject:
   - component: {fileID: -3234992874514921803}
   - component: {fileID: 1703302268}
   - component: {fileID: -441253928698191471}
-  - component: {fileID: 1704070449170931736}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -365,6 +364,7 @@ MonoBehaviour:
   groundChecker: {fileID: 7671428934813331096}
   attack: 3
   diveAttack: 10
+  impulseScale: 15
   range: 5
   diveSpeed: {x: 0, y: 300, z: 0}
   rangeObj: {fileID: 6065665293073880980, guid: d9c668afabb81c9439ae754c9ab3d264,
@@ -387,25 +387,6 @@ MonoBehaviour:
   beard: {fileID: 9046822759135755294}
   maxBeardSize: {x: 1000, y: 100, z: 100}
   knockback: 10
---- !u!114 &1704070449170931736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6458540396161758453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a122b37e1bc2504fbc4e4bd7cf1f996, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundChecker: {fileID: 7671428934813331096}
-  attack: 3
-  diveAttack: 10
-  range: 5
-  diveSpeed: {x: 0, y: 1, z: 1}
-  rangeObj: {fileID: 6065665293073880980, guid: d9c668afabb81c9439ae754c9ab3d264,
-    type: 3}
 --- !u!1 &6458540397592222639
 GameObject:
   m_ObjectHideFlags: 0
