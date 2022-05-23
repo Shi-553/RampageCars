@@ -110,4 +110,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dca8f8cd08bd5040a7728caeb417134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearScene: 1
+  clearScene: 5
