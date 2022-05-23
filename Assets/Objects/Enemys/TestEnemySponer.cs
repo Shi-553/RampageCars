@@ -18,6 +18,8 @@ namespace RampageCars
         float sponeSpeed = 1;
         [SerializeField]
         float sponeMax = 100;
+        [SerializeField]
+        Vector3 sponeRange = new(10, 5, 10);
 
         // Update is called once per frame
         void Update()
@@ -32,10 +34,24 @@ namespace RampageCars
                     return;
                 }
                 var obj = Instantiate(testEnemy);
-                var pos = new Vector3(Random.Range(-30, 30), 5, Random.Range(-30, 30));
-                obj.transform.position = pos;
+
+                var pos = new Vector3(
+                    Random.Range(-sponeRange.x, sponeRange.x),
+                    Random.Range(-sponeRange.y, sponeRange.y),
+                    Random.Range(-sponeRange.z, sponeRange.z)
+                    );
                 obj.transform.parent = transform;
+                obj.transform.localPosition = pos ;
             }
         }
+
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.matrix = transform.localToWorldMatrix;
+            Gizmos.DrawCube(Vector3.zero, sponeRange*2);
+        }
+#endif
     }
 }
