@@ -21,6 +21,9 @@ namespace RampageCars
         [SerializeField]
         Vector3 sponeRange = new(10, 5, 10);
 
+        [SerializeField]
+        float sponeAngle = 0;
+
         // Update is called once per frame
         void Update()
         {
@@ -41,7 +44,10 @@ namespace RampageCars
                     Random.Range(-sponeRange.z, sponeRange.z)
                     );
                 obj.transform.parent = transform;
-                obj.transform.localPosition = pos ;
+                var euler=obj.transform.eulerAngles;
+                euler.y = sponeAngle;
+                obj.transform.eulerAngles= euler;
+                obj.transform.localPosition = pos;
             }
         }
 
@@ -50,7 +56,14 @@ namespace RampageCars
         {
             Gizmos.color = Color.yellow;
             Gizmos.matrix = transform.localToWorldMatrix;
-            Gizmos.DrawCube(Vector3.zero, sponeRange*2);
+            Gizmos.DrawCube(Vector3.zero, sponeRange * 2);
+
+            Gizmos.color = Color.black;
+            Gizmos.matrix = Matrix4x4.identity;
+
+            var rot = Quaternion.AngleAxis(sponeAngle, Vector3.up);
+
+            Gizmos.DrawLine(transform.position, transform.position+ rot * (transform.forward*10));
         }
 #endif
     }
