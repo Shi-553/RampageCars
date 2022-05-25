@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 namespace RampageCars
 {
+
     public class Timer : MonoBehaviour
     {
         [SerializeField]
@@ -16,7 +17,6 @@ namespace RampageCars
         TMP_Text time;
         bool isEnableTimer = false;
 
-        public event UnityAction OnTimerEnd;
 
         void Start()
         {
@@ -36,10 +36,9 @@ namespace RampageCars
             if (timeLimit <= 0.0)
             {
                 timeLimit = 0.0f;
-                OnTimerEnd?.Invoke();
+                Singleton.Get<GameRoleManager>().GameOver();
+
                 isEnableTimer = false;
-                var loader = Singleton.Get<SceneLoader>();
-                loader.ChangeScene(SceneType.GameOver);
             }
 
             time.text = Mathf.FloorToInt(timeLimit).ToString();
