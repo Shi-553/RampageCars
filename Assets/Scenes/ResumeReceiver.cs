@@ -15,7 +15,7 @@ namespace RampageCars
         public void ChangeScene()
         {
             var loader = Singleton.Get<SceneLoader>();
-            loader.Resume();
+            loader.UnoverrideScene();
         }
     }
 }
