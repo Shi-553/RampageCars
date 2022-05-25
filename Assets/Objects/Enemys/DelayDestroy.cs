@@ -10,6 +10,7 @@ namespace RampageCars
 
         [SerializeField]
         float destroyDelayTime = 1;
+
         private void Start()
         {
             GetComponent<ISubscribeable<DeathInfo>>().Subscribe((_) => StartCoroutine(Delay()));
@@ -20,7 +21,6 @@ namespace RampageCars
             yield return new WaitForSeconds(destroyDelayTime);
 
             Destroy(transform.parent.gameObject);
-
             PubSubAction.Publish(new());
         }
     }
