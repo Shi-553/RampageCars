@@ -14,7 +14,10 @@ namespace RampageCars
         void Retry()
         {
             var loader=Singleton.Get<SceneLoader>();
-            loader.ChangeScene(loader.CurrentType);
+            if (loader.BackgroundType.HasValue)
+            {
+                loader.ChangeScene(loader.BackgroundType.Value);
+            }
         }
 
     }
