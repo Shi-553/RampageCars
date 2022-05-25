@@ -23,11 +23,11 @@ namespace RampageCars
             var loader = Singleton.Get<SceneLoader>();
             if (loader.IsPause)
             {
-                loader.Resume();
+                loader.UnoverrideScene();
             }
             else
             {
-                loader.Pause();
+                loader.OverrideScene(SceneType.Pause);
             }
         }
     }

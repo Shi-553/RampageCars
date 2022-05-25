@@ -7,10 +7,18 @@ namespace RampageCars
 {
     public class SceneLoader : SingletonBase
     {
+        // アクティブなシーン
         public Scene Current { get; private set; }
-        public bool IsPause { get; private set; }
-
         public SceneType CurrentType => (SceneType)Current.buildIndex;
+
+        // オーバーライドされて後ろにいったシーン
+        public Scene? Background { get; private set; } = null;
+        public SceneType? BackgroundType => (SceneType)Background?.buildIndex;
+
+        // オーバーライドされてるときは必ずポーズする
+        public bool IsPause => Background.HasValue;
+        public bool IsOverride => Background.HasValue;
+
 
         Coroutine changeing;
 
@@ -22,6 +30,10 @@ namespace RampageCars
         protected override void Init()
         {
             Current = SceneManager.GetActiveScene();
+            if (Current.name == "" && Current.path == "")
+            {
+                Debug.LogWarning("ビルド設定にないので上手く遷移しないかも");
+            }
         }
 
         public void ChangeScene(SceneType scene)
@@ -41,14 +53,17 @@ namespace RampageCars
             Singleton.Get<BGMManager>().StopAll();
             Singleton.Get<SEManager>().StopAll();
 
+            // とりあえずマネージャーシーンをアクティブに
             SceneManager.SetActiveScene(gameObject.scene);
 
             yield return SceneManager.UnloadSceneAsync(Current);
+
             if (IsPause)
             {
-                yield return SceneManager.UnloadSceneAsync(SceneType.Pause.GetBuildIndex());
-                IsPause = false;
+                yield return SceneManager.UnloadSceneAsync(Background.Value.buildIndex);
+                Background = null;
             }
+
             audioListener.enabled = true;
 
             yield return Resources.UnloadUnusedAssets();
@@ -58,11 +73,10 @@ namespace RampageCars
             audioListener.enabled = false;
 
 
-
             Current = SceneManager.GetSceneByBuildIndex(type.GetBuildIndex());
             SceneManager.SetActiveScene(Current);
 
-            FindObjectOfType<FirstSelect>()?.Select();
+            Select();
 
             Debug.Log($"Changed to <b>{CurrentType}</b>");
 
@@ -71,49 +85,65 @@ namespace RampageCars
 
             changeing = null;
         }
-        IEnumerator AddPauseAsync()
-        {
-            Time.timeScale = 0;
 
-            yield return SceneManager.LoadSceneAsync(SceneType.Pause.GetBuildIndex(), LoadSceneMode.Additive);
-            SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(SceneType.Pause.GetBuildIndex()));
-
-            Debug.Log($"Add to <b>{CurrentType}</b>");
-
-            FindObjectOfType<FirstSelect>()?.Select();
-            IsPause = true;
-
-            changeing = null;
-        }
-        IEnumerator RemovePauseAsync()
-        {
-            Time.timeScale = 0;
-
-            yield return SceneManager.UnloadSceneAsync(SceneType.Pause.GetBuildIndex());
-            SceneManager.SetActiveScene(Current);
-
-            Debug.Log($"Remove to <b>{CurrentType}</b>");
-
-            FindObjectOfType<FirstSelect>()?.Select();
-            Time.timeScale = 1;
-            IsPause = false;
-
-            changeing = null;
-        }
-
-        public void Pause()
+        public void OverrideScene(SceneType scene)
         {
             if (changeing == null && !IsPause)
             {
-                changeing = StartCoroutine(AddPauseAsync());
+                changeing = StartCoroutine(OverrideAsync(scene));
             }
         }
-        public void Resume()
+        public void UnoverrideScene()
         {
             if (changeing == null && IsPause)
             {
-                changeing = StartCoroutine(RemovePauseAsync());
+                changeing = StartCoroutine(UnoverrideAsync());
             }
+        }
+
+        IEnumerator OverrideAsync(SceneType scene)
+        {
+            Time.timeScale = 0;
+
+            yield return SceneManager.LoadSceneAsync(scene.GetBuildIndex(), LoadSceneMode.Additive);
+
+
+            Background = Current;
+            Current = SceneManager.GetSceneByBuildIndex(scene.GetBuildIndex());
+            SceneManager.SetActiveScene(Current);
+
+            Debug.Log($"Override to <b>{CurrentType}</b>");
+
+            Select();
+
+            changeing = null;
+        }
+
+        IEnumerator UnoverrideAsync()
+        {
+            Time.timeScale = 0;
+
+            yield return SceneManager.UnloadSceneAsync(Current.buildIndex);
+
+            Debug.Log($"Unoverride to <b>{CurrentType}</b>");
+
+            Current = Background.Value;
+            Background = null;
+            SceneManager.SetActiveScene(Current);
+
+
+            Select();
+
+            Time.timeScale = 1;
+
+            changeing = null;
+        }
+
+        void Select()
+        {
+            var select = FindObjectOfType<FirstSelect>();
+            if (select != null)
+                select.Select();
         }
     }
 }

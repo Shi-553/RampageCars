@@ -10,6 +10,8 @@ namespace RampageCars
     {
         [SerializeField]
         SceneType nextScene;
+        [SerializeField]
+        bool isOverride = false;
 
         void Start()
         {
@@ -19,7 +21,14 @@ namespace RampageCars
         public void ChangeScene()
         {
             var loader = Singleton.Get<SceneLoader>();
-            loader.ChangeScene(nextScene);
+            if (!isOverride)
+            {
+                loader.ChangeScene(nextScene);
+            }
+            else
+            {
+                loader.OverrideScene(nextScene);
+            }
         }
     }
 }
