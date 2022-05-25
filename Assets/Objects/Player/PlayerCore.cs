@@ -25,9 +25,12 @@ namespace RampageCars
 
             slider.maxValue = 1;
             slider.value = 1;
-            this.StaticCast<ISubscribeable<DamageInfo>>().Subscribe((_) => slider.value = HealthPoint / healthPointMax);
+            this.StaticCast<ISubscribeable<DamageInfo>>()
+                .Subscribe((_) => slider.value = HealthPoint / healthPointMax);
 
-            this.StaticCast<ISubscribeable<DeathInfo>>().Subscribe((_) => Singleton.Get<SceneLoader>().ChangeScene(SceneType.GameOver));
+            this.StaticCast<ISubscribeable<DeathInfo>>()
+                .Subscribe((_) => Singleton.Get<GameRoleManager>().GameOver());
+
         }
     }
 }

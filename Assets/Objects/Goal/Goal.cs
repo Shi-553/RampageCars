@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace RampageCars
 {
+
     public class Goal : MonoBehaviour
     {
         [SerializeField]
@@ -12,7 +13,7 @@ namespace RampageCars
         {
             if (other.GetComponent<IPlayerTag>() != null)
             {
-                Singleton.Get<SceneLoader>().ChangeScene(clearScene);
+                Singleton.Get<GameRoleManager>().GameClear();
             }
         }
     }
