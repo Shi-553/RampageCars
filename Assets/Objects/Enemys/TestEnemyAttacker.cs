@@ -137,7 +137,7 @@ namespace RampageCars
                 return;
             }
             var com = collision.collider.GetComponent<IPublishable<CollisionDamageInfo>>();
-            if (com is not null and IPlayerTag)
+            if (com is IPlayerTag)
             {
                 Vector3 direction = collision.collider.transform.position - transform.position;
                 com.Publish(new(attackDamage, direction.normalized * impulseScale));

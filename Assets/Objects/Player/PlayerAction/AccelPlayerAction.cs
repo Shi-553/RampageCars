@@ -47,7 +47,7 @@ namespace RampageCars
         public void CollisionEnter(Collision collision)
         {
             var damageable = collision.collider.GetComponent<IPublishable<CollisionDamageInfo>>();
-            if (damageable is not null and IEnemyTag)
+            if (damageable is IEnemyTag)
             {
                 damageable.Publish(new(attack, collision.impulse));
             }

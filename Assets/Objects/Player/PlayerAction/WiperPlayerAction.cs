@@ -86,7 +86,7 @@ namespace RampageCars
                     item.UnConstraint();
 
                     var damageable = item.GetComponent<IPublishable<CollisionDamageInfo>>();
-                    if (damageable is not null and IEnemyTag)
+                    if (damageable is IEnemyTag)
                     {
                         damageable.Publish(new(attack, -item.Contact.normal * impulseScale));
 

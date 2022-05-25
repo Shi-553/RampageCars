@@ -3,7 +3,7 @@
 namespace RampageCars
 {
     // HPを持ち、ダメージを受け、死ぬことができる
-    public interface IPawn : ISubscribeableImpl<DeathInfo>, ISubscribeableImpl<DamageInfo>, IPublishableImpl<DamageInfo>
+    public interface IPawn : ISubscribeableImpl<DeathInfo>, IPubSubImpl<DamageInfo>
     {
         float HealthPoint { get; set; }
         bool IsDeath => HealthPoint <= 0;
