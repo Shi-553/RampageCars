@@ -10,20 +10,20 @@ namespace RampageCars
         Enter,
         Exit
     }
-    public readonly struct CollisionReceiveInfo
+    public readonly struct TriggerReceiveInfo
     {
         public readonly CollisionTiming timing;
         public readonly Collider body;
 
-        public CollisionReceiveInfo(CollisionTiming timing, Collider body)
+        public TriggerReceiveInfo(CollisionTiming timing, Collider body)
         {
             this.timing = timing;
             this.body = body;
         }
     }
-    public class ColliderTriggerReceiver : MonoBehaviour, ISubscribeableImpl<CollisionReceiveInfo>
+    public class ColliderTriggerReceiver : MonoBehaviour, ISubscribeableImpl<TriggerReceiveInfo>
     {
-        public ActionWrapper<CollisionReceiveInfo> PubSubAction { get; } = new();
+        public ActionWrapper<TriggerReceiveInfo> PubSubAction { get; } = new();
 
 
         private void OnTriggerEnter(Collider other)

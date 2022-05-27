@@ -68,7 +68,7 @@ namespace RampageCars
             foreach (Collider colliders in targets)
             {
                 var damageable = colliders.GetComponent<IPublishable<CollisionDamageInfo>>();
-                if (damageable is not null and IEnemyTag)
+                if (damageable is IEnemyTag)
                 {
                     var impulse = (colliders.transform.position - obj.transform.position).normalized * impulseScale;
                     damageable.Publish(new(diveAttack, impulse));
@@ -83,7 +83,7 @@ namespace RampageCars
         public void CollisionEnter(Collision collision)
         {
             var damageable = collision.gameObject.GetComponent<IPublishable<CollisionDamageInfo>>();
-            if (damageable is not null and IEnemyTag)
+            if (damageable is IEnemyTag)
             {
                 damageable.Publish(new(attack, collision.impulse));
             }

@@ -9,26 +9,19 @@ namespace RampageCars
         [SerializeField]
         private Transform self;
         
-        [SerializeField]
-        private Transform target;
         
-        // Start is called before the first frame update
         void Start()
         {
-        
+            GetComponent<ISubscribeable<FallSeaInfo>>().Subscribe(Respawn);
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
 
-        public void Respawn()
+        void Respawn(FallSeaInfo _)
         {
-            self.LookAt(target);
             self.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-            this.transform.parent.position = FetchNearObjectWithTag("Spawn").position;
+            var nearObject = FetchNearObjectWithTag("Spawn");
+            self.LookAt(nearObject);
+            transform.parent.position = nearObject.position;
 
         }
 

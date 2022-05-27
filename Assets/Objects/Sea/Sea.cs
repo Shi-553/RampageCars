@@ -25,12 +25,11 @@ namespace RampageCars
         private void OnTriggerEnter(Collider collision)
         {
             var publishable = collision.gameObject.GetComponent<IPublishable<FallSeaInfo>>();
-            if (publishable is not null and IPlayerTag)
+            if (publishable is IPlayerTag)
             {
                 publishable.Publish(new (playerDamage));
-                collision.gameObject.GetComponent<PlayerFall>().Respawn();
             }
-            if (publishable is not null and IEnemyTag)
+            if (publishable is IEnemyTag)
             {
                 publishable.Publish(new (enemyDamage));
             }
