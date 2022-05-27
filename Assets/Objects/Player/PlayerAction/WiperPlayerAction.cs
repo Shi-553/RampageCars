@@ -17,8 +17,6 @@ namespace RampageCars
 
         [SerializeField]
         float impulseScale = 20;
-        [SerializeField, NotNull]
-        Transform beard;
 
         [SerializeField]
         Vector3 maxBeardSize = new(3, 1, 1);
@@ -29,11 +27,22 @@ namespace RampageCars
 
         List<ConstraintOnOtherObject> playerConstraints = new();
 
+        Rigidbody rb;
+        private void Awake()
+        {
+
+             rb = GetComponentInParent<Rigidbody>();
+        }
         public void CollisionEnter(Collision collision)
         {
-            var constraint = collision?.collider?.GetComponent<ConstraintOnOtherObject>();
-            if (constraint == null) return;
-            constraint.Constraint(transform,collision.GetContact(0));
+            if (collision.GetContact(0).thisCollider.gameObject!=gameObject)
+            {
+                return;
+            }
+            if (!collision.collider.TryGetComponent<ConstraintOnOtherObject>(out var constraint))
+                return;
+
+            constraint.Constraint(base.transform, collision.GetContact(0));
             playerConstraints.Add(constraint);
         }
 
@@ -42,22 +51,21 @@ namespace RampageCars
         {
             CanChange = false;
 
-            beardSize = beard.localScale;
-            beard.localScale = maxBeardSize;
+            beardSize = transform.localScale;
+            transform.localScale = maxBeardSize;
         }
         public void Finish()
         {
             var halfSize = new Vector3(
-                beard.localScale.x / beardSize.x,
-                beard.localScale.y / beardSize.y,
-                beard.localScale.z / beardSize.z)
+                transform.localScale.x / beardSize.x,
+                transform.localScale.y / beardSize.y,
+                transform.localScale.z / beardSize.z)
                 / 2;
 
-            var pos = beard.position;
+            var pos = transform.position;
             int layerMask = LayerMask.GetMask(new string[] { "Default" });
-            var raycasteds = Physics.BoxCastAll(pos, halfSize, beard.forward, beard.rotation, distance, layerMask);
+            var raycasteds = Physics.BoxCastAll(pos, halfSize, transform.forward, transform.rotation, distance, layerMask);
 
-            var rb = GetComponent<Rigidbody>();
 
             foreach (var hit in raycasteds)
             {
@@ -99,7 +107,7 @@ namespace RampageCars
             }
             playerConstraints.Clear();
 
-            beard.localScale = beardSize;
+            transform.localScale = beardSize;
             CanChange = true;
         }
         private void Update()
@@ -108,9 +116,9 @@ namespace RampageCars
             {
                 return;
             }
-            var halfSize = beard.localScale / 2;
-            var pos = beard.position;
-            ExtDebug.DrawBoxCastBox(pos, halfSize, beard.rotation, beard.forward, distance, Color.green);
+            var halfSize = transform.localScale / 2;
+            var pos = transform.position;
+            ExtDebug.DrawBoxCastBox(pos, halfSize, transform.rotation, transform.forward, distance, Color.green);
         }
 
 

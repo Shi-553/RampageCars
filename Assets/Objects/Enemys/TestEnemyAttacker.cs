@@ -9,7 +9,7 @@ namespace RampageCars
     public class TestEnemyAttacker : MonoEventReceiver
     {
         [SerializeField]
-        SerializeInterface<ISubscribeable<CollisionReceiveInfo>> collisionReceiver;
+        SerializeInterface<ISubscribeable<TriggerReceiveInfo>> collisionReceiver;
         Coroutine attackCo;
         [SerializeField]
         float attackDamage = 1;
@@ -43,7 +43,7 @@ namespace RampageCars
             OnDestroyed += collisionReceiver.Interface.Subscribe(Collision);
         }
 
-        void Collision(CollisionReceiveInfo info)
+        void Collision(TriggerReceiveInfo info)
         {
             if (constraint.IsConstant)
             {
