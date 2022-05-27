@@ -15,7 +15,7 @@ namespace RampageCars
     }
 
 
-    // 外から検索して使う用
+    // 外から検索して使う用、またはPubSubActionが要らない場合
 
     public interface IPublishable<T0>
     {
@@ -40,5 +40,10 @@ namespace RampageCars
     {
         /// <returns>UnScribeアクション</returns>
         Action ISubscribeable<T0>.Subscribe(Action<T0> add) => DefaultSubscribe(add);
+    }
+
+    // さらに便利に
+    public interface IPubSubImpl<T0> : IPublishableImpl<T0>, ISubscribeableImpl<T0>
+    {
     }
 }

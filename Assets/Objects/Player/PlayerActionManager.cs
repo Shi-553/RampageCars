@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using EditorScripts;
+using UnityEngine;
 
 namespace RampageCars
 {
@@ -9,10 +11,14 @@ namespace RampageCars
         IPlayerAction current;
         IPlayerAction EnabledCurrent => current.CanChange ? defaultPlayerAction : current;
 
+        IPlayerAction[] actions;
+
         private void Awake()
         {
             defaultPlayerAction = GetComponent<DefaultPlayerAction>();
             current = defaultPlayerAction;
+
+            actions=GetComponentsInChildren<IPlayerAction>();
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -28,6 +34,17 @@ namespace RampageCars
             EnabledCurrent.CollisionExit(collision);
         }
 
+        IPlayerAction GetAction<T>()
+        {
+            foreach (var action in actions)
+            {
+                if (action is T)
+                {
+                    return action;
+                }
+            }
+            return defaultPlayerAction;
+        }
         public void DoAction<T>() where T : IPlayerAction
         {
             if (!current.CanChange)
@@ -35,7 +52,8 @@ namespace RampageCars
                 current.Finish();
                 Debug.Log($"Finish {current.GetType().Name}!");
             }
-            current = GetComponent<T>();
+
+            current = GetAction<T>();
             current.Do();
 
             Debug.Log($"Do {typeof(T).Name}!");
@@ -47,7 +65,7 @@ namespace RampageCars
                 return;
             }
 
-            IPlayerAction finidhed = GetComponent<T>();
+            IPlayerAction finidhed = GetAction<T>();
             if (current == finidhed)
             {
                 current.Finish();

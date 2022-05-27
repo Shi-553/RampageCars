@@ -1,4 +1,4 @@
-# editorconfig.org
+﻿# editorconfig.org
 
 # top-most EditorConfig file
 root = true
@@ -159,6 +159,8 @@ csharp_style_prefer_pattern_matching = true:silent
 csharp_style_prefer_not_pattern = true:suggestion
 csharp_style_prefer_extended_property_pattern = true:suggestion
 
+# IDE0008: 明示的な型の使用
+dotnet_diagnostic.IDE0008.severity = none
 # C++ Files
 [*.{cpp,h,in}]
 curly_bracket_next_line = true

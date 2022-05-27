@@ -9,7 +9,7 @@ namespace RampageCars
     public class TestEnemyAttacker : MonoEventReceiver
     {
         [SerializeField]
-        SerializeInterface<ISubscribeable<CollisionReceiveInfo>> collisionReceiver;
+        SerializeInterface<ISubscribeable<TriggerReceiveInfo>> collisionReceiver;
         Coroutine attackCo;
         [SerializeField]
         float attackDamage = 1;
@@ -43,7 +43,7 @@ namespace RampageCars
             OnDestroyed += collisionReceiver.Interface.Subscribe(Collision);
         }
 
-        void Collision(CollisionReceiveInfo info)
+        void Collision(TriggerReceiveInfo info)
         {
             if (constraint.IsConstant)
             {
@@ -127,7 +127,7 @@ namespace RampageCars
                 }
                 return;
             }
-            transform.LookAt(transform.forward, Vector3.up);
+            transform.LookAt(transform.position+transform.forward, Vector3.up);
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -137,7 +137,7 @@ namespace RampageCars
                 return;
             }
             var com = collision.collider.GetComponent<IPublishable<CollisionDamageInfo>>();
-            if (com is not null and IPlayerTag)
+            if (com is IPlayerTag)
             {
                 Vector3 direction = collision.collider.transform.position - transform.position;
                 com.Publish(new(attackDamage, direction.normalized * impulseScale));
