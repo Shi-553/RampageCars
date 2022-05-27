@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using System;
 
 namespace RampageCars
 {
@@ -41,7 +42,9 @@ namespace RampageCars
                 isEnableTimer = false;
             }
 
-            time.text = Mathf.FloorToInt(timeLimit).ToString();
+            var span = new TimeSpan(0, 0, Mathf.FloorToInt(timeLimit));
+            var hhmmss = span.ToString(@"mm\:ss");
+            time.text = hhmmss;
         }
 
     }
