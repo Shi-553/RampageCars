@@ -127,7 +127,7 @@ namespace RampageCars
                 }
                 return;
             }
-            transform.LookAt(transform.forward, Vector3.up);
+            transform.LookAt(transform.position+transform.forward, Vector3.up);
         }
 
         private void OnCollisionEnter(Collision collision)
