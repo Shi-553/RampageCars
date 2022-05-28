@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,12 +12,13 @@ namespace RampageCars
         public float Speed { private set; get; }
         public float SpeedForward { private set; get; }
 
+
         private void Awake()
         {
             rigid = GetComponent<Rigidbody>();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             Speed = rigid.velocity.magnitude;
             SpeedForward = Vector3.Dot(rigid.velocity, transform.forward);

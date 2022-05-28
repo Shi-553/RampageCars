@@ -3,8 +3,9 @@
 namespace RampageCars
 {
     // HPを持ち、ダメージを受け、死ぬことができる
-    public interface IPawn : ISubscribeableImpl<DeathInfo>, IPubSubImpl<DamageInfo>
+    public interface IPawn : ISubscribeableImpl<HPPercentInfo>, ISubscribeableImpl<DeathInfo>, IPubSubImpl<DamageInfo>
     {
+        float HealthPointMax { get; }
         float HealthPoint { get; set; }
         bool IsDeath => HealthPoint <= 0;
 
@@ -17,6 +18,7 @@ namespace RampageCars
             HealthPoint -= info.damage;
 
             DefaultPublish(info);
+            DefaultPublish(new HPPercentInfo(HealthPoint/ HealthPointMax));
 
             if (IsDeath)
                 DefaultPublish(new DeathInfo());
