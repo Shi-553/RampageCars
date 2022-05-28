@@ -575,7 +575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack: 5
   distance: 3
-  impulseScale: 3
+  impulseScale: 30
   maxBeardSize: {x: 1000, y: 100, z: 100}
   knockback: 10
 --- !u!1 &8194985831438718663 stripped
