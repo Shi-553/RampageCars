@@ -13,11 +13,12 @@ namespace RampageCars
         {
             scoreLabel = GetComponent<TMP_Text>();
             scoreLabel.text = Singleton.Get<ScoreManager>().Score.ToString();
+            Singleton.Get<ScoreManager>().OnChangeScore.Subscribe( UpdateScore);
         }
 
-        private void Update()
+        private void UpdateScore(int score)
         {
-            scoreLabel.text =  Singleton.Get<ScoreManager>().Score.ToString();
+            scoreLabel.text = score.ToString();
         }
 
     }

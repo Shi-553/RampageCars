@@ -11,9 +11,12 @@ namespace RampageCars
     {
         [SerializeField]
         float healthPointMax;
+        public float HealthPointMax => healthPointMax;
         [SerializeField]
-        Slider slider;
-        public float HealthPoint { get; set; }
+        float healthPoint;
+        public float HealthPoint { get => healthPoint; set => healthPoint = value; }
+
+        ActionWrapper<HPPercentInfo> IPubSub<HPPercentInfo>.PubSubAction { get; } = new();
         ActionWrapper<DeathInfo> IPubSub<DeathInfo>.PubSubAction { get; } = new();
         ActionWrapper<DamageInfo> IPubSub<DamageInfo>.PubSubAction { get; } = new();
         ActionWrapper<CollisionDamageInfo> IPubSub<CollisionDamageInfo>.PubSubAction { get; } = new();
@@ -21,12 +24,7 @@ namespace RampageCars
 
         void Awake()
         {
-            HealthPoint = healthPointMax;
-
-            slider.maxValue = 1;
-            slider.value = 1;
-            this.StaticCast<ISubscribeable<DamageInfo>>()
-                .Subscribe((_) => slider.value = HealthPoint / healthPointMax);
+            healthPoint = healthPointMax;
 
             this.StaticCast<ISubscribeable<DeathInfo>>()
                 .Subscribe((_) => Singleton.Get<GameRoleManager>().GameOver());

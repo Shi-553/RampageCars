@@ -9,6 +9,7 @@ namespace RampageCars
     {
         public int Score { get; private set; } = 0;
 
+        public ActionWrapper<int> OnChangeScore=new();
         void Start()
         {
         }
@@ -16,6 +17,7 @@ namespace RampageCars
         public void AddScore(int amount)
         {
             Score += amount;
+            OnChangeScore.Publish(Score);
         }
     }
 }

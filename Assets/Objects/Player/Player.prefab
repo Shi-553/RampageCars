@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: -297400424362045699}
   - component: {fileID: -3234992874514921803}
   - component: {fileID: 1703302268}
-  - component: {fileID: -441253928698191471}
+  - component: {fileID: 490532543}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -369,7 +369,7 @@ MonoBehaviour:
   diveSpeed: {x: 0, y: 300, z: 0}
   rangeObj: {fileID: 6065665293073880980, guid: d9c668afabb81c9439ae754c9ab3d264,
     type: 3}
---- !u!114 &-441253928698191471
+--- !u!114 &490532543
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -378,15 +378,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6458540396161758453}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d03442e548e09944be96c19fe328f3c, type: 3}
+  m_Script: {fileID: 11500000, guid: 37f777611479504458536faa0672de0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: 5
-  distance: 3
-  impulseScale: 3
-  beard: {fileID: 9046822759135755294}
-  maxBeardSize: {x: 1000, y: 100, z: 100}
-  knockback: 10
+  maxSpeed: 100
 --- !u!1 &6458540397592222639
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,6 +561,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.002826544, y: 0.00007741989, z: 0.00074799365}
   m_Center: {x: -0.000000007392373, y: -0.003974753, z: -0.00065643986}
+--- !u!114 &1638651748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891950809953779493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d03442e548e09944be96c19fe328f3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack: 5
+  distance: 3
+  impulseScale: 3
+  maxBeardSize: {x: 1000, y: 100, z: 100}
+  knockback: 10
 --- !u!1 &8194985831438718663 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d2e9c8da14bdd8142ba58520ccbd252f,
@@ -611,16 +623,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthPointMax: 30
-  slider: {fileID: 0}
+  healthPoint: 0
 --- !u!4 &8859038539341614205 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d2e9c8da14bdd8142ba58520ccbd252f,
-    type: 3}
-  m_PrefabInstance: {fileID: 9041849127718005654}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &9046822759135755294 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -9153605008158484600, guid: d2e9c8da14bdd8142ba58520ccbd252f,
     type: 3}
   m_PrefabInstance: {fileID: 9041849127718005654}
   m_PrefabAsset: {fileID: 0}
@@ -637,4 +643,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthPointMax: 30
-  slider: {fileID: 0}
+  healthPoint: 0

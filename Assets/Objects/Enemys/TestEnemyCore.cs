@@ -10,7 +10,12 @@ namespace RampageCars
     {
         [SerializeField]
         float healthPointMax = 6;
-        public float HealthPoint { get; set; }
+        [SerializeField]
+        float healthPoint;
+        public float HealthPoint { get => healthPoint; set => healthPoint = value; }
+        public float HealthPointMax => healthPointMax;
+
+        ActionWrapper<HPPercentInfo> IPubSub<HPPercentInfo>.PubSubAction { get; } = new();
 
         ActionWrapper<DeathInfo> IPubSub<DeathInfo>.PubSubAction { get; } = new();
         ActionWrapper<DamageInfo> IPubSub<DamageInfo>.PubSubAction { get; } = new();
@@ -20,7 +25,7 @@ namespace RampageCars
 
         void Awake()
         {
-            HealthPoint = healthPointMax;
+            healthPoint = healthPointMax;
         }
     }
 }
