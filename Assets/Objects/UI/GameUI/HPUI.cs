@@ -8,14 +8,15 @@ namespace RampageCars
 {
     public class HPUI : MonoBehaviour
     {
-        [SerializeField]
-        SerializeInterface<ISubscribeable<HPPercentInfo>> onPercent;
 
         [SerializeField,NotNull]
         Slider hpBar;
+
         void Start()
         {
-            onPercent.Interface.Subscribe(OnPercent);
+            Singleton.Get<PlayerSingleton>()
+                .GetComponentInChildren<ISubscribeable<HPPercentInfo>>()
+                .Subscribe(OnPercent);
         }
         void OnPercent(HPPercentInfo percentInfo) {
             hpBar.value = percentInfo.Percent;

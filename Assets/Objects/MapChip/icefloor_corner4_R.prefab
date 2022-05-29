@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6006892197538294422}
   m_Layer: 0
   m_Name: icefloor_corner4_R
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

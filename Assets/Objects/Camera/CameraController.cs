@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,6 +25,12 @@ namespace RampageCars
 
         void Start()
         {
+            var player = Singleton.Get<PlayerSingleton>().transform;
+
+            var cinemachine = GetComponent<CinemachineFreeLook>();
+            cinemachine.Follow = player;
+            cinemachine.LookAt = player;
+
             camera = GetComponent<ICamera>();
             action.Camera.Reset.started += ResetStarted;
         }
