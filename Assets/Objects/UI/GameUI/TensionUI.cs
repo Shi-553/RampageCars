@@ -11,8 +11,6 @@ namespace RampageCars
         [field: Range(0, 1)]
         public float Value { get; private set; }
 
-        [SerializeField]
-        SerializeInterface<ISubscribeable<TensionPercentInfo>> onPercent;
 
         [SerializeField, NotNull]
         Slider tensionBar;
@@ -22,7 +20,10 @@ namespace RampageCars
 
         void Start()
         {
-            onPercent.Interface.Subscribe(OnPercent);
+            Singleton.Get<PlayerSingleton>()
+                .GetComponentInChildren<ISubscribeable<TensionPercentInfo>>()
+                .Subscribe(OnPercent);
+
             OnPercent(new(0));
         }
         void OnPercent(TensionPercentInfo percentInfo)
@@ -30,9 +31,9 @@ namespace RampageCars
             tensionBar.value = percentInfo.Percent;
 
             var onePercent = 1.0f / tensionFaces.Count;
-            
+
             var index = Mathf.FloorToInt(percentInfo.Percent / onePercent);
-            index = Mathf.Clamp(index, 0,tensionFaces.Count-1);
+            index = Mathf.Clamp(index, 0, tensionFaces.Count - 1);
 
             if (tensionFaces[index] == currnetTensionFace)
             {
@@ -42,7 +43,7 @@ namespace RampageCars
                 currnetTensionFace.SetActive(false);
 
             tensionFaces[index].SetActive(true);
-            currnetTensionFace=tensionFaces[index];
+            currnetTensionFace = tensionFaces[index];
         }
     }
 }
