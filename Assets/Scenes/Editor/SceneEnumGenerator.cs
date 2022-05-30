@@ -15,7 +15,7 @@ namespace EditorScripts
     public static class SceneEnumGenerator
     {
         private const string MENU_ITEM_NAME = "Tools/Scene Type/Generate";
-        private const string SCRIPT_FILE_NAME = "SceneType.cs";
+        private const string SCRIPT_FILE_NAME = "C#/SceneType.cs";
         static SceneEnumGenerator()
         {
             EditorBuildSettings.sceneListChanged += () => SceneListChanged(false);

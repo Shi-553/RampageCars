@@ -368,7 +368,7 @@ MonoBehaviour:
   impulseScale: 15
   range: 5
   diveSpeed: {x: 0, y: 300, z: 0}
-  rangeObj: {fileID: 6065665293073880980, guid: d9c668afabb81c9439ae754c9ab3d264,
+  rangeObj: {fileID: 6122189715037497088, guid: d277ea46cdd109f4895320df9892e71c,
     type: 3}
 --- !u!114 &490532543
 MonoBehaviour:

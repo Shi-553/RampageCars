@@ -61,9 +61,10 @@ namespace RampageCars
 
                 yield return null;
             }
+            
 
             obj = Instantiate(rangeObj, this.transform.position, Quaternion.identity);
-            obj.transform.localScale = new Vector3(range * 2, range * 2, range * 2);
+
             Collider[] targets = Physics.OverlapSphere(this.transform.position, range);
             foreach (Collider colliders in targets)
             {
