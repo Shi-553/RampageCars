@@ -15,6 +15,8 @@ public enum SceneType
 
     GameClear = 5,
 
+    MAP02 = 6,
+
 }
 public static class SceneTypeExtension
 {
@@ -28,6 +30,7 @@ public static class SceneTypeExtension
           SceneType.SampleScene => 3,              
           SceneType.Pause => 4,              
           SceneType.GameClear => 5,              
+          SceneType.MAP02 => 6,              
           _ => 0,                                
       };                                         
    }
