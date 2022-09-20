@@ -16,9 +16,11 @@ namespace RampageCars
         public bool CanChange { get; private set; } = true;
 
         Rigidbody rb;
+        Animator animator;
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
+            animator = GetComponentInChildren<Animator>();
         }
         private void FixedUpdate()
         {
@@ -32,12 +34,14 @@ namespace RampageCars
         {
             yield return new WaitForSeconds(duration);
 
+            animator.SetBool("IsAccel", false);
             CanChange = true;
         }
 
         public void Do()
         {
             CanChange = false;
+            animator.SetBool("IsAccel",true);
             StartCoroutine(WaitFinish());
         }
 

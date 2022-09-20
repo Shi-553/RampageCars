@@ -16,14 +16,17 @@ namespace RampageCars
         Vector3 drag = new(1,0,1);
 
         public abstract float RotatePower { get; }
+        public abstract string MotionName { get; }
 
         Rigidbody rb;
+        Animator animator;
         public bool CanChange { get; private set; } = true;
 
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
 
+            animator = GetComponentInChildren<Animator>();
         }
         private void FixedUpdate()
         {
@@ -47,11 +50,13 @@ namespace RampageCars
         public void Do()
         {
             CanChange = false;
+            animator.SetBool(MotionName,true);
         }
 
         public void Finish()
         {
             CanChange = true;
+            animator.SetBool(MotionName, false);
         }
 
         public void CollisionEnter(Collision collision)

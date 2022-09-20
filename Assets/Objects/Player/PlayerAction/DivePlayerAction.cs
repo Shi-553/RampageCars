@@ -25,9 +25,11 @@ namespace RampageCars
         GameObject rangeObj;
         private GameObject obj;
         Rigidbody rb;
+        Animator animator;
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
+            animator = GetComponentInChildren<Animator>();
         }
         private void FixedUpdate()
         {
@@ -45,6 +47,8 @@ namespace RampageCars
         {
             CanChange = false;
             Destroy(obj);
+
+            animator.SetTrigger("Dive");
 
             rb.AddForce(transform.forward * diveSpeed.z + Vector3.down * diveSpeed.y, ForceMode.Impulse);
 
