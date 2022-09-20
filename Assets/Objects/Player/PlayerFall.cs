@@ -19,7 +19,7 @@ namespace RampageCars
 
         void Respawn(FallSeaInfo _)
         {
-            GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            GetComponentInParent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             if (respawnPoint == null)
             {
                 Debug.LogError("リスポーンポイントが設定されていません。");

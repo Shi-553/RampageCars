@@ -10,5 +10,6 @@ namespace RampageCars
         [SerializeField]
         float rotatePower = 5;
         public override float RotatePower => rotatePower;
+        public override string MotionName => "IsDriftR";
     }
 }

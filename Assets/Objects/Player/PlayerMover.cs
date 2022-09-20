@@ -35,10 +35,16 @@ namespace RampageCars
         GroundChecker groundChecker;
 
 
+        Animator animator;
         void Awake()
         {
             rb = GetComponent<Rigidbody>();
             speedMeasure = GetComponent<SpeedMeasure>();
+        }
+        private void Start()
+        {
+
+            animator = GetComponentInChildren<Animator>();
         }
 
         private void FixedUpdate()
@@ -85,6 +91,7 @@ namespace RampageCars
             if (groundChecker.IsGrounded)
             {
                 rb.AddForce(transform.up * jumpPower, ForceMode.Impulse);
+                animator.SetTrigger("Jump");
             }
         }
     }

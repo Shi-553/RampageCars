@@ -12,6 +12,7 @@ namespace RampageCars
         IPlayerAction EnabledCurrent => current.CanChange ? defaultPlayerAction : current;
 
         IPlayerAction[] actions;
+        Animator animator;
 
         private void Awake()
         {
@@ -19,6 +20,10 @@ namespace RampageCars
             current = defaultPlayerAction;
 
             actions=GetComponentsInChildren<IPlayerAction>();
+            animator = GetComponentInChildren<Animator>();
+
+            GetComponentInChildren<ISubscribeable<GroundInfo>>()
+                .Subscribe(g=> animator.SetBool("IsGrounded", g.isGrounded));
         }
 
         private void OnCollisionEnter(Collision collision)

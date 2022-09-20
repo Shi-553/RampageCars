@@ -5,11 +5,20 @@ using UnityEngine;
 
 namespace RampageCars
 {
-    public class GroundChecker : MonoBehaviour
+    public readonly struct GroundInfo
+    {
+
+        public readonly bool isGrounded;
+
+        public GroundInfo(bool isGrounded) => this.isGrounded = isGrounded;
+    };
+    public class GroundChecker : MonoBehaviour,ISubscribeableImpl<GroundInfo>
     {
         int groundCount = 0;
 
         public bool IsGrounded => groundCount != 0;
+
+        public ActionWrapper<GroundInfo> PubSubAction { get; } = new();
 
         string groundTag = "Ground";
 
@@ -17,6 +26,8 @@ namespace RampageCars
         {
             if (other.tag == groundTag)
             {
+                if (!IsGrounded)
+                    PubSubAction.Publish(new(true));
                 groundCount++;
             }
         }
@@ -24,6 +35,8 @@ namespace RampageCars
         {
             if (other.tag == groundTag)
             {
+                if (IsGrounded)
+                    PubSubAction.Publish(new(false));
                 groundCount--;
             }
         }
