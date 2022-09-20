@@ -17,6 +17,12 @@ namespace RampageCars
         private float shotSpeed = 100;
 
         private float shottime=0;
+
+        private void Start()
+        {
+            if(target == null)
+            target = Singleton.Get<PlayerSingleton>().gameObject;
+        }
         private void Update()
         {
             shottime++;
