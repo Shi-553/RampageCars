@@ -28,6 +28,7 @@ namespace RampageCars
             actionManager = GetComponent<PlayerActionManager>();
             player = GetComponent<PlayerMover>();
             action.Player.Accel.performed += BoostPerformed;
+            action.Player.Accel.canceled += AccelCanceled;
             action.Player.Jump.started += JumpStarted;
             action.Player.Wiper.started += WiperStarted;
             action.Player.Wiper.canceled += WiperCanceled;
@@ -38,6 +39,11 @@ namespace RampageCars
             action.Player.DriftR.canceled += DriftRCanceled;
 
             player.SetMotorTorque(1);
+        }
+
+        private void AccelCanceled(InputAction.CallbackContext obj)
+        {
+            actionManager.FinishAction<AccelPlayerAction>();
         }
 
         private void DriftLStarted(InputAction.CallbackContext obj)
