@@ -22,6 +22,12 @@ namespace RampageCars
         Animator animator;
         public bool CanChange { get; private set; } = true;
 
+        [SerializeField]
+        GameObject driftEffect;
+        [SerializeField]
+        Transform driftEffectParent;
+        ParticleSystem driftParticleSystem;
+
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
@@ -40,7 +46,6 @@ namespace RampageCars
                     float forceZ = - drag.z * localV.z;
                     rb.AddRelativeForce(new Vector3(forceX, forceY, forceZ));
 
-
                     rb.MoveRotation(transform.localRotation * Quaternion.AngleAxis(RotatePower, Vector3.up));
                 }
             }
@@ -51,12 +56,18 @@ namespace RampageCars
         {
             CanChange = false;
             animator.SetBool(MotionName,true);
+            if (driftParticleSystem == null)
+            {
+                driftParticleSystem = Instantiate(driftEffect, driftEffectParent).GetComponent<ParticleSystem>();
+            }
+            driftParticleSystem.Play();
         }
 
         public void Finish()
         {
             CanChange = true;
             animator.SetBool(MotionName, false);
+            driftParticleSystem.Stop();
         }
 
         public void CollisionEnter(Collision collision)

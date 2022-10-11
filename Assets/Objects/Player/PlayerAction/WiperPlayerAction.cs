@@ -18,9 +18,6 @@ namespace RampageCars
         [SerializeField]
         float impulseScale = 20;
 
-        [SerializeField]
-        Vector3 maxBeardSize = new(3, 1, 1);
-        Vector3 beardSize;
 
         [SerializeField]
         float knockback = 1;
@@ -28,14 +25,19 @@ namespace RampageCars
         List<ConstraintOnOtherObject> playerConstraints = new();
 
         Rigidbody rb;
+        ParticleSystem higeEffect;
+        BoxCollider boxCollider;
+
         private void Awake()
         {
 
-             rb = GetComponentInParent<Rigidbody>();
+            rb = GetComponentInParent<Rigidbody>();
+            TryGetComponent(out boxCollider);
+            TryGetComponent(out higeEffect);
         }
         public void CollisionEnter(Collision collision)
         {
-            if (collision.GetContact(0).thisCollider.gameObject!=gameObject)
+            if (collision.GetContact(0).thisCollider.gameObject != gameObject)
             {
                 return;
             }
@@ -51,45 +53,43 @@ namespace RampageCars
         {
             CanChange = false;
 
-            beardSize = transform.localScale;
-            transform.localScale = maxBeardSize;
+
+            boxCollider.enabled = true;
+            higeEffect.Play();
         }
         public void Finish()
         {
-            var halfSize = new Vector3(
-                transform.localScale.x / beardSize.x,
-                transform.localScale.y / beardSize.y,
-                transform.localScale.z / beardSize.z)
-                / 2;
 
-            var pos = transform.position;
-            int layerMask = LayerMask.GetMask(new string[] { "Default" });
-            var raycasteds = Physics.BoxCastAll(pos, halfSize, transform.forward, transform.rotation, distance, layerMask);
+            boxCollider.enabled = false;
+            higeEffect.Stop();
+            //var pos = transform.position;
+            //int layerMask = LayerMask.GetMask(new string[] { "Default" });
+            //var raycasteds = Physics.BoxCastAll(pos, halfSize, transform.forward, transform.rotation, distance, layerMask);
 
 
-            foreach (var hit in raycasteds)
-            {
-                var damageable = hit.collider.GetComponent<IPublishable<CollisionDamageInfo>>();
-                if (damageable != null && damageable is IEnemyTag)
-                {
-                    var constant=hit.collider.GetComponent<ConstraintOnOtherObject>();
-                    if (constant != null)
-                    {
-                        constant.UnConstraint();
-                    }
+            //foreach (var hit in raycasteds)
+            //{
+            //    var damageable = hit.collider.GetComponent<IPublishable<CollisionDamageInfo>>();
+            //    if (damageable != null && damageable is IEnemyTag)
+            //    {
+            //        var constant = hit.collider.GetComponent<ConstraintOnOtherObject>();
+            //        if (constant != null)
+            //        {
+            //            constant.UnConstraint();
+            //        }
 
-                    damageable.Publish(new(attack, -hit.normal * impulseScale));
+            //        damageable.Publish(new(attack, -hit.normal * impulseScale));
 
 
-                    var knockbackForce = hit.normal * knockback;
-                    knockbackForce.y = 0;
-                    rb.AddForceAtPosition(knockbackForce, hit.point, ForceMode.Impulse);
-                }
-            }
+            //        var knockbackForce = hit.normal * knockback;
+            //        knockbackForce.y = 0;
+            //        rb.AddForceAtPosition(knockbackForce, hit.point, ForceMode.Impulse);
+            //    }
+            //}
 
             foreach (var item in playerConstraints)
             {
-                if (item != null&& item.IsConstant)
+                if (item != null && item.IsConstant)
                 {
                     item.UnConstraint();
 
@@ -107,7 +107,6 @@ namespace RampageCars
             }
             playerConstraints.Clear();
 
-            transform.localScale = beardSize;
             CanChange = true;
         }
         private void Update()

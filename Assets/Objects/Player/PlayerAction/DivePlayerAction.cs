@@ -26,6 +26,12 @@ namespace RampageCars
         private GameObject obj;
         Rigidbody rb;
         Animator animator;
+
+        [SerializeField]
+        GameObject diveEffect;
+        [SerializeField]
+        Transform diveEffectParent;
+
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
@@ -45,6 +51,8 @@ namespace RampageCars
 
         IEnumerator Dive()
         {
+            Instantiate(diveEffect, diveEffectParent);
+
             CanChange = false;
             Destroy(obj);
 

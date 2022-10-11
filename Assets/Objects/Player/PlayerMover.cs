@@ -36,6 +36,12 @@ namespace RampageCars
 
 
         Animator animator;
+
+        [SerializeField]
+        GameObject jumpEffect;
+        [SerializeField]
+        Transform jumpEffectParent;
+
         void Awake()
         {
             rb = GetComponent<Rigidbody>();
@@ -92,6 +98,8 @@ namespace RampageCars
             {
                 rb.AddForce(transform.up * jumpPower, ForceMode.Impulse);
                 animator.SetTrigger("Jump");
+
+                Instantiate(jumpEffect, jumpEffectParent);
             }
         }
     }

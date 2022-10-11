@@ -17,6 +17,14 @@ namespace RampageCars
 
         Rigidbody rb;
         Animator animator;
+
+        [SerializeField]
+        GameObject accelEffect;
+        [SerializeField]
+        Transform accelEffectParent;
+
+        private ParticleSystem accelParticleSystem;
+
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
@@ -30,23 +38,24 @@ namespace RampageCars
             }
         }
 
-        IEnumerator WaitFinish()
-        {
-            yield return new WaitForSeconds(duration);
-
-            animator.SetBool("IsAccel", false);
-            CanChange = true;
-        }
 
         public void Do()
         {
             CanChange = false;
             animator.SetBool("IsAccel",true);
-            StartCoroutine(WaitFinish());
+
+            if (accelParticleSystem == null)
+            {
+                accelParticleSystem=Instantiate(accelEffect, accelEffectParent).GetComponent<ParticleSystem>();
+            }
+            accelParticleSystem.Play();
         }
 
         public void Finish()
         {
+            animator.SetBool("IsAccel", false);
+            CanChange = true;
+            accelParticleSystem.Stop();
         }
         public void CollisionEnter(Collision collision)
         {
