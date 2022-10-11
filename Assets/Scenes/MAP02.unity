@@ -131,28 +131,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 603092989}
     m_Modifications:
-    - target: {fileID: -3234992874514921803, guid: 157b707dc855994408170d06d138c449,
-        type: 3}
-      propertyPath: driftEffect
-      value: 
-      objectReference: {fileID: 5871943275338805377, guid: b92edd9da82738b42820ebf3b31168f6,
-        type: 3}
-    - target: {fileID: -3234992874514921803, guid: 157b707dc855994408170d06d138c449,
-        type: 3}
-      propertyPath: driftEffectParent
-      value: 
-      objectReference: {fileID: 208894293}
-    - target: {fileID: -297400424362045699, guid: 157b707dc855994408170d06d138c449,
-        type: 3}
-      propertyPath: driftEffect
-      value: 
-      objectReference: {fileID: 5871943275338805377, guid: 72f980ed055c58342b41a36f50cf1b12,
-        type: 3}
-    - target: {fileID: -297400424362045699, guid: 157b707dc855994408170d06d138c449,
-        type: 3}
-      propertyPath: driftEffectParent
-      value: 
-      objectReference: {fileID: 208894293}
     - target: {fileID: 1553862187, guid: 157b707dc855994408170d06d138c449, type: 3}
       propertyPath: respawnPoint
       value: 
@@ -527,12 +505,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7383847596156283237, guid: 5367507a400031e47b75c88229e9377a,
     type: 3}
   m_PrefabInstance: {fileID: 1251401788}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &208894293 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1828298432597151544, guid: 157b707dc855994408170d06d138c449,
-    type: 3}
-  m_PrefabInstance: {fileID: 6840068}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &229816702 stripped
 Transform:
